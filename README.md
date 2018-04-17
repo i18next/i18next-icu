@@ -43,10 +43,13 @@ import fr from 'i18next-icu/locale-data/fr';
 i18next
   .use(ICU)
   .init({
-    i18nFormat: options
+    i18nFormat: {
+      localeData: fr // you also can pass in array of localeData
+    }
   });
 
-i18next.ICU.addLocaleData(fr);
+// or after init
+// i18next.ICU.addLocaleData(fr);
 
 ```
 
@@ -55,7 +58,10 @@ i18next.ICU.addLocaleData(fr);
 ```js
 {
   // per default icu functions are parsed once and cached for subsequent calls
-  memoize: true
+  memoize: true,
+
+  // array or single object of loaded 'i18next-icu/locale-data
+  localeData: null
 }
 ```
 

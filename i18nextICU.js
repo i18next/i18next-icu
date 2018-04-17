@@ -2024,6 +2024,8 @@ var ICU = function () {
         i18next.IntlMessageFormat = MessageFormat;
         i18next.ICU = this;
       }
+
+      if (this.options.localeData) this.addLocaleData(this.options.localeData);
     }
   }, {
     key: 'addLocaleData',

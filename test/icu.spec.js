@@ -14,8 +14,8 @@ describe('icu format', () => {
     let icu;
 
     before(() => {
-      icu = new ICU();
-      icu.addLocaleData(ar);
+      icu = new ICU({ localeData: ar });
+      // icu.addLocaleData(ar);
     });
 
 
