@@ -1,11 +1,12 @@
 // shim intl
 var Intl = require('intl');
 require('intl/locale-data/jsonp/en.js')
+require('intl/locale-data/jsonp/ar.js')
+//require('intl-messageformat/dist/locale-data/ar.js');
 global.Intl = Intl;
-
 import ICU from '../src/';
 import i18next from 'i18next';
-
+import ar from '../locale-data/ar';
 
 describe('icu format', () => {
 
@@ -14,6 +15,7 @@ describe('icu format', () => {
 
     before(() => {
       icu = new ICU();
+      icu.addLocaleData(ar);
     });
 
 
@@ -24,7 +26,15 @@ describe('icu format', () => {
         '=1 {one photo.}' +
         'other {# photos.}}';
 
-      expect(icu.parse(str, { numPhotos: 1000 }, 'en', 'ns')).to.eql('You have 1,000 photos.');
+      expect(icu.parse(str, { numPhotos: 1000 }, 'en', 'ns', 'key')).to.eql('You have 1,000 photos.');
+    });
+
+    it('should parse (AR)', () => {
+      const str = '{ numVar, plural, zero {Got # zero} one {Got # one} two {Got # two} few {Got # few} many {Got # many} other {Got # other}}';
+
+      expect(icu.parse(str, { numVar: 1000 }, 'ar-AR', 'ns', 'key')).to.eql('Got ١٬٠٠٠ other');
+      expect(icu.parse(str, { numVar: 2 }, 'ar-AR', 'ns', 'key')).to.eql('Got ٢ two');
+      expect(icu.parse(str, { numVar: 1 }, 'ar-AR', 'ns', 'key')).to.eql('Got ١ one');
     });
 
   });

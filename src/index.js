@@ -18,16 +18,32 @@ class ICU {
   init(i18next, options) {
     const i18nextOptions = (i18next && i18next.options && i18next.options.i18nFormat) || {};
     this.options = utils.defaults(i18nextOptions, options, this.options || {}, getDefaults());
+
+    if (i18next) {
+      i18next.IntlMessageFormat = IntlMessageFormat;
+      i18next.ICU = this;
+    }
+  }
+
+  addLocaleData(data) {
+    let locales = Object.prototype.toString.apply(data) === '[object Array]' ? data : [data];
+
+    locales.forEach(localeData => {
+      if (localeData && localeData.locale) {
+        IntlMessageFormat.__addLocaleData(localeData);
+        // IntlRelativeFormat.__addLocaleData(localeData);
+      }
+    });
   }
 
   parse(res, options, lng, ns, key) {
     let fc;
     if (this.options.memoize) {
-      fc = utils.get(this.mem, `${lng}.${ns}.${key}`);
+      fc = utils.getPath(this.mem, `${lng}.${ns}.${key}`);
     }
     if (!fc) {
       fc = new IntlMessageFormat(res, lng);
-      if (this.options.memoize) utils.set(this.mem, `${lng}.${ns}.${key}`, fc);
+      if (this.options.memoize) utils.setPath(this.mem, `${lng}.${ns}.${key}`, fc);
     }
     return fc.format(options);
   }

@@ -1,6 +1,6 @@
 {
   "name": "i18next-icu",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "i18nFormat plugin to use ICU format with i18next",
   "main": "./index.js",
   "jsnext:main": "dist/es/index.js",
@@ -15,9 +15,7 @@
     "url": "https://github.com/i18next/i18next-icu"
   },
   "dependencies": {
-    "intl-messageformat": "2.2.0",
-    "lodash.get": "4.4.2",
-    "lodash.set": "4.3.2"
+    "intl-messageformat": "2.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.18.0",
@@ -52,6 +50,7 @@
     "mkdirp": "0.5.1",
     "mocha": "3.2.0",
     "phantomjs-prebuilt": "2.1.14",
+    "react-intl": "2.4.0",
     "rimraf": "2.5.4",
     "rollup": "0.41.1",
     "rollup-plugin-babel": "2.7.1",
@@ -63,7 +62,8 @@
   "scripts": {
     "test": "karma start karma.conf.js --singleRun",
     "tdd": "karma start karma.conf.js",
-    "clean": "rimraf dist && mkdirp dist",
+    "clean": "rimraf dist && mkdirp dist && rimraf locale-data",
+    "copyLocale": "cp -R ./node_modules/react-intl/locale-data ./",
     "copy": "cp ./dist/umd/i18nextICU.min.js ./i18nextICU.min.js && cp ./dist/umd/i18nextICU.js ./i18nextICU.js",
     "copy-win": "xcopy .\\dist\\umd\\i18nextICU.min.js .\\i18nextICU.min.js /y && xcopy .\\dist\\umd\\i18nextICU.js .\\i18nextICU.js /y",
     "build:es": "BABEL_ENV=jsnext babel src --out-dir dist/es",
@@ -72,7 +72,7 @@
     "build:umd": "rollup -c rollup.config.js --format umd && rollup -c rollup.config.js --format umd --uglify",
     "build:amd": "rollup -c rollup.config.js --format amd && rollup -c rollup.config.js --format umd --uglify",
     "build:iife": "rollup -c rollup.config.js --format iife && rollup -c rollup.config.js --format iife --uglify",
-    "build": "npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy",
+    "build": "npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy && npm run copyLocale",
     "build-win": "npm run clean && npm run build:cjs && npm run build:es-win && npm run build:umd && npm run copy-win",
     "preversion": "npm run test && npm run build && git push",
     "postversion": "git push && git push --tags"

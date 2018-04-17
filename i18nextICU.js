@@ -4,8 +4,49 @@
   (global.i18nextICU = factory());
 }(this, (function () { 'use strict';
 
-var get = require('lodash.get');
-var set = require('lodash.set');
+function getLastOfPath(object, path, Empty) {
+  function cleanKey(key) {
+    return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
+  }
+
+  function canNotTraverseDeeper() {
+    return !object || typeof object === 'string';
+  }
+
+  var stack = typeof path !== 'string' ? [].concat(path) : path.split('.');
+  while (stack.length > 1) {
+    if (canNotTraverseDeeper()) return {};
+
+    var key = cleanKey(stack.shift());
+    if (!object[key] && Empty) object[key] = new Empty();
+    object = object[key];
+  }
+
+  if (canNotTraverseDeeper()) return {};
+  return {
+    obj: object,
+    k: cleanKey(stack.shift())
+  };
+}
+
+function setPath(object, path, newValue) {
+  var _getLastOfPath = getLastOfPath(object, path, Object),
+      obj = _getLastOfPath.obj,
+      k = _getLastOfPath.k;
+
+  obj[k] = newValue;
+}
+
+
+
+function getPath(object, path) {
+  var _getLastOfPath3 = getLastOfPath(object, path),
+      obj = _getLastOfPath3.obj,
+      k = _getLastOfPath3.k;
+
+  if (!obj) return undefined;
+  return obj[k];
+}
 
 var arr = [];
 var each = arr.forEach;
@@ -1978,17 +2019,34 @@ var ICU = function () {
     value: function init(i18next, options) {
       var i18nextOptions = i18next && i18next.options && i18next.options.i18nFormat || {};
       this.options = defaults(i18nextOptions, options, this.options || {}, getDefaults());
+
+      if (i18next) {
+        i18next.IntlMessageFormat = MessageFormat;
+        i18next.ICU = this;
+      }
+    }
+  }, {
+    key: 'addLocaleData',
+    value: function addLocaleData(data) {
+      var locales = Object.prototype.toString.apply(data) === '[object Array]' ? data : [data];
+
+      locales.forEach(function (localeData) {
+        if (localeData && localeData.locale) {
+          MessageFormat.__addLocaleData(localeData);
+          // IntlRelativeFormat.__addLocaleData(localeData);
+        }
+      });
     }
   }, {
     key: 'parse',
     value: function parse(res, options, lng, ns, key) {
       var fc = void 0;
       if (this.options.memoize) {
-        fc = get(this.mem, lng + '.' + ns + '.' + key);
+        fc = getPath(this.mem, lng + '.' + ns + '.' + key);
       }
       if (!fc) {
         fc = new MessageFormat(res, lng);
-        if (this.options.memoize) set(this.mem, lng + '.' + ns + '.' + key, fc);
+        if (this.options.memoize) setPath(this.mem, lng + '.' + ns + '.' + key, fc);
       }
       return fc.format(options);
     }
