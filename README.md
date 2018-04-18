@@ -48,9 +48,19 @@ i18next
     }
   });
 
-// or after init
-// i18next.ICU.addLocaleData(fr);
+// or for react-i18next when using SSR
+import i18next from 'i18next';
+import ICU from 'i18next-icu';
+import fr from 'i18next-icu/locale-data/fr';
 
+const icu = new ICU();
+icu.addLocaleData(fr);
+
+i18next
+  .use(icu)
+  .init({
+    i18nFormat: {}
+  });
 ```
 
 ## Backend Options
