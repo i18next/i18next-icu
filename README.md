@@ -70,6 +70,9 @@ i18next
   // per default icu functions are parsed once and cached for subsequent calls
   memoize: true,
 
+  // memoize if not having a lookup and just using the key fallback as value
+  memoizeFallback: false,
+
   // array or single object of loaded 'i18next-icu/locale-data
   localeData: null
 }

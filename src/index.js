@@ -3,7 +3,8 @@ import IntlMessageFormat from 'intl-messageformat';
 
 function getDefaults() {
   return {
-    memoize: true
+    memoize: true,
+    memoizeFallback: false
   };
 }
 
@@ -38,14 +39,16 @@ class ICU {
     });
   }
 
-  parse(res, options, lng, ns, key) {
+  parse(res, options, lng, ns, key, info) {
+    const hadSuccessfulLookup = info && info.resolved && info.resolved.res;
+
     let fc;
     if (this.options.memoize) {
       fc = utils.getPath(this.mem, `${lng}.${ns}.${key}`);
     }
     if (!fc) {
       fc = new IntlMessageFormat(res, lng);
-      if (this.options.memoize) utils.setPath(this.mem, `${lng}.${ns}.${key}`, fc);
+      if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, `${lng}.${ns}.${key}`, fc);
     }
     return fc.format(options);
   }

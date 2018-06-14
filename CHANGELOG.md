@@ -1,3 +1,6 @@
+### 0.4.0
+- with i18next >=v11.3.3 only memoize if successful lookup
+
 ### 0.3.0
 - allow to pass in localeData in init options
 
