@@ -1,6 +1,10 @@
-### 0.4.0
+### 0.5.0
 
 - allow custom formatters like described [here](https://github.com/yahoo/intl-messageformat#user-defined-formats) - [5](https://github.com/i18next/i18next-icu/issues/5)
+
+### 0.4.0
+
+- with i18next >=v11.3.3 only memoize if successful lookup
 
 ### 0.3.0
 

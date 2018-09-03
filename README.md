@@ -71,6 +71,9 @@ i18next
   // per default icu functions are parsed once and cached for subsequent calls
   memoize: true,
 
+  // memoize if not having a lookup and just using the key fallback as value
+  memoizeFallback: false,
+
   // array or single object of loaded 'i18next-icu/locale-data
   localeData: null
 }
@@ -110,3 +113,13 @@ i18next.use(ICU).init({
 
 i18next.t("key", { numPhotos: 1000 }); // -> You have 1,000 photos.
 ```
+
+--------------
+
+<h3 align="center">Gold Sponsors</h3>
+
+<p align="center">
+  <a href="https://locize.com/" target="_blank">
+    <img src="https://raw.githubusercontent.com/i18next/i18next/master/assets/locize_sponsor_240.gif" width="240px">
+  </a>
+</p>

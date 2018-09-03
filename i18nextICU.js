@@ -2002,7 +2002,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function getDefaults() {
   return {
-    memoize: true
+    memoize: true,
+    memoizeFallback: false
   };
 }
 
@@ -2049,14 +2050,16 @@ var ICU = function () {
     }
   }, {
     key: 'parse',
-    value: function parse(res, options, lng, ns, key) {
+    value: function parse(res, options, lng, ns, key, info) {
+      var hadSuccessfulLookup = info && info.resolved && info.resolved.res;
+
       var fc = void 0;
       if (this.options.memoize) {
         fc = getPath(this.mem, lng + '.' + ns + '.' + key);
       }
       if (!fc) {
         fc = new MessageFormat(res, lng, this.formatters);
-        if (this.options.memoize) setPath(this.mem, lng + '.' + ns + '.' + key, fc);
+        if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, lng + '.' + ns + '.' + key, fc);
       }
       return fc.format(options);
     }
