@@ -18,6 +18,7 @@ class ICU {
   init(i18next, options) {
     const i18nextOptions = (i18next && i18next.options && i18next.options.i18nFormat) || {};
     this.options = utils.defaults(i18nextOptions, options, this.options || {}, getDefaults());
+    this.formatters = this.options.formatters;
 
     if (i18next) {
       i18next.IntlMessageFormat = IntlMessageFormat;
@@ -38,13 +39,17 @@ class ICU {
     });
   }
 
+  addFormatters(formatters) {
+    this.formatters = this.formatters ? { ...this.formatters, ...formatters } : formatters;
+  }
+
   parse(res, options, lng, ns, key) {
     let fc;
     if (this.options.memoize) {
       fc = utils.getPath(this.mem, `${lng}.${ns}.${key}`);
     }
     if (!fc) {
-      fc = new IntlMessageFormat(res, lng);
+      fc = new IntlMessageFormat(res, lng, this.formatters);
       if (this.options.memoize) utils.setPath(this.mem, `${lng}.${ns}.${key}`, fc);
     }
     return fc.format(options);

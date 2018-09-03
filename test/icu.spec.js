@@ -39,6 +39,26 @@ describe('icu format', () => {
 
   });
 
+  describe('with formatter', () => {
+    let icu;
+    const formatters = {
+      upcase: function(v) { return v.toUpperCase(); },
+    };
+
+    before(() => {
+      icu = new ICU();
+      icu.addFormatters(formatters)
+      // icu.addLocaleData(ar);
+    });
+
+
+    it('should parse with custom format', () => {
+      const str = 'This is {VAR, upcase}.';
+
+      expect(icu.parse(str, { VAR: 'me' }, 'en', 'ns', 'key')).to.eql('This is ME.');
+    });
+  });
+
   describe('with i18next', () => {
 
     before(() => {
