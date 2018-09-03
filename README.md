@@ -19,12 +19,10 @@ $ npm install i18next-icu
 Wiring up:
 
 ```js
-import i18next from 'i18next';
-import ICU from 'i18next-icu';
+import i18next from "i18next";
+import ICU from "i18next-icu";
 
-i18next
-  .use(ICU)
-  .init(i18nextOptions);
+i18next.use(ICU).init(i18nextOptions);
 ```
 
 - As with all modules you can either pass the constructor function (class) to the i18next.use or a concrete instance.
@@ -45,6 +43,9 @@ i18next
   .init({
     i18nFormat: {
       localeData: fr // you also can pass in array of localeData
+      formatters: {
+        // https://github.com/yahoo/intl-messageformat#user-defined-formats
+      }
     }
   });
 
@@ -78,37 +79,34 @@ i18next
 Options can be passed in by setting options.i18nFormat in i18next.init:
 
 ```js
-import i18next from 'i18next';
-import ICU from 'i18next-icu';
+import i18next from "i18next";
+import ICU from "i18next-icu";
 
-i18next
-  .use(ICU)
-  .init({
-    i18nFormat: options
-  });
+i18next.use(ICU).init({
+  i18nFormat: options
+});
 ```
 
 ### more complete sample
 
 ```js
-import i18next from 'i18next';
-import ICU from 'i18next-icu';
+import i18next from "i18next";
+import ICU from "i18next-icu";
 
-i18next
-  .use(ICU)
-  .init({
-    lng: 'en',
-    resources: {
-      en: {
-        translation: {
-          'key': 'You have {numPhotos, plural, ' +
-            '=0 {no photos.}' +
-            '=1 {one photo.}' +
-            'other {# photos.}}'
-        }
+i18next.use(ICU).init({
+  lng: "en",
+  resources: {
+    en: {
+      translation: {
+        key:
+          "You have {numPhotos, plural, " +
+          "=0 {no photos.}" +
+          "=1 {one photo.}" +
+          "other {# photos.}}"
       }
     }
-  });
+  }
+});
 
- i18next.t('key', { numPhotos: 1000 }); // -> You have 1,000 photos.
+i18next.t("key", { numPhotos: 1000 }); // -> You have 1,000 photos.
 ```

@@ -1994,6 +1994,8 @@ var defaultLocale = {"locale":"en","pluralRuleFunction":function (n,ord){var s=S
 MessageFormat.__addLocaleData(defaultLocale);
 MessageFormat.defaultLocale = 'en';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2019,6 +2021,7 @@ var ICU = function () {
     value: function init(i18next, options) {
       var i18nextOptions = i18next && i18next.options && i18next.options.i18nFormat || {};
       this.options = defaults(i18nextOptions, options, this.options || {}, getDefaults());
+      this.formatters = this.options.formatters;
 
       if (i18next) {
         i18next.IntlMessageFormat = MessageFormat;
@@ -2040,6 +2043,11 @@ var ICU = function () {
       });
     }
   }, {
+    key: 'addFormatters',
+    value: function addFormatters(formatters) {
+      this.formatters = this.formatters ? _extends({}, this.formatters, formatters) : formatters;
+    }
+  }, {
     key: 'parse',
     value: function parse(res, options, lng, ns, key) {
       var fc = void 0;
@@ -2047,7 +2055,7 @@ var ICU = function () {
         fc = getPath(this.mem, lng + '.' + ns + '.' + key);
       }
       if (!fc) {
-        fc = new MessageFormat(res, lng);
+        fc = new MessageFormat(res, lng, this.formatters);
         if (this.options.memoize) setPath(this.mem, lng + '.' + ns + '.' + key, fc);
       }
       return fc.format(options);
