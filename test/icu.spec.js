@@ -42,20 +42,34 @@ describe('icu format', () => {
   describe('with formatter', () => {
     let icu;
     const formatters = {
-      upcase: function(v) { return v.toUpperCase(); },
+      number: {
+        THREE_FRACTIONAL_DIGITS: {
+          minimumSignificantDigits: 3,
+          maximumSignificantDigits: 3
+        },
+        ROUGH: {
+          minimumSignificantDigits: 1,
+          maximumSignificantDigits: 1
+        },
+      }
     };
 
     before(() => {
-      icu = new ICU();
-      icu.addFormatters(formatters)
-      // icu.addLocaleData(ar);
+      icu = new ICU({
+        formatters
+      });
+
+      // or
+      // icu.addFormatters(formatters)
     });
 
 
     it('should parse with custom format', () => {
-      const str = 'This is {VAR, upcase}.';
+      const str1 = 'number formatting {value, number, THREE_FRACTIONAL_DIGITS}.';
+      expect(icu.parse(str1, { value: 0.333333 }, 'en', 'ns', 'key1')).to.eql('number formatting 0.333.');
 
-      expect(icu.parse(str, { VAR: 'me' }, 'en', 'ns', 'key')).to.eql('This is ME.');
+      const str2 = 'number formatting {value, number, ROUGH}.';
+      expect(icu.parse(str2, { value: 0.444444 }, 'en', 'ns', 'key2')).to.eql('number formatting 0.4.');
     });
   });
 
