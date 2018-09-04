@@ -1,3 +1,7 @@
+### 0.6.0
+
+- rename formatters to format and addFormatters to addUserDefinedFormats
+
 ### 0.5.0
 
 - allow custom formatters like described [here](https://github.com/yahoo/intl-messageformat#user-defined-formats) - [5](https://github.com/i18next/i18next-icu/issues/5)

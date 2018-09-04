@@ -19,7 +19,7 @@ class ICU {
   init(i18next, options) {
     const i18nextOptions = (i18next && i18next.options && i18next.options.i18nFormat) || {};
     this.options = utils.defaults(i18nextOptions, options, this.options || {}, getDefaults());
-    this.formatters = this.options.formatters;
+    this.formats = this.options.formats;
 
     if (i18next) {
       i18next.IntlMessageFormat = IntlMessageFormat;
@@ -40,8 +40,8 @@ class ICU {
     });
   }
 
-  addFormatters(formatters) {
-    this.formatters = this.formatters ? { ...this.formatters, ...formatters } : formatters;
+  addUserDefinedFormats(formats) {
+    this.formats = this.formats ? { ...this.formats, ...formats } : formats;
   }
 
   parse(res, options, lng, ns, key, info) {
@@ -52,7 +52,7 @@ class ICU {
       fc = utils.getPath(this.mem, `${lng}.${ns}.${key}`);
     }
     if (!fc) {
-      fc = new IntlMessageFormat(res, lng, this.formatters);
+      fc = new IntlMessageFormat(res, lng, this.formats);
       if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, `${lng}.${ns}.${key}`, fc);
     }
     return fc.format(options);

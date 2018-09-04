@@ -41,34 +41,38 @@ describe('icu format', () => {
 
   describe('with formatter', () => {
     let icu;
-    const formatters = {
+    const formats = {
       number: {
-        THREE_FRACTIONAL_DIGITS: {
-          minimumSignificantDigits: 3,
-          maximumSignificantDigits: 3
+        THREE_FRACTION_DIGITS: {
+          minimumFractionDigits: 3,
+          maximumFractionDigits: 3,
         },
         ROUGH: {
-          minimumSignificantDigits: 1,
-          maximumSignificantDigits: 1
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1,
         },
       }
     };
 
     before(() => {
       icu = new ICU({
-        formatters
+        // or
+        // formats
       });
 
       // or
-      // icu.addFormatters(formatters)
+      icu.addUserDefinedFormats(formats)
     });
 
 
     it('should parse with custom format', () => {
-      const str1 = 'number formatting {value, number, THREE_FRACTIONAL_DIGITS}.';
+      const str1 = 'number formatting {value, number, THREE_FRACTION_DIGITS}.';
       expect(icu.parse(str1, { value: 0.333333 }, 'en', 'ns', 'key1')).to.eql('number formatting 0.333.');
 
       const str2 = 'number formatting {value, number, ROUGH}.';
+      expect(icu.parse(str2, { value: 0.444444 }, 'en', 'ns', 'key2')).to.eql('number formatting 0.4.');
+
+      expect(icu.parse(str1, { value: 0.333333 }, 'en', 'ns', 'key1')).to.eql('number formatting 0.333.');
       expect(icu.parse(str2, { value: 0.444444 }, 'en', 'ns', 'key2')).to.eql('number formatting 0.4.');
     });
   });

@@ -43,7 +43,7 @@ i18next
   .init({
     i18nFormat: {
       localeData: fr // you also can pass in array of localeData
-      formatters: {
+      formats: {
         // https://github.com/yahoo/intl-messageformat#user-defined-formats
       }
     }
@@ -56,6 +56,7 @@ import fr from 'i18next-icu/locale-data/fr';
 
 const icu = new ICU();
 icu.addLocaleData(fr);
+icu.addUserDefinedFormats({ /* https://github.com/yahoo/intl-messageformat#user-defined-formats */ })
 
 i18next
   .use(icu)
@@ -114,7 +115,7 @@ i18next.use(ICU).init({
 i18next.t("key", { numPhotos: 1000 }); // -> You have 1,000 photos.
 ```
 
---------------
+---
 
 <h3 align="center">Gold Sponsors</h3>
 

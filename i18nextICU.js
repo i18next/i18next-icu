@@ -2022,7 +2022,7 @@ var ICU = function () {
     value: function init(i18next, options) {
       var i18nextOptions = i18next && i18next.options && i18next.options.i18nFormat || {};
       this.options = defaults(i18nextOptions, options, this.options || {}, getDefaults());
-      this.formatters = this.options.formatters;
+      this.formats = this.options.formats;
 
       if (i18next) {
         i18next.IntlMessageFormat = MessageFormat;
@@ -2044,9 +2044,9 @@ var ICU = function () {
       });
     }
   }, {
-    key: 'addFormatters',
-    value: function addFormatters(formatters) {
-      this.formatters = this.formatters ? _extends({}, this.formatters, formatters) : formatters;
+    key: 'addUserDefinedFormats',
+    value: function addUserDefinedFormats(formats) {
+      this.formats = this.formats ? _extends({}, this.formats, formats) : formats;
     }
   }, {
     key: 'parse',
@@ -2058,7 +2058,7 @@ var ICU = function () {
         fc = getPath(this.mem, lng + '.' + ns + '.' + key);
       }
       if (!fc) {
-        fc = new MessageFormat(res, lng, this.formatters);
+        fc = new MessageFormat(res, lng, this.formats);
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, lng + '.' + ns + '.' + key, fc);
       }
       return fc.format(options);
