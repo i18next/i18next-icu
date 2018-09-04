@@ -1,6 +1,6 @@
 ### 0.6.0
 
-- rename formatters to format and addFormatters to addUserDefinedFormats
+- rename formatters to formats and addFormatters to addUserDefinedFormats
 
 ### 0.5.0
 
