@@ -1,3 +1,7 @@
+### 1.0.0
+
+- fixes memoize path for keySeparator false [7](https://github.com/i18next/i18next-icu/pull/7)
+
 ### 0.6.0
 
 - rename formatters to formats and addFormatters to addUserDefinedFormats
