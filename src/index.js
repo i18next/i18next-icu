@@ -46,14 +46,15 @@ class ICU {
 
   parse(res, options, lng, ns, key, info) {
     const hadSuccessfulLookup = info && info.resolved && info.resolved.res;
+    const memKey = this.options.memoize && `${lng}.${ns}.${key.replace('.', '###')}`;
 
     let fc;
     if (this.options.memoize) {
-      fc = utils.getPath(this.mem, `${lng}.${ns}.${key}`);
+      fc = utils.getPath(this.mem, memKey);
     }
     if (!fc) {
       fc = new IntlMessageFormat(res, lng, this.formats);
-      if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, `${lng}.${ns}.${key}`, fc);
+      if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
     }
     return fc.format(options);
   }
