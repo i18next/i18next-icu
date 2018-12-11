@@ -46,7 +46,7 @@ class ICU {
 
   parse(res, options, lng, ns, key, info) {
     const hadSuccessfulLookup = info && info.resolved && info.resolved.res;
-    const memKey = this.options.memoize && `${lng}.${ns}.${key.replace('.', '###')}`;
+    const memKey = this.options.memoize && `${lng}.${ns}.${key.replace(/\./g, '###')}`;
 
     let fc;
     if (this.options.memoize) {
