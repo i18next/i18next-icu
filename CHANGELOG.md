@@ -1,3 +1,7 @@
+### 1.0.1
+
+- fixes memoize path for keySeparator false global replace [8](https://github.com/i18next/i18next-icu/pull/8)
+
 ### 1.0.0
 
 - fixes memoize path for keySeparator false [7](https://github.com/i18next/i18next-icu/pull/7)

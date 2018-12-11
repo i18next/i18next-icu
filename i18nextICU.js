@@ -2052,7 +2052,7 @@ var ICU = function () {
     key: 'parse',
     value: function parse(res, options, lng, ns, key, info) {
       var hadSuccessfulLookup = info && info.resolved && info.resolved.res;
-      var memKey = this.options.memoize && lng + '.' + ns + '.' + key.replace('.', '###');
+      var memKey = this.options.memoize && lng + '.' + ns + '.' + key.replace(/\./g, '###');
 
       var fc = void 0;
       if (this.options.memoize) {
