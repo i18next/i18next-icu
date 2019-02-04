@@ -27,7 +27,7 @@ class ICU {
     }
 
     if (this.options.localeData) {
-      if (typeof Object.prototype.toString.apply(this.addLocaleData) === '[object Array]') {
+      if (typeof Object.prototype.toString.apply(this.options.addLocaleData) === '[object Array]') {
         this.options.localeData.forEach(ld => this.addLocaleData(ld));
       } else {
         this.addLocaleData(this.options.localeData);

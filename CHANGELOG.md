@@ -1,4 +1,4 @@
-### 1.0.2
+### 1.0.3
 
 - fixes passing in localeData as array [9](https://github.com/i18next/i18next-icu/issues/9)
 
