@@ -2032,7 +2032,7 @@ var ICU = function () {
       }
 
       if (this.options.localeData) {
-        if (typeof Object.prototype.toString.apply(this.options.localeData) === '[object Array]') {
+        if (Object.prototype.toString.apply(this.options.localeData) === '[object Array]') {
           this.options.localeData.forEach(function (ld) {
             return _this.addLocaleData(ld);
           });
