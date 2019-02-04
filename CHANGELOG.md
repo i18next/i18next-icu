@@ -1,3 +1,7 @@
+### 1.0.2
+
+- fixes passing in localeData as array [9](https://github.com/i18next/i18next-icu/issues/9)
+
 ### 1.0.1
 
 - fixes memoize path for keySeparator false global replace [8](https://github.com/i18next/i18next-icu/pull/8)

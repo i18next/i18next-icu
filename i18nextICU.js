@@ -2020,6 +2020,8 @@ var ICU = function () {
   _createClass(ICU, [{
     key: 'init',
     value: function init(i18next, options) {
+      var _this = this;
+
       var i18nextOptions = i18next && i18next.options && i18next.options.i18nFormat || {};
       this.options = defaults(i18nextOptions, options, this.options || {}, getDefaults());
       this.formats = this.options.formats;
@@ -2029,7 +2031,15 @@ var ICU = function () {
         i18next.ICU = this;
       }
 
-      if (this.options.localeData) this.addLocaleData(this.options.localeData);
+      if (this.options.localeData) {
+        if (typeof Object.prototype.toString.apply(this.addLocaleData) === '[object Array]') {
+          this.options.localeData.forEach(function (ld) {
+            return _this.addLocaleData(ld);
+          });
+        } else {
+          this.addLocaleData(this.options.localeData);
+        }
+      }
     }
   }, {
     key: 'addLocaleData',
