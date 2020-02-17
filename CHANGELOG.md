@@ -1,3 +1,7 @@
+### 1.2.0
+
+- typescript: add typings [13](https://github.com/i18next/i18next-icu/pull/13)
+
 ### 1.1.2
 
 - fixes passing in localeData as array [9](https://github.com/i18next/i18next-icu/issues/9)
