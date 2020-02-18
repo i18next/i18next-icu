@@ -12,40 +12,13 @@ declare module "i18next-icu" {
   // prettier-ignore
   export interface IcuFormats {
     number?: {
-      [styleName: string]: {
-        style?: "currency" | "percent" | "decimal";
-        currency?: string;
-        currencyDisplay?: "name" | "symbol" | "code";
-        minimumIntegerDigits?: 1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21;
-        minimumFractionDigits?: 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20;
-        maximumFractionDigits?: 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20;
-        minimumSignificantDigits?: 1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21;
-        maximumSignificantDigits?: 1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21;
-        [key: string]: IcuFormats.number;
-      }
+      [styleName: string]: Intl.NumberFormatOptions;
     },
     date?: {
-      [styleName: string]: {
-        weekday?: "narrow" | "short" | "long";
-        era?: "narrow" | "short" | "long";
-        year?: "numeric" | "2-digit";
-        month?: "numeric" | "2-digit" | "narrow" | "short" | "long";
-        day?: "numeric" | "2-digit";
-        hour?: "numeric" | "2-digit";
-        minute?: "numeric" | "2-digit";
-        second?: "numeric" | "2-digit";
-        timeZoneName?: "short" | "long";
-        timeZone?: "UTC" | string;
-      }
+      [styleName: string]: Intl.DateTimeFormatOptions;
     },
     time?: {
-      [styleName: string]: {
-        hour?: "numeric" | "2-digit";
-        minute?: "numeric" | "2-digit";
-        second?: "numeric" | "2-digit";
-        timeZoneName?: "short" | "long";
-        timeZone?: "UTC" | string;
-      }
+      [styleName: string]: Intl.DateTimeFormatOptions;
     }
   }
 
@@ -57,7 +30,6 @@ declare module "i18next-icu" {
   }
 
   export interface IcuInstance extends ThirdPartyModule {
-    type: "i18nFormat";
     init(i18next: i18n, options?: IcuConfig): void;
     addLocaleData(localeData: LocaleData | LocaleData[]): void;
     addUserDefinedFormats(formats: IcuFormats): void;
