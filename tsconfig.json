@@ -8,6 +8,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "lib": ["ES2015"],
     "module": "esnext"
   },
   "include": ["."]

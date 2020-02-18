@@ -39,7 +39,7 @@
     "yargs": "6.6.0"
   },
   "scripts": {
-    "test": "jest --coverage --runInBand --ci",
+    "test": "tsc --noEmit && jest --coverage --runInBand --ci",
     "tdd": "jest --watch",
     "clean": "rimraf dist && mkdirp dist && rimraf locale-data",
     "copyLocale": "cp -R ./node_modules/react-intl/locale-data ./",
