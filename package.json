@@ -30,7 +30,7 @@
     "coveralls": "2.11.15",
     "eslint": "3.13.0",
     "eslint-config-airbnb": "13.0.0",
-    "i18next": "11.2.2",
+    "i18next": "^19.1.0",
     "intl": "1.2.5",
     "istanbul": "gotwarlost/istanbul#source-map",
     "json5": "0.5.1",
@@ -57,6 +57,7 @@
     "rollup-plugin-node-resolve": "2.0.0",
     "rollup-plugin-uglify": "1.0.1",
     "sinon": "1.17.7",
+    "typescript": "^3.7.5",
     "yargs": "6.6.0"
   },
   "scripts": {
