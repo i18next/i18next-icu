@@ -8,7 +8,7 @@ const compress = argv.uglify;
 
 const babelOptions = {
   exclude: 'node_modules/**',
-  presets: [['es2015', { modules: false }], 'stage-0'],
+  presets: [['@babel/preset-env', { modules: false }]],
   babelrc: false
 };
 
