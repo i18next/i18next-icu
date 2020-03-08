@@ -4,6 +4,77 @@
   (global.i18nextICU = factory());
 }(this, (function () { 'use strict';
 
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
 function getLastOfPath(object, path, Empty) {
   function cleanKey(key) {
     return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
@@ -14,9 +85,9 @@ function getLastOfPath(object, path, Empty) {
   }
 
   var stack = typeof path !== 'string' ? [].concat(path) : path.split('.');
+
   while (stack.length > 1) {
     if (canNotTraverseDeeper()) return {};
-
     var key = cleanKey(stack.shift());
     if (!object[key] && Empty) object[key] = new Empty();
     object = object[key];
@@ -37,8 +108,6 @@ function setPath(object, path, newValue) {
   obj[k] = newValue;
 }
 
-
-
 function getPath(object, path) {
   var _getLastOfPath3 = getLastOfPath(object, path),
       obj = _getLastOfPath3.obj,
@@ -47,11 +116,9 @@ function getPath(object, path) {
   if (!obj) return undefined;
   return obj[k];
 }
-
 var arr = [];
 var each = arr.forEach;
 var slice = arr.slice;
-
 function defaults(obj) {
   each.call(slice.call(arguments, 1), function (source) {
     if (source) {
@@ -1994,12 +2061,6 @@ var defaultLocale = {"locale":"en","pluralRuleFunction":function (n,ord){var s=S
 MessageFormat.__addLocaleData(defaultLocale);
 MessageFormat.defaultLocale = 'en';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function getDefaults() {
   return {
     memoize: true,
@@ -2007,18 +2068,17 @@ function getDefaults() {
   };
 }
 
-var ICU = function () {
+var ICU = /*#__PURE__*/function () {
   function ICU(options) {
     _classCallCheck(this, ICU);
 
     this.type = 'i18nFormat';
     this.mem = {};
-
     this.init(null, options);
   }
 
   _createClass(ICU, [{
-    key: 'init',
+    key: "init",
     value: function init(i18next, options) {
       var _this = this;
 
@@ -2042,40 +2102,41 @@ var ICU = function () {
       }
     }
   }, {
-    key: 'addLocaleData',
+    key: "addLocaleData",
     value: function addLocaleData(data) {
       var locales = Object.prototype.toString.apply(data) === '[object Array]' ? data : [data];
-
       locales.forEach(function (localeData) {
         if (localeData && localeData.locale) {
-          MessageFormat.__addLocaleData(localeData);
-          // IntlRelativeFormat.__addLocaleData(localeData);
+          MessageFormat.__addLocaleData(localeData); // IntlRelativeFormat.__addLocaleData(localeData);
+
         }
       });
     }
   }, {
-    key: 'addUserDefinedFormats',
+    key: "addUserDefinedFormats",
     value: function addUserDefinedFormats(formats) {
-      this.formats = this.formats ? _extends({}, this.formats, formats) : formats;
+      this.formats = this.formats ? _objectSpread2({}, this.formats, {}, formats) : formats;
     }
   }, {
-    key: 'parse',
+    key: "parse",
     value: function parse(res, options, lng, ns, key, info) {
       var hadSuccessfulLookup = info && info.resolved && info.resolved.res;
-      var memKey = this.options.memoize && lng + '.' + ns + '.' + key.replace(/\./g, '###');
+      var memKey = this.options.memoize && "".concat(lng, ".").concat(ns, ".").concat(key.replace(/\./g, '###'));
+      var fc;
 
-      var fc = void 0;
       if (this.options.memoize) {
         fc = getPath(this.mem, memKey);
       }
+
       if (!fc) {
         fc = new MessageFormat(res, lng, this.formats);
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, memKey, fc);
       }
+
       return fc.format(options);
     }
   }, {
-    key: 'addLookupKeys',
+    key: "addLookupKeys",
     value: function addLookupKeys(finalKeys, key, code, ns, options) {
       // no additional keys needed for select or plural
       // so there is no need to add keys to that finalKeys array

@@ -1,6 +1,6 @@
 {
   "name": "i18next-icu",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "i18nFormat plugin to use ICU format with i18next",
   "main": "./index.js",
   "jsnext:main": "dist/es/index.js",
@@ -29,6 +29,7 @@
     "jest": "^25.1.0",
     "mkdirp": "0.5.1",
     "react-intl": "2.4.0",
+    "request": "^2.88.2",
     "rimraf": "2.5.4",
     "rollup": "0.41.1",
     "rollup-plugin-babel": "4.3.3",

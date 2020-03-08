@@ -1,3 +1,7 @@
+### 1.2.1
+
+- typescript: fix Broken typescript example [15](https://github.com/i18next/i18next-icu/pull/15)
+
 ### 1.2.0
 
 - typescript: add typings [13](https://github.com/i18next/i18next-icu/pull/13)
