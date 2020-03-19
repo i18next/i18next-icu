@@ -4,7 +4,9 @@ import IntlMessageFormat from 'intl-messageformat';
 function getDefaults() {
   return {
     memoize: true,
-    memoizeFallback: false
+    memoizeFallback: false,
+    bindI18n: '',
+    bindI18nStore: '',
   };
 }
 
@@ -22,8 +24,20 @@ class ICU {
     this.formats = this.options.formats;
 
     if (i18next) {
+      const { bindI18n, bindI18nStore, memoize } = this.options; 
+
       i18next.IntlMessageFormat = IntlMessageFormat;
       i18next.ICU = this;
+
+      if (memoize) {
+        if (bindI18n) {
+          i18next.on(bindI18n, () => this.clearCache())
+        }
+  
+        if (bindI18nStore) {
+          i18next.store.on(bindI18nStore, () => this.clearCache())
+        }
+      }
     }
 
     if (this.options.localeData) {
@@ -69,6 +83,10 @@ class ICU {
     // no additional keys needed for select or plural
     // so there is no need to add keys to that finalKeys array
     return finalKeys;
+  }
+
+  clearCache() {
+    this.mem = {};
   }
 }
 

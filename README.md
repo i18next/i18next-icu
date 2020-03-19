@@ -76,7 +76,13 @@ i18next
   memoizeFallback: false,
 
   // array or single object of loaded 'i18next-icu/locale-data
-  localeData: null
+  localeData: null,
+
+  // which events should clear the cache, can be set to false or string of events separated by " "
+  bindI18n: '',
+
+  // which events on resourceSource should clear the cache, can be set to false or string of events separated by " "
+  bindI18nStore: ''
 }
 ```
 

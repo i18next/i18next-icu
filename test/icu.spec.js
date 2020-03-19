@@ -105,6 +105,26 @@ describe('icu format', () => {
       expect(i18next.t('key', { numPhotos: 2000 })).toEqual('You have 2,000 photos.');
     });
 
+    it('should clear the cache on bound events', () => {
+      i18next.use(ICU).init({
+        lng: 'en',
+        resources: {},
+        i18nFormat: {
+          memoize: true,
+          bindI18n: 'languageChanged',
+          bindI18nStore: 'added'
+        }
+      });
+
+      const spy = jest.spyOn(i18next.services.i18nFormat, 'clearCache');
+
+      expect(spy).not.toHaveBeenCalled();
+      i18next.changeLanguage('ar');
+      expect(spy).toHaveBeenCalledTimes(1);
+      i18next.addResourceBundle('en', 'translation', { key: 'value' });
+      expect(spy).toHaveBeenCalledTimes(2);
+    });
+
   });
 
 });

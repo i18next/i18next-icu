@@ -27,12 +27,15 @@ declare module "i18next-icu" {
     memoizeFallback?: boolean;
     localeData?: LocaleData | LocaleData[];
     formats?: IcuFormats;
+    bindI18n?: string;
+    bindI18nStore?: string;
   }
 
   export interface IcuInstance extends ThirdPartyModule {
     init(i18next: i18n, options?: IcuConfig): void;
     addLocaleData(localeData: LocaleData | LocaleData[]): void;
     addUserDefinedFormats(formats: IcuFormats): void;
+    clearCache(): void;
   }
 
   interface IcuConstructor {
