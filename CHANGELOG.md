@@ -1,3 +1,7 @@
+### 1.3.0
+
+- feat: Bind i18n and resource store events to clear the memoized cache [18](https://github.com/i18next/i18next-icu/pull/18)
+
 ### 1.2.1
 
 - typescript: fix Broken typescript example [15](https://github.com/i18next/i18next-icu/pull/15)

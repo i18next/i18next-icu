@@ -2064,7 +2064,9 @@ MessageFormat.defaultLocale = 'en';
 function getDefaults() {
   return {
     memoize: true,
-    memoizeFallback: false
+    memoizeFallback: false,
+    bindI18n: '',
+    bindI18nStore: ''
   };
 }
 
@@ -2087,8 +2089,26 @@ var ICU = /*#__PURE__*/function () {
       this.formats = this.options.formats;
 
       if (i18next) {
+        var _this$options = this.options,
+            bindI18n = _this$options.bindI18n,
+            bindI18nStore = _this$options.bindI18nStore,
+            memoize = _this$options.memoize;
         i18next.IntlMessageFormat = MessageFormat;
         i18next.ICU = this;
+
+        if (memoize) {
+          if (bindI18n) {
+            i18next.on(bindI18n, function () {
+              return _this.clearCache();
+            });
+          }
+
+          if (bindI18nStore) {
+            i18next.store.on(bindI18nStore, function () {
+              return _this.clearCache();
+            });
+          }
+        }
       }
 
       if (this.options.localeData) {
@@ -2141,6 +2161,11 @@ var ICU = /*#__PURE__*/function () {
       // no additional keys needed for select or plural
       // so there is no need to add keys to that finalKeys array
       return finalKeys;
+    }
+  }, {
+    key: "clearCache",
+    value: function clearCache() {
+      this.mem = {};
     }
   }]);
 
