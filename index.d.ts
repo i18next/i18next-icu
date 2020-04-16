@@ -62,378 +62,378 @@ declare module "i18next-icu/locale-data/index" {
 
 declare module "i18next-icu/locale-data/af" {
   import { LocaleData } from "i18next-icu";
-  const af: LocaleData;
-  export default af;
+  const afLocaleData: LocaleData;
+  export default afLocaleData;
 }
 declare module "i18next-icu/locale-data/agq" {
   import { LocaleData } from "i18next-icu";
-  const agq: LocaleData;
-  export default agq;
+  const agqLocaleData: LocaleData;
+  export default agqLocaleData;
 }
 declare module "i18next-icu/locale-data/ak" {
   import { LocaleData } from "i18next-icu";
-  const ak: LocaleData;
-  export default ak;
+  const akLocaleData: LocaleData;
+  export default akLocaleData;
 }
 declare module "i18next-icu/locale-data/am" {
   import { LocaleData } from "i18next-icu";
-  const am: LocaleData;
-  export default am;
+  const amLocaleData: LocaleData;
+  export default amLocaleData;
 }
 declare module "i18next-icu/locale-data/ar" {
   import { LocaleData } from "i18next-icu";
-  const ar: LocaleData;
-  export default ar;
+  const arLocaleData: LocaleData;
+  export default arLocaleData;
 }
 declare module "i18next-icu/locale-data/ars" {
   import { LocaleData } from "i18next-icu";
-  const ars: LocaleData;
-  export default ars;
+  const arsLocaleData: LocaleData;
+  export default arsLocaleData;
 }
 declare module "i18next-icu/locale-data/as" {
   import { LocaleData } from "i18next-icu";
-  const as: LocaleData;
-  export default as;
+  const asLocaleData: LocaleData;
+  export default asLocaleData;
 }
 declare module "i18next-icu/locale-data/asa" {
   import { LocaleData } from "i18next-icu";
-  const asa: LocaleData;
-  export default asa;
+  const asaLocaleData: LocaleData;
+  export default asaLocaleData;
 }
 declare module "i18next-icu/locale-data/ast" {
   import { LocaleData } from "i18next-icu";
-  const ast: LocaleData;
-  export default ast;
+  const astLocaleData: LocaleData;
+  export default astLocaleData;
 }
 declare module "i18next-icu/locale-data/az" {
   import { LocaleData } from "i18next-icu";
-  const az: LocaleData;
-  export default az;
+  const azLocaleData: LocaleData;
+  export default azLocaleData;
 }
 declare module "i18next-icu/locale-data/bas" {
   import { LocaleData } from "i18next-icu";
-  const bas: LocaleData;
-  export default bas;
+  const basLocaleData: LocaleData;
+  export default basLocaleData;
 }
 declare module "i18next-icu/locale-data/be" {
   import { LocaleData } from "i18next-icu";
-  const be: LocaleData;
-  export default be;
+  const beLocaleData: LocaleData;
+  export default beLocaleData;
 }
 declare module "i18next-icu/locale-data/bem" {
   import { LocaleData } from "i18next-icu";
-  const bem: LocaleData;
-  export default bem;
+  const bemLocaleData: LocaleData;
+  export default bemLocaleData;
 }
 declare module "i18next-icu/locale-data/bez" {
   import { LocaleData } from "i18next-icu";
-  const bez: LocaleData;
-  export default bez;
+  const bezLocaleData: LocaleData;
+  export default bezLocaleData;
 }
 declare module "i18next-icu/locale-data/bg" {
   import { LocaleData } from "i18next-icu";
-  const bg: LocaleData;
-  export default bg;
+  const bgLocaleData: LocaleData;
+  export default bgLocaleData;
 }
 declare module "i18next-icu/locale-data/bh" {
   import { LocaleData } from "i18next-icu";
-  const bh: LocaleData;
-  export default bh;
+  const bhLocaleData: LocaleData;
+  export default bhLocaleData;
 }
 declare module "i18next-icu/locale-data/bm" {
   import { LocaleData } from "i18next-icu";
-  const bm: LocaleData;
-  export default bm;
+  const bmLocaleData: LocaleData;
+  export default bmLocaleData;
 }
 declare module "i18next-icu/locale-data/bn" {
   import { LocaleData } from "i18next-icu";
-  const bn: LocaleData;
-  export default bn;
+  const bnLocaleData: LocaleData;
+  export default bnLocaleData;
 }
 declare module "i18next-icu/locale-data/bo" {
   import { LocaleData } from "i18next-icu";
-  const bo: LocaleData;
-  export default bo;
+  const boLocaleData: LocaleData;
+  export default boLocaleData;
 }
 declare module "i18next-icu/locale-data/br" {
   import { LocaleData } from "i18next-icu";
-  const br: LocaleData;
-  export default br;
+  const brLocaleData: LocaleData;
+  export default brLocaleData;
 }
 declare module "i18next-icu/locale-data/brx" {
   import { LocaleData } from "i18next-icu";
-  const brx: LocaleData;
-  export default brx;
+  const brxLocaleData: LocaleData;
+  export default brxLocaleData;
 }
 declare module "i18next-icu/locale-data/bs" {
   import { LocaleData } from "i18next-icu";
-  const bs: LocaleData;
-  export default bs;
+  const bsLocaleData: LocaleData;
+  export default bsLocaleData;
 }
 declare module "i18next-icu/locale-data/ca" {
   import { LocaleData } from "i18next-icu";
-  const ca: LocaleData;
-  export default ca;
+  const caLocaleData: LocaleData;
+  export default caLocaleData;
 }
 declare module "i18next-icu/locale-data/ce" {
   import { LocaleData } from "i18next-icu";
-  const ce: LocaleData;
-  export default ce;
+  const ceLocaleData: LocaleData;
+  export default ceLocaleData;
 }
 declare module "i18next-icu/locale-data/cgg" {
   import { LocaleData } from "i18next-icu";
-  const cgg: LocaleData;
-  export default cgg;
+  const cggLocaleData: LocaleData;
+  export default cggLocaleData;
 }
 declare module "i18next-icu/locale-data/chr" {
   import { LocaleData } from "i18next-icu";
-  const chr: LocaleData;
-  export default chr;
+  const chrLocaleData: LocaleData;
+  export default chrLocaleData;
 }
 declare module "i18next-icu/locale-data/ckb" {
   import { LocaleData } from "i18next-icu";
-  const ckb: LocaleData;
-  export default ckb;
+  const ckbLocaleData: LocaleData;
+  export default ckbLocaleData;
 }
 declare module "i18next-icu/locale-data/cs" {
   import { LocaleData } from "i18next-icu";
-  const cs: LocaleData;
-  export default cs;
+  const csLocaleData: LocaleData;
+  export default csLocaleData;
 }
 declare module "i18next-icu/locale-data/cu" {
   import { LocaleData } from "i18next-icu";
-  const cu: LocaleData;
-  export default cu;
+  const cuLocaleData: LocaleData;
+  export default cuLocaleData;
 }
 declare module "i18next-icu/locale-data/cy" {
   import { LocaleData } from "i18next-icu";
-  const cy: LocaleData;
-  export default cy;
+  const cyLocaleData: LocaleData;
+  export default cyLocaleData;
 }
 declare module "i18next-icu/locale-data/da" {
   import { LocaleData } from "i18next-icu";
-  const da: LocaleData;
-  export default da;
+  const daLocaleData: LocaleData;
+  export default daLocaleData;
 }
 declare module "i18next-icu/locale-data/dav" {
   import { LocaleData } from "i18next-icu";
-  const dav: LocaleData;
-  export default dav;
+  const davLocaleData: LocaleData;
+  export default davLocaleData;
 }
 declare module "i18next-icu/locale-data/de" {
   import { LocaleData } from "i18next-icu";
-  const de: LocaleData;
-  export default de;
+  const deLocaleData: LocaleData;
+  export default deLocaleData;
 }
 declare module "i18next-icu/locale-data/dje" {
   import { LocaleData } from "i18next-icu";
-  const dje: LocaleData;
-  export default dje;
+  const djeLocaleData: LocaleData;
+  export default djeLocaleData;
 }
 declare module "i18next-icu/locale-data/dsb" {
   import { LocaleData } from "i18next-icu";
-  const dsb: LocaleData;
-  export default dsb;
+  const dsbLocaleData: LocaleData;
+  export default dsbLocaleData;
 }
 declare module "i18next-icu/locale-data/dua" {
   import { LocaleData } from "i18next-icu";
-  const dua: LocaleData;
-  export default dua;
+  const duaLocaleData: LocaleData;
+  export default duaLocaleData;
 }
 declare module "i18next-icu/locale-data/dv" {
   import { LocaleData } from "i18next-icu";
-  const dv: LocaleData;
-  export default dv;
+  const dvLocaleData: LocaleData;
+  export default dvLocaleData;
 }
 declare module "i18next-icu/locale-data/dyo" {
   import { LocaleData } from "i18next-icu";
-  const dyo: LocaleData;
-  export default dyo;
+  const dyoLocaleData: LocaleData;
+  export default dyoLocaleData;
 }
 declare module "i18next-icu/locale-data/dz" {
   import { LocaleData } from "i18next-icu";
-  const dz: LocaleData;
-  export default dz;
+  const dzLocaleData: LocaleData;
+  export default dzLocaleData;
 }
 declare module "i18next-icu/locale-data/ebu" {
   import { LocaleData } from "i18next-icu";
-  const ebu: LocaleData;
-  export default ebu;
+  const ebuLocaleData: LocaleData;
+  export default ebuLocaleData;
 }
 declare module "i18next-icu/locale-data/ee" {
   import { LocaleData } from "i18next-icu";
-  const ee: LocaleData;
-  export default ee;
+  const eeLocaleData: LocaleData;
+  export default eeLocaleData;
 }
 declare module "i18next-icu/locale-data/el" {
   import { LocaleData } from "i18next-icu";
-  const el: LocaleData;
-  export default el;
+  const elLocaleData: LocaleData;
+  export default elLocaleData;
 }
 declare module "i18next-icu/locale-data/en" {
   import { LocaleData } from "i18next-icu";
-  const en: LocaleData;
-  export default en;
+  const enLocaleData: LocaleData;
+  export default enLocaleData;
 }
 declare module "i18next-icu/locale-data/eo" {
   import { LocaleData } from "i18next-icu";
-  const eo: LocaleData;
-  export default eo;
+  const eoLocaleData: LocaleData;
+  export default eoLocaleData;
 }
 declare module "i18next-icu/locale-data/es" {
   import { LocaleData } from "i18next-icu";
-  const es: LocaleData;
-  export default es;
+  const esLocaleData: LocaleData;
+  export default esLocaleData;
 }
 declare module "i18next-icu/locale-data/et" {
   import { LocaleData } from "i18next-icu";
-  const et: LocaleData;
-  export default et;
+  const etLocaleData: LocaleData;
+  export default etLocaleData;
 }
 declare module "i18next-icu/locale-data/eu" {
   import { LocaleData } from "i18next-icu";
-  const eu: LocaleData;
-  export default eu;
+  const euLocaleData: LocaleData;
+  export default euLocaleData;
 }
 declare module "i18next-icu/locale-data/ewo" {
   import { LocaleData } from "i18next-icu";
-  const ewo: LocaleData;
-  export default ewo;
+  const ewoLocaleData: LocaleData;
+  export default ewoLocaleData;
 }
 declare module "i18next-icu/locale-data/fa" {
   import { LocaleData } from "i18next-icu";
-  const fa: LocaleData;
-  export default fa;
+  const faLocaleData: LocaleData;
+  export default faLocaleData;
 }
 declare module "i18next-icu/locale-data/ff" {
   import { LocaleData } from "i18next-icu";
-  const ff: LocaleData;
-  export default ff;
+  const ffLocaleData: LocaleData;
+  export default ffLocaleData;
 }
 declare module "i18next-icu/locale-data/fi" {
   import { LocaleData } from "i18next-icu";
-  const fi: LocaleData;
-  export default fi;
+  const fiLocaleData: LocaleData;
+  export default fiLocaleData;
 }
 declare module "i18next-icu/locale-data/fil" {
   import { LocaleData } from "i18next-icu";
-  const fil: LocaleData;
-  export default fil;
+  const filLocaleData: LocaleData;
+  export default filLocaleData;
 }
 declare module "i18next-icu/locale-data/fo" {
   import { LocaleData } from "i18next-icu";
-  const fo: LocaleData;
-  export default fo;
+  const foLocaleData: LocaleData;
+  export default foLocaleData;
 }
 declare module "i18next-icu/locale-data/fr" {
   import { LocaleData } from "i18next-icu";
-  const fr: LocaleData;
-  export default fr;
+  const frLocaleData: LocaleData;
+  export default frLocaleData;
 }
 declare module "i18next-icu/locale-data/fur" {
   import { LocaleData } from "i18next-icu";
-  const fur: LocaleData;
-  export default fur;
+  const furLocaleData: LocaleData;
+  export default furLocaleData;
 }
 declare module "i18next-icu/locale-data/fy" {
   import { LocaleData } from "i18next-icu";
-  const fy: LocaleData;
-  export default fy;
+  const fyLocaleData: LocaleData;
+  export default fyLocaleData;
 }
 declare module "i18next-icu/locale-data/ga" {
   import { LocaleData } from "i18next-icu";
-  const ga: LocaleData;
-  export default ga;
+  const gaLocaleData: LocaleData;
+  export default gaLocaleData;
 }
 declare module "i18next-icu/locale-data/gd" {
   import { LocaleData } from "i18next-icu";
-  const gd: LocaleData;
-  export default gd;
+  const gdLocaleData: LocaleData;
+  export default gdLocaleData;
 }
 declare module "i18next-icu/locale-data/gl" {
   import { LocaleData } from "i18next-icu";
-  const gl: LocaleData;
-  export default gl;
+  const glLocaleData: LocaleData;
+  export default glLocaleData;
 }
 declare module "i18next-icu/locale-data/gsw" {
   import { LocaleData } from "i18next-icu";
-  const gsw: LocaleData;
-  export default gsw;
+  const gswLocaleData: LocaleData;
+  export default gswLocaleData;
 }
 declare module "i18next-icu/locale-data/gu" {
   import { LocaleData } from "i18next-icu";
-  const gu: LocaleData;
-  export default gu;
+  const guLocaleData: LocaleData;
+  export default guLocaleData;
 }
 declare module "i18next-icu/locale-data/guw" {
   import { LocaleData } from "i18next-icu";
-  const guw: LocaleData;
-  export default guw;
+  const guwLocaleData: LocaleData;
+  export default guwLocaleData;
 }
 declare module "i18next-icu/locale-data/guz" {
   import { LocaleData } from "i18next-icu";
-  const guz: LocaleData;
-  export default guz;
+  const guzLocaleData: LocaleData;
+  export default guzLocaleData;
 }
 declare module "i18next-icu/locale-data/gv" {
   import { LocaleData } from "i18next-icu";
-  const gv: LocaleData;
-  export default gv;
+  const gvLocaleData: LocaleData;
+  export default gvLocaleData;
 }
 declare module "i18next-icu/locale-data/ha" {
   import { LocaleData } from "i18next-icu";
-  const ha: LocaleData;
-  export default ha;
+  const haLocaleData: LocaleData;
+  export default haLocaleData;
 }
 declare module "i18next-icu/locale-data/haw" {
   import { LocaleData } from "i18next-icu";
-  const haw: LocaleData;
-  export default haw;
+  const hawLocaleData: LocaleData;
+  export default hawLocaleData;
 }
 declare module "i18next-icu/locale-data/he" {
   import { LocaleData } from "i18next-icu";
-  const he: LocaleData;
-  export default he;
+  const heLocaleData: LocaleData;
+  export default heLocaleData;
 }
 declare module "i18next-icu/locale-data/hi" {
   import { LocaleData } from "i18next-icu";
-  const hi: LocaleData;
-  export default hi;
+  const hiLocaleData: LocaleData;
+  export default hiLocaleData;
 }
 declare module "i18next-icu/locale-data/hr" {
   import { LocaleData } from "i18next-icu";
-  const hr: LocaleData;
-  export default hr;
+  const hrLocaleData: LocaleData;
+  export default hrLocaleData;
 }
 declare module "i18next-icu/locale-data/hsb" {
   import { LocaleData } from "i18next-icu";
-  const hsb: LocaleData;
-  export default hsb;
+  const hsbLocaleData: LocaleData;
+  export default hsbLocaleData;
 }
 declare module "i18next-icu/locale-data/hu" {
   import { LocaleData } from "i18next-icu";
-  const hu: LocaleData;
-  export default hu;
+  const huLocaleData: LocaleData;
+  export default huLocaleData;
 }
 declare module "i18next-icu/locale-data/hy" {
   import { LocaleData } from "i18next-icu";
-  const hy: LocaleData;
-  export default hy;
+  const hyLocaleData: LocaleData;
+  export default hyLocaleData;
 }
 declare module "i18next-icu/locale-data/id" {
   import { LocaleData } from "i18next-icu";
-  const id: LocaleData;
-  export default id;
+  const idLocaleData: LocaleData;
+  export default idLocaleData;
 }
 declare module "i18next-icu/locale-data/ig" {
   import { LocaleData } from "i18next-icu";
-  const ig: LocaleData;
-  export default ig;
+  const igLocaleData: LocaleData;
+  export default igLocaleData;
 }
 declare module "i18next-icu/locale-data/ii" {
   import { LocaleData } from "i18next-icu";
-  const ii: LocaleData;
-  export default ii;
+  const iiLocaleData: LocaleData;
+  export default iiLocaleData;
 }
 declare module "i18next-icu/locale-data/in" {
   import { LocaleData } from "i18next-icu";
@@ -442,801 +442,801 @@ declare module "i18next-icu/locale-data/in" {
 }
 declare module "i18next-icu/locale-data/is" {
   import { LocaleData } from "i18next-icu";
-  const is: LocaleData;
-  export default is;
+  const isLocaleData: LocaleData;
+  export default isLocaleData;
 }
 declare module "i18next-icu/locale-data/it" {
   import { LocaleData } from "i18next-icu";
-  const it: LocaleData;
-  export default it;
+  const itLocaleData: LocaleData;
+  export default itLocaleData;
 }
 declare module "i18next-icu/locale-data/iu" {
   import { LocaleData } from "i18next-icu";
-  const iu: LocaleData;
-  export default iu;
+  const iuLocaleData: LocaleData;
+  export default iuLocaleData;
 }
 declare module "i18next-icu/locale-data/iw" {
   import { LocaleData } from "i18next-icu";
-  const iw: LocaleData;
-  export default iw;
+  const iwLocaleData: LocaleData;
+  export default iwLocaleData;
 }
 declare module "i18next-icu/locale-data/ja" {
   import { LocaleData } from "i18next-icu";
-  const ja: LocaleData;
-  export default ja;
+  const jaLocaleData: LocaleData;
+  export default jaLocaleData;
 }
 declare module "i18next-icu/locale-data/jbo" {
   import { LocaleData } from "i18next-icu";
-  const jbo: LocaleData;
-  export default jbo;
+  const jboLocaleData: LocaleData;
+  export default jboLocaleData;
 }
 declare module "i18next-icu/locale-data/jgo" {
   import { LocaleData } from "i18next-icu";
-  const jgo: LocaleData;
-  export default jgo;
+  const jgoLocaleData: LocaleData;
+  export default jgoLocaleData;
 }
 declare module "i18next-icu/locale-data/ji" {
   import { LocaleData } from "i18next-icu";
-  const ji: LocaleData;
-  export default ji;
+  const jiLocaleData: LocaleData;
+  export default jiLocaleData;
 }
 declare module "i18next-icu/locale-data/jmc" {
   import { LocaleData } from "i18next-icu";
-  const jmc: LocaleData;
-  export default jmc;
+  const jmcLocaleData: LocaleData;
+  export default jmcLocaleData;
 }
 declare module "i18next-icu/locale-data/jv" {
   import { LocaleData } from "i18next-icu";
-  const jv: LocaleData;
-  export default jv;
+  const jvLocaleData: LocaleData;
+  export default jvLocaleData;
 }
 declare module "i18next-icu/locale-data/jw" {
   import { LocaleData } from "i18next-icu";
-  const jw: LocaleData;
-  export default jw;
+  const jwLocaleData: LocaleData;
+  export default jwLocaleData;
 }
 declare module "i18next-icu/locale-data/ka" {
   import { LocaleData } from "i18next-icu";
-  const ka: LocaleData;
-  export default ka;
+  const kaLocaleData: LocaleData;
+  export default kaLocaleData;
 }
 declare module "i18next-icu/locale-data/kab" {
   import { LocaleData } from "i18next-icu";
-  const kab: LocaleData;
-  export default kab;
+  const kabLocaleData: LocaleData;
+  export default kabLocaleData;
 }
 declare module "i18next-icu/locale-data/kaj" {
   import { LocaleData } from "i18next-icu";
-  const kaj: LocaleData;
-  export default kaj;
+  const kajLocaleData: LocaleData;
+  export default kajLocaleData;
 }
 declare module "i18next-icu/locale-data/kam" {
   import { LocaleData } from "i18next-icu";
-  const kam: LocaleData;
-  export default kam;
+  const kamLocaleData: LocaleData;
+  export default kamLocaleData;
 }
 declare module "i18next-icu/locale-data/kcg" {
   import { LocaleData } from "i18next-icu";
-  const kcg: LocaleData;
-  export default kcg;
+  const kcgLocaleData: LocaleData;
+  export default kcgLocaleData;
 }
 declare module "i18next-icu/locale-data/kde" {
   import { LocaleData } from "i18next-icu";
-  const kde: LocaleData;
-  export default kde;
+  const kdeLocaleData: LocaleData;
+  export default kdeLocaleData;
 }
 declare module "i18next-icu/locale-data/kea" {
   import { LocaleData } from "i18next-icu";
-  const kea: LocaleData;
-  export default kea;
+  const keaLocaleData: LocaleData;
+  export default keaLocaleData;
 }
 declare module "i18next-icu/locale-data/khq" {
   import { LocaleData } from "i18next-icu";
-  const khq: LocaleData;
-  export default khq;
+  const khqLocaleData: LocaleData;
+  export default khqLocaleData;
 }
 declare module "i18next-icu/locale-data/ki" {
   import { LocaleData } from "i18next-icu";
-  const ki: LocaleData;
-  export default ki;
+  const kiLocaleData: LocaleData;
+  export default kiLocaleData;
 }
 declare module "i18next-icu/locale-data/kk" {
   import { LocaleData } from "i18next-icu";
-  const kk: LocaleData;
-  export default kk;
+  const kkLocaleData: LocaleData;
+  export default kkLocaleData;
 }
 declare module "i18next-icu/locale-data/kkj" {
   import { LocaleData } from "i18next-icu";
-  const kkj: LocaleData;
-  export default kkj;
+  const kkjLocaleData: LocaleData;
+  export default kkjLocaleData;
 }
 declare module "i18next-icu/locale-data/kl" {
   import { LocaleData } from "i18next-icu";
-  const kl: LocaleData;
-  export default kl;
+  const klLocaleData: LocaleData;
+  export default klLocaleData;
 }
 declare module "i18next-icu/locale-data/kln" {
   import { LocaleData } from "i18next-icu";
-  const kln: LocaleData;
-  export default kln;
+  const klnLocaleData: LocaleData;
+  export default klnLocaleData;
 }
 declare module "i18next-icu/locale-data/km" {
   import { LocaleData } from "i18next-icu";
-  const km: LocaleData;
-  export default km;
+  const kmLocaleData: LocaleData;
+  export default kmLocaleData;
 }
 declare module "i18next-icu/locale-data/kn" {
   import { LocaleData } from "i18next-icu";
-  const kn: LocaleData;
-  export default kn;
+  const knLocaleData: LocaleData;
+  export default knLocaleData;
 }
 declare module "i18next-icu/locale-data/ko" {
   import { LocaleData } from "i18next-icu";
-  const ko: LocaleData;
-  export default ko;
+  const koLocaleData: LocaleData;
+  export default koLocaleData;
 }
 declare module "i18next-icu/locale-data/kok" {
   import { LocaleData } from "i18next-icu";
-  const kok: LocaleData;
-  export default kok;
+  const kokLocaleData: LocaleData;
+  export default kokLocaleData;
 }
 declare module "i18next-icu/locale-data/ks" {
   import { LocaleData } from "i18next-icu";
-  const ks: LocaleData;
-  export default ks;
+  const ksLocaleData: LocaleData;
+  export default ksLocaleData;
 }
 declare module "i18next-icu/locale-data/ksb" {
   import { LocaleData } from "i18next-icu";
-  const ksb: LocaleData;
-  export default ksb;
+  const ksbLocaleData: LocaleData;
+  export default ksbLocaleData;
 }
 declare module "i18next-icu/locale-data/ksf" {
   import { LocaleData } from "i18next-icu";
-  const ksf: LocaleData;
-  export default ksf;
+  const ksfLocaleData: LocaleData;
+  export default ksfLocaleData;
 }
 declare module "i18next-icu/locale-data/ksh" {
   import { LocaleData } from "i18next-icu";
-  const ksh: LocaleData;
-  export default ksh;
+  const kshLocaleData: LocaleData;
+  export default kshLocaleData;
 }
 declare module "i18next-icu/locale-data/ku" {
   import { LocaleData } from "i18next-icu";
-  const ku: LocaleData;
-  export default ku;
+  const kuLocaleData: LocaleData;
+  export default kuLocaleData;
 }
 declare module "i18next-icu/locale-data/kw" {
   import { LocaleData } from "i18next-icu";
-  const kw: LocaleData;
-  export default kw;
+  const kwLocaleData: LocaleData;
+  export default kwLocaleData;
 }
 declare module "i18next-icu/locale-data/ky" {
   import { LocaleData } from "i18next-icu";
-  const ky: LocaleData;
-  export default ky;
+  const kyLocaleData: LocaleData;
+  export default kyLocaleData;
 }
 declare module "i18next-icu/locale-data/lag" {
   import { LocaleData } from "i18next-icu";
-  const lag: LocaleData;
-  export default lag;
+  const lagLocaleData: LocaleData;
+  export default lagLocaleData;
 }
 declare module "i18next-icu/locale-data/lb" {
   import { LocaleData } from "i18next-icu";
-  const lb: LocaleData;
-  export default lb;
+  const lbLocaleData: LocaleData;
+  export default lbLocaleData;
 }
 declare module "i18next-icu/locale-data/lg" {
   import { LocaleData } from "i18next-icu";
-  const lg: LocaleData;
-  export default lg;
+  const lgLocaleData: LocaleData;
+  export default lgLocaleData;
 }
 declare module "i18next-icu/locale-data/lkt" {
   import { LocaleData } from "i18next-icu";
-  const lkt: LocaleData;
-  export default lkt;
+  const lktLocaleData: LocaleData;
+  export default lktLocaleData;
 }
 declare module "i18next-icu/locale-data/ln" {
   import { LocaleData } from "i18next-icu";
-  const ln: LocaleData;
-  export default ln;
+  const lnLocaleData: LocaleData;
+  export default lnLocaleData;
 }
 declare module "i18next-icu/locale-data/lo" {
   import { LocaleData } from "i18next-icu";
-  const lo: LocaleData;
-  export default lo;
+  const loLocaleData: LocaleData;
+  export default loLocaleData;
 }
 declare module "i18next-icu/locale-data/lrc" {
   import { LocaleData } from "i18next-icu";
-  const lrc: LocaleData;
-  export default lrc;
+  const lrcLocaleData: LocaleData;
+  export default lrcLocaleData;
 }
 declare module "i18next-icu/locale-data/lt" {
   import { LocaleData } from "i18next-icu";
-  const lt: LocaleData;
-  export default lt;
+  const ltLocaleData: LocaleData;
+  export default ltLocaleData;
 }
 declare module "i18next-icu/locale-data/lu" {
   import { LocaleData } from "i18next-icu";
-  const lu: LocaleData;
-  export default lu;
+  const luLocaleData: LocaleData;
+  export default luLocaleData;
 }
 declare module "i18next-icu/locale-data/luo" {
   import { LocaleData } from "i18next-icu";
-  const luo: LocaleData;
-  export default luo;
+  const luoLocaleData: LocaleData;
+  export default luoLocaleData;
 }
 declare module "i18next-icu/locale-data/luy" {
   import { LocaleData } from "i18next-icu";
-  const luy: LocaleData;
-  export default luy;
+  const luyLocaleData: LocaleData;
+  export default luyLocaleData;
 }
 declare module "i18next-icu/locale-data/lv" {
   import { LocaleData } from "i18next-icu";
-  const lv: LocaleData;
-  export default lv;
+  const lvLocaleData: LocaleData;
+  export default lvLocaleData;
 }
 declare module "i18next-icu/locale-data/mas" {
   import { LocaleData } from "i18next-icu";
-  const mas: LocaleData;
-  export default mas;
+  const masLocaleData: LocaleData;
+  export default masLocaleData;
 }
 declare module "i18next-icu/locale-data/mer" {
   import { LocaleData } from "i18next-icu";
-  const mer: LocaleData;
-  export default mer;
+  const merLocaleData: LocaleData;
+  export default merLocaleData;
 }
 declare module "i18next-icu/locale-data/mfe" {
   import { LocaleData } from "i18next-icu";
-  const mfe: LocaleData;
-  export default mfe;
+  const mfeLocaleData: LocaleData;
+  export default mfeLocaleData;
 }
 declare module "i18next-icu/locale-data/mg" {
   import { LocaleData } from "i18next-icu";
-  const mg: LocaleData;
-  export default mg;
+  const mgLocaleData: LocaleData;
+  export default mgLocaleData;
 }
 declare module "i18next-icu/locale-data/mgh" {
   import { LocaleData } from "i18next-icu";
-  const mgh: LocaleData;
-  export default mgh;
+  const mghLocaleData: LocaleData;
+  export default mghLocaleData;
 }
 declare module "i18next-icu/locale-data/mgo" {
   import { LocaleData } from "i18next-icu";
-  const mgo: LocaleData;
-  export default mgo;
+  const mgoLocaleData: LocaleData;
+  export default mgoLocaleData;
 }
 declare module "i18next-icu/locale-data/mk" {
   import { LocaleData } from "i18next-icu";
-  const mk: LocaleData;
-  export default mk;
+  const mkLocaleData: LocaleData;
+  export default mkLocaleData;
 }
 declare module "i18next-icu/locale-data/ml" {
   import { LocaleData } from "i18next-icu";
-  const ml: LocaleData;
-  export default ml;
+  const mlLocaleData: LocaleData;
+  export default mlLocaleData;
 }
 declare module "i18next-icu/locale-data/mn" {
   import { LocaleData } from "i18next-icu";
-  const mn: LocaleData;
-  export default mn;
+  const mnLocaleData: LocaleData;
+  export default mnLocaleData;
 }
 declare module "i18next-icu/locale-data/mo" {
   import { LocaleData } from "i18next-icu";
-  const mo: LocaleData;
-  export default mo;
+  const moLocaleData: LocaleData;
+  export default moLocaleData;
 }
 declare module "i18next-icu/locale-data/mr" {
   import { LocaleData } from "i18next-icu";
-  const mr: LocaleData;
-  export default mr;
+  const mrLocaleData: LocaleData;
+  export default mrLocaleData;
 }
 declare module "i18next-icu/locale-data/ms" {
   import { LocaleData } from "i18next-icu";
-  const ms: LocaleData;
-  export default ms;
+  const msLocaleData: LocaleData;
+  export default msLocaleData;
 }
 declare module "i18next-icu/locale-data/mt" {
   import { LocaleData } from "i18next-icu";
-  const mt: LocaleData;
-  export default mt;
+  const mtLocaleData: LocaleData;
+  export default mtLocaleData;
 }
 declare module "i18next-icu/locale-data/mua" {
   import { LocaleData } from "i18next-icu";
-  const mua: LocaleData;
-  export default mua;
+  const muaLocaleData: LocaleData;
+  export default muaLocaleData;
 }
 declare module "i18next-icu/locale-data/my" {
   import { LocaleData } from "i18next-icu";
-  const my: LocaleData;
-  export default my;
+  const myLocaleData: LocaleData;
+  export default myLocaleData;
 }
 declare module "i18next-icu/locale-data/mzn" {
   import { LocaleData } from "i18next-icu";
-  const mzn: LocaleData;
-  export default mzn;
+  const mznLocaleData: LocaleData;
+  export default mznLocaleData;
 }
 declare module "i18next-icu/locale-data/nah" {
   import { LocaleData } from "i18next-icu";
-  const nah: LocaleData;
-  export default nah;
+  const nahLocaleData: LocaleData;
+  export default nahLocaleData;
 }
 declare module "i18next-icu/locale-data/naq" {
   import { LocaleData } from "i18next-icu";
-  const naq: LocaleData;
-  export default naq;
+  const naqLocaleData: LocaleData;
+  export default naqLocaleData;
 }
 declare module "i18next-icu/locale-data/nb" {
   import { LocaleData } from "i18next-icu";
-  const nb: LocaleData;
-  export default nb;
+  const nbLocaleData: LocaleData;
+  export default nbLocaleData;
 }
 declare module "i18next-icu/locale-data/nd" {
   import { LocaleData } from "i18next-icu";
-  const nd: LocaleData;
-  export default nd;
+  const ndLocaleData: LocaleData;
+  export default ndLocaleData;
 }
 declare module "i18next-icu/locale-data/nds" {
   import { LocaleData } from "i18next-icu";
-  const nds: LocaleData;
-  export default nds;
+  const ndsLocaleData: LocaleData;
+  export default ndsLocaleData;
 }
 declare module "i18next-icu/locale-data/ne" {
   import { LocaleData } from "i18next-icu";
-  const ne: LocaleData;
-  export default ne;
+  const neLocaleData: LocaleData;
+  export default neLocaleData;
 }
 declare module "i18next-icu/locale-data/nl" {
   import { LocaleData } from "i18next-icu";
-  const nl: LocaleData;
-  export default nl;
+  const nlLocaleData: LocaleData;
+  export default nlLocaleData;
 }
 declare module "i18next-icu/locale-data/nmg" {
   import { LocaleData } from "i18next-icu";
-  const nmg: LocaleData;
-  export default nmg;
+  const nmgLocaleData: LocaleData;
+  export default nmgLocaleData;
 }
 declare module "i18next-icu/locale-data/nn" {
   import { LocaleData } from "i18next-icu";
-  const nn: LocaleData;
-  export default nn;
+  const nnLocaleData: LocaleData;
+  export default nnLocaleData;
 }
 declare module "i18next-icu/locale-data/nnh" {
   import { LocaleData } from "i18next-icu";
-  const nnh: LocaleData;
-  export default nnh;
+  const nnhLocaleData: LocaleData;
+  export default nnhLocaleData;
 }
 declare module "i18next-icu/locale-data/no" {
   import { LocaleData } from "i18next-icu";
-  const no: LocaleData;
-  export default no;
+  const noLocaleData: LocaleData;
+  export default noLocaleData;
 }
 declare module "i18next-icu/locale-data/nqo" {
   import { LocaleData } from "i18next-icu";
-  const nqo: LocaleData;
-  export default nqo;
+  const nqoLocaleData: LocaleData;
+  export default nqoLocaleData;
 }
 declare module "i18next-icu/locale-data/nr" {
   import { LocaleData } from "i18next-icu";
-  const nr: LocaleData;
-  export default nr;
+  const nrLocaleData: LocaleData;
+  export default nrLocaleData;
 }
 declare module "i18next-icu/locale-data/nso" {
   import { LocaleData } from "i18next-icu";
-  const nso: LocaleData;
-  export default nso;
+  const nsoLocaleData: LocaleData;
+  export default nsoLocaleData;
 }
 declare module "i18next-icu/locale-data/nus" {
   import { LocaleData } from "i18next-icu";
-  const nus: LocaleData;
-  export default nus;
+  const nusLocaleData: LocaleData;
+  export default nusLocaleData;
 }
 declare module "i18next-icu/locale-data/ny" {
   import { LocaleData } from "i18next-icu";
-  const ny: LocaleData;
-  export default ny;
+  const nyLocaleData: LocaleData;
+  export default nyLocaleData;
 }
 declare module "i18next-icu/locale-data/nyn" {
   import { LocaleData } from "i18next-icu";
-  const nyn: LocaleData;
-  export default nyn;
+  const nynLocaleData: LocaleData;
+  export default nynLocaleData;
 }
 declare module "i18next-icu/locale-data/om" {
   import { LocaleData } from "i18next-icu";
-  const om: LocaleData;
-  export default om;
+  const omLocaleData: LocaleData;
+  export default omLocaleData;
 }
 declare module "i18next-icu/locale-data/or" {
   import { LocaleData } from "i18next-icu";
-  const or: LocaleData;
-  export default or;
+  const orLocaleData: LocaleData;
+  export default orLocaleData;
 }
 declare module "i18next-icu/locale-data/os" {
   import { LocaleData } from "i18next-icu";
-  const os: LocaleData;
-  export default os;
+  const osLocaleData: LocaleData;
+  export default osLocaleData;
 }
 declare module "i18next-icu/locale-data/pa" {
   import { LocaleData } from "i18next-icu";
-  const pa: LocaleData;
-  export default pa;
+  const paLocaleData: LocaleData;
+  export default paLocaleData;
 }
 declare module "i18next-icu/locale-data/pap" {
   import { LocaleData } from "i18next-icu";
-  const pap: LocaleData;
-  export default pap;
+  const papLocaleData: LocaleData;
+  export default papLocaleData;
 }
 declare module "i18next-icu/locale-data/pl" {
   import { LocaleData } from "i18next-icu";
-  const pl: LocaleData;
-  export default pl;
+  const plLocaleData: LocaleData;
+  export default plLocaleData;
 }
 declare module "i18next-icu/locale-data/prg" {
   import { LocaleData } from "i18next-icu";
-  const prg: LocaleData;
-  export default prg;
+  const prgLocaleData: LocaleData;
+  export default prgLocaleData;
 }
 declare module "i18next-icu/locale-data/ps" {
   import { LocaleData } from "i18next-icu";
-  const ps: LocaleData;
-  export default ps;
+  const psLocaleData: LocaleData;
+  export default psLocaleData;
 }
 declare module "i18next-icu/locale-data/pt" {
   import { LocaleData } from "i18next-icu";
-  const pt: LocaleData;
-  export default pt;
+  const ptLocaleData: LocaleData;
+  export default ptLocaleData;
 }
 declare module "i18next-icu/locale-data/qu" {
   import { LocaleData } from "i18next-icu";
-  const qu: LocaleData;
-  export default qu;
+  const quLocaleData: LocaleData;
+  export default quLocaleData;
 }
 declare module "i18next-icu/locale-data/rm" {
   import { LocaleData } from "i18next-icu";
-  const rm: LocaleData;
-  export default rm;
+  const rmLocaleData: LocaleData;
+  export default rmLocaleData;
 }
 declare module "i18next-icu/locale-data/rn" {
   import { LocaleData } from "i18next-icu";
-  const rn: LocaleData;
-  export default rn;
+  const rnLocaleData: LocaleData;
+  export default rnLocaleData;
 }
 declare module "i18next-icu/locale-data/ro" {
   import { LocaleData } from "i18next-icu";
-  const ro: LocaleData;
-  export default ro;
+  const roLocaleData: LocaleData;
+  export default roLocaleData;
 }
 declare module "i18next-icu/locale-data/rof" {
   import { LocaleData } from "i18next-icu";
-  const rof: LocaleData;
-  export default rof;
+  const rofLocaleData: LocaleData;
+  export default rofLocaleData;
 }
 declare module "i18next-icu/locale-data/ru" {
   import { LocaleData } from "i18next-icu";
-  const ru: LocaleData;
-  export default ru;
+  const ruLocaleData: LocaleData;
+  export default ruLocaleData;
 }
 declare module "i18next-icu/locale-data/rw" {
   import { LocaleData } from "i18next-icu";
-  const rw: LocaleData;
-  export default rw;
+  const rwLocaleData: LocaleData;
+  export default rwLocaleData;
 }
 declare module "i18next-icu/locale-data/rwk" {
   import { LocaleData } from "i18next-icu";
-  const rwk: LocaleData;
-  export default rwk;
+  const rwkLocaleData: LocaleData;
+  export default rwkLocaleData;
 }
 declare module "i18next-icu/locale-data/sah" {
   import { LocaleData } from "i18next-icu";
-  const sah: LocaleData;
-  export default sah;
+  const sahLocaleData: LocaleData;
+  export default sahLocaleData;
 }
 declare module "i18next-icu/locale-data/saq" {
   import { LocaleData } from "i18next-icu";
-  const saq: LocaleData;
-  export default saq;
+  const saqLocaleData: LocaleData;
+  export default saqLocaleData;
 }
 declare module "i18next-icu/locale-data/sbp" {
   import { LocaleData } from "i18next-icu";
-  const sbp: LocaleData;
-  export default sbp;
+  const sbpLocaleData: LocaleData;
+  export default sbpLocaleData;
 }
 declare module "i18next-icu/locale-data/sdh" {
   import { LocaleData } from "i18next-icu";
-  const sdh: LocaleData;
-  export default sdh;
+  const sdhLocaleData: LocaleData;
+  export default sdhLocaleData;
 }
 declare module "i18next-icu/locale-data/se" {
   import { LocaleData } from "i18next-icu";
-  const se: LocaleData;
-  export default se;
+  const seLocaleData: LocaleData;
+  export default seLocaleData;
 }
 declare module "i18next-icu/locale-data/seh" {
   import { LocaleData } from "i18next-icu";
-  const seh: LocaleData;
-  export default seh;
+  const sehLocaleData: LocaleData;
+  export default sehLocaleData;
 }
 declare module "i18next-icu/locale-data/ses" {
   import { LocaleData } from "i18next-icu";
-  const ses: LocaleData;
-  export default ses;
+  const sesLocaleData: LocaleData;
+  export default sesLocaleData;
 }
 declare module "i18next-icu/locale-data/sg" {
   import { LocaleData } from "i18next-icu";
-  const sg: LocaleData;
-  export default sg;
+  const sgLocaleData: LocaleData;
+  export default sgLocaleData;
 }
 declare module "i18next-icu/locale-data/sh" {
   import { LocaleData } from "i18next-icu";
-  const sh: LocaleData;
-  export default sh;
+  const shLocaleData: LocaleData;
+  export default shLocaleData;
 }
 declare module "i18next-icu/locale-data/shi" {
   import { LocaleData } from "i18next-icu";
-  const shi: LocaleData;
-  export default shi;
+  const shiLocaleData: LocaleData;
+  export default shiLocaleData;
 }
 declare module "i18next-icu/locale-data/si" {
   import { LocaleData } from "i18next-icu";
-  const si: LocaleData;
-  export default si;
+  const siLocaleData: LocaleData;
+  export default siLocaleData;
 }
 declare module "i18next-icu/locale-data/sk" {
   import { LocaleData } from "i18next-icu";
-  const sk: LocaleData;
-  export default sk;
+  const skLocaleData: LocaleData;
+  export default skLocaleData;
 }
 declare module "i18next-icu/locale-data/sl" {
   import { LocaleData } from "i18next-icu";
-  const sl: LocaleData;
-  export default sl;
+  const slLocaleData: LocaleData;
+  export default slLocaleData;
 }
 declare module "i18next-icu/locale-data/sma" {
   import { LocaleData } from "i18next-icu";
-  const sma: LocaleData;
-  export default sma;
+  const smaLocaleData: LocaleData;
+  export default smaLocaleData;
 }
 declare module "i18next-icu/locale-data/smi" {
   import { LocaleData } from "i18next-icu";
-  const smi: LocaleData;
-  export default smi;
+  const smiLocaleData: LocaleData;
+  export default smiLocaleData;
 }
 declare module "i18next-icu/locale-data/smj" {
   import { LocaleData } from "i18next-icu";
-  const smj: LocaleData;
-  export default smj;
+  const smjLocaleData: LocaleData;
+  export default smjLocaleData;
 }
 declare module "i18next-icu/locale-data/smn" {
   import { LocaleData } from "i18next-icu";
-  const smn: LocaleData;
-  export default smn;
+  const smnLocaleData: LocaleData;
+  export default smnLocaleData;
 }
 declare module "i18next-icu/locale-data/sms" {
   import { LocaleData } from "i18next-icu";
-  const sms: LocaleData;
-  export default sms;
+  const smsLocaleData: LocaleData;
+  export default smsLocaleData;
 }
 declare module "i18next-icu/locale-data/sn" {
   import { LocaleData } from "i18next-icu";
-  const sn: LocaleData;
-  export default sn;
+  const snLocaleData: LocaleData;
+  export default snLocaleData;
 }
 declare module "i18next-icu/locale-data/so" {
   import { LocaleData } from "i18next-icu";
-  const so: LocaleData;
-  export default so;
+  const soLocaleData: LocaleData;
+  export default soLocaleData;
 }
 declare module "i18next-icu/locale-data/sq" {
   import { LocaleData } from "i18next-icu";
-  const sq: LocaleData;
-  export default sq;
+  const sqLocaleData: LocaleData;
+  export default sqLocaleData;
 }
 declare module "i18next-icu/locale-data/sr" {
   import { LocaleData } from "i18next-icu";
-  const sr: LocaleData;
-  export default sr;
+  const srLocaleData: LocaleData;
+  export default srLocaleData;
 }
 declare module "i18next-icu/locale-data/ss" {
   import { LocaleData } from "i18next-icu";
-  const ss: LocaleData;
-  export default ss;
+  const ssLocaleData: LocaleData;
+  export default ssLocaleData;
 }
 declare module "i18next-icu/locale-data/ssy" {
   import { LocaleData } from "i18next-icu";
-  const ssy: LocaleData;
-  export default ssy;
+  const ssyLocaleData: LocaleData;
+  export default ssyLocaleData;
 }
 declare module "i18next-icu/locale-data/st" {
   import { LocaleData } from "i18next-icu";
-  const st: LocaleData;
-  export default st;
+  const stLocaleData: LocaleData;
+  export default stLocaleData;
 }
 declare module "i18next-icu/locale-data/sv" {
   import { LocaleData } from "i18next-icu";
-  const sv: LocaleData;
-  export default sv;
+  const svLocaleData: LocaleData;
+  export default svLocaleData;
 }
 declare module "i18next-icu/locale-data/sw" {
   import { LocaleData } from "i18next-icu";
-  const sw: LocaleData;
-  export default sw;
+  const swLocaleData: LocaleData;
+  export default swLocaleData;
 }
 declare module "i18next-icu/locale-data/syr" {
   import { LocaleData } from "i18next-icu";
-  const syr: LocaleData;
-  export default syr;
+  const syrLocaleData: LocaleData;
+  export default syrLocaleData;
 }
 declare module "i18next-icu/locale-data/ta" {
   import { LocaleData } from "i18next-icu";
-  const ta: LocaleData;
-  export default ta;
+  const taLocaleData: LocaleData;
+  export default taLocaleData;
 }
 declare module "i18next-icu/locale-data/te" {
   import { LocaleData } from "i18next-icu";
-  const te: LocaleData;
-  export default te;
+  const teLocaleData: LocaleData;
+  export default teLocaleData;
 }
 declare module "i18next-icu/locale-data/teo" {
   import { LocaleData } from "i18next-icu";
-  const teo: LocaleData;
-  export default teo;
+  const teoLocaleData: LocaleData;
+  export default teoLocaleData;
 }
 declare module "i18next-icu/locale-data/th" {
   import { LocaleData } from "i18next-icu";
-  const th: LocaleData;
-  export default th;
+  const thLocaleData: LocaleData;
+  export default thLocaleData;
 }
 declare module "i18next-icu/locale-data/ti" {
   import { LocaleData } from "i18next-icu";
-  const ti: LocaleData;
-  export default ti;
+  const tiLocaleData: LocaleData;
+  export default tiLocaleData;
 }
 declare module "i18next-icu/locale-data/tig" {
   import { LocaleData } from "i18next-icu";
-  const tig: LocaleData;
-  export default tig;
+  const tigLocaleData: LocaleData;
+  export default tigLocaleData;
 }
 declare module "i18next-icu/locale-data/tk" {
   import { LocaleData } from "i18next-icu";
-  const tk: LocaleData;
-  export default tk;
+  const tkLocaleData: LocaleData;
+  export default tkLocaleData;
 }
 declare module "i18next-icu/locale-data/tl" {
   import { LocaleData } from "i18next-icu";
-  const tl: LocaleData;
-  export default tl;
+  const tlLocaleData: LocaleData;
+  export default tlLocaleData;
 }
 declare module "i18next-icu/locale-data/tn" {
   import { LocaleData } from "i18next-icu";
-  const tn: LocaleData;
-  export default tn;
+  const tnLocaleData: LocaleData;
+  export default tnLocaleData;
 }
 declare module "i18next-icu/locale-data/to" {
   import { LocaleData } from "i18next-icu";
-  const to: LocaleData;
-  export default to;
+  const toLocaleData: LocaleData;
+  export default toLocaleData;
 }
 declare module "i18next-icu/locale-data/tr" {
   import { LocaleData } from "i18next-icu";
-  const tr: LocaleData;
-  export default tr;
+  const trLocaleData: LocaleData;
+  export default trLocaleData;
 }
 declare module "i18next-icu/locale-data/ts" {
   import { LocaleData } from "i18next-icu";
-  const ts: LocaleData;
-  export default ts;
+  const tsLocaleData: LocaleData;
+  export default tsLocaleData;
 }
 declare module "i18next-icu/locale-data/twq" {
   import { LocaleData } from "i18next-icu";
-  const twq: LocaleData;
-  export default twq;
+  const twqLocaleData: LocaleData;
+  export default twqLocaleData;
 }
 declare module "i18next-icu/locale-data/tzm" {
   import { LocaleData } from "i18next-icu";
-  const tzm: LocaleData;
-  export default tzm;
+  const tzmLocaleData: LocaleData;
+  export default tzmLocaleData;
 }
 declare module "i18next-icu/locale-data/ug" {
   import { LocaleData } from "i18next-icu";
-  const ug: LocaleData;
-  export default ug;
+  const ugLocaleData: LocaleData;
+  export default ugLocaleData;
 }
 declare module "i18next-icu/locale-data/uk" {
   import { LocaleData } from "i18next-icu";
-  const uk: LocaleData;
-  export default uk;
+  const ukLocaleData: LocaleData;
+  export default ukLocaleData;
 }
 declare module "i18next-icu/locale-data/ur" {
   import { LocaleData } from "i18next-icu";
-  const ur: LocaleData;
-  export default ur;
+  const urLocaleData: LocaleData;
+  export default urLocaleData;
 }
 declare module "i18next-icu/locale-data/uz" {
   import { LocaleData } from "i18next-icu";
-  const uz: LocaleData;
-  export default uz;
+  const uzLocaleData: LocaleData;
+  export default uzLocaleData;
 }
 declare module "i18next-icu/locale-data/vai" {
   import { LocaleData } from "i18next-icu";
-  const vai: LocaleData;
-  export default vai;
+  const vaiLocaleData: LocaleData;
+  export default vaiLocaleData;
 }
 declare module "i18next-icu/locale-data/ve" {
   import { LocaleData } from "i18next-icu";
-  const ve: LocaleData;
-  export default ve;
+  const veLocaleData: LocaleData;
+  export default veLocaleData;
 }
 declare module "i18next-icu/locale-data/vi" {
   import { LocaleData } from "i18next-icu";
-  const vi: LocaleData;
-  export default vi;
+  const viLocaleData: LocaleData;
+  export default viLocaleData;
 }
 declare module "i18next-icu/locale-data/vo" {
   import { LocaleData } from "i18next-icu";
-  const vo: LocaleData;
-  export default vo;
+  const voLocaleData: LocaleData;
+  export default voLocaleData;
 }
 declare module "i18next-icu/locale-data/vun" {
   import { LocaleData } from "i18next-icu";
-  const vun: LocaleData;
-  export default vun;
+  const vunLocaleData: LocaleData;
+  export default vunLocaleData;
 }
 declare module "i18next-icu/locale-data/wa" {
   import { LocaleData } from "i18next-icu";
-  const wa: LocaleData;
-  export default wa;
+  const waLocaleData: LocaleData;
+  export default waLocaleData;
 }
 declare module "i18next-icu/locale-data/wae" {
   import { LocaleData } from "i18next-icu";
-  const wae: LocaleData;
-  export default wae;
+  const waeLocaleData: LocaleData;
+  export default waeLocaleData;
 }
 declare module "i18next-icu/locale-data/wo" {
   import { LocaleData } from "i18next-icu";
-  const wo: LocaleData;
-  export default wo;
+  const woLocaleData: LocaleData;
+  export default woLocaleData;
 }
 declare module "i18next-icu/locale-data/xh" {
   import { LocaleData } from "i18next-icu";
-  const xh: LocaleData;
-  export default xh;
+  const xhLocaleData: LocaleData;
+  export default xhLocaleData;
 }
 declare module "i18next-icu/locale-data/xog" {
   import { LocaleData } from "i18next-icu";
-  const xog: LocaleData;
-  export default xog;
+  const xogLocaleData: LocaleData;
+  export default xogLocaleData;
 }
 declare module "i18next-icu/locale-data/yav" {
   import { LocaleData } from "i18next-icu";
-  const yav: LocaleData;
-  export default yav;
+  const yavLocaleData: LocaleData;
+  export default yavLocaleData;
 }
 declare module "i18next-icu/locale-data/yi" {
   import { LocaleData } from "i18next-icu";
-  const yi: LocaleData;
-  export default yi;
+  const yiLocaleData: LocaleData;
+  export default yiLocaleData;
 }
 declare module "i18next-icu/locale-data/yo" {
   import { LocaleData } from "i18next-icu";
-  const yo: LocaleData;
-  export default yo;
+  const yoLocaleData: LocaleData;
+  export default yoLocaleData;
 }
 declare module "i18next-icu/locale-data/yue" {
   import { LocaleData } from "i18next-icu";
-  const yue: LocaleData;
-  export default yue;
+  const yueLocaleData: LocaleData;
+  export default yueLocaleData;
 }
 declare module "i18next-icu/locale-data/zgh" {
   import { LocaleData } from "i18next-icu";
-  const zgh: LocaleData;
-  export default zgh;
+  const zghLocaleData: LocaleData;
+  export default zghLocaleData;
 }
 declare module "i18next-icu/locale-data/zh" {
   import { LocaleData } from "i18next-icu";
-  const zh: LocaleData;
-  export default zh;
+  const zhLocaleData: LocaleData;
+  export default zhLocaleData;
 }
 declare module "i18next-icu/locale-data/zu" {
   import { LocaleData } from "i18next-icu";
-  const zu: LocaleData;
-  export default zu;
+  const zuLocaleData: LocaleData;
+  export default zuLocaleData;
 }
