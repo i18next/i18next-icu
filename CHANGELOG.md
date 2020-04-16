@@ -1,3 +1,8 @@
+
+### 1.3.1
+
+- typescript: IDE autocomplete: annoying short locale data names [23](https://github.com/i18next/i18next-icu/pull/23)
+
 ### 1.3.0
 
 - feat: Bind i18n and resource store events to clear the memoized cache [18](https://github.com/i18next/i18next-icu/pull/18)
