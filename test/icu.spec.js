@@ -127,4 +127,36 @@ describe('icu format', () => {
 
   });
 
+  describe('with missing keys', () => {
+    it('should call the error handler', () => {
+      let errorHandler = jest.fn()
+
+      let icu;
+      icu = new ICU({ 
+        localeData: ar,
+        parseErrorHandler: errorHandler
+      });
+
+      icu.parse('hello how are you {name}', {}, 'en', 'ns', 'key1')
+
+      expect(errorHandler).toHaveBeenCalled()
+    })
+  })
+
+  describe('without missing keys', () => {
+    it('should not call the error handler', () => {
+      let errorHandler = jest.fn()
+
+      let icu;
+      icu = new ICU({ 
+        localeData: ar,
+        parseErrorHandler: errorHandler
+      });
+
+      icu.parse('hello how are you {name}', {name: 'Joseph'}, 'en', 'ns', 'key1')
+
+      expect(errorHandler).toHaveBeenCalledTimes(0)
+    })
+  })
+
 });

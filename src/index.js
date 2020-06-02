@@ -7,6 +7,7 @@ function getDefaults() {
     memoizeFallback: false,
     bindI18n: '',
     bindI18nStore: '',
+    parseErrorHandler: (err, options) => { return options.defaultValue }
   };
 }
 
@@ -76,7 +77,12 @@ class ICU {
       fc = new IntlMessageFormat(res, lng, this.formats);
       if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
     }
-    return fc.format(options);
+    try {
+      return fc.format(options);
+    } 
+    catch (err) {
+      return this.options.parseErrorHandler(err, options);
+    }
   }
 
   addLookupKeys(finalKeys, key, code, ns, options) {

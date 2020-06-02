@@ -2066,7 +2066,10 @@ function getDefaults() {
     memoize: true,
     memoizeFallback: false,
     bindI18n: '',
-    bindI18nStore: ''
+    bindI18nStore: '',
+    parseErrorHandler: function parseErrorHandler(err, options) {
+      return options.defaultValue;
+    }
   };
 }
 
@@ -2135,7 +2138,7 @@ var ICU = /*#__PURE__*/function () {
   }, {
     key: "addUserDefinedFormats",
     value: function addUserDefinedFormats(formats) {
-      this.formats = this.formats ? _objectSpread2({}, this.formats, {}, formats) : formats;
+      this.formats = this.formats ? _objectSpread2(_objectSpread2({}, this.formats), formats) : formats;
     }
   }, {
     key: "parse",
@@ -2153,7 +2156,11 @@ var ICU = /*#__PURE__*/function () {
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, memKey, fc);
       }
 
-      return fc.format(options);
+      try {
+        return fc.format(options);
+      } catch (err) {
+        return this.options.parseErrorHandler(err, options);
+      }
     }
   }, {
     key: "addLookupKeys",
