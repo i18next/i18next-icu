@@ -85,8 +85,8 @@ i18next
   bindI18nStore: '',
 
   // Will be run when parser throws an error. Return a string to use in place of the translation.
-  // If omitted, the default swallows the error and returns options.defaultValue or the key if options.defaultValue doesn't exist.
-  parseErrorHandler: (err, key, options) => {}
+  // If omitted, the default swallows the error and returns the unsubstituted string (res)
+  parseErrorHandler: (err, key, res, options) => {}
 }
 ```
 
