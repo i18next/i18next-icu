@@ -82,7 +82,11 @@ i18next
   bindI18n: '',
 
   // which events on resourceSource should clear the cache, can be set to false or string of events separated by " "
-  bindI18nStore: ''
+  bindI18nStore: '',
+
+  // Will be run when parser throws an error. Return a string to use in place of the translation.
+  // If omitted, the default swallows the error and returns options.defaultValue
+  parseErrorHandler: (err, options) => {}
 }
 ```
 
