@@ -7,7 +7,9 @@ function getDefaults() {
     memoizeFallback: false,
     bindI18n: '',
     bindI18nStore: '',
-    parseErrorHandler: (err, options) => { return options.defaultValue }
+    parseErrorHandler: (err, key, options) => { 
+      return typeof options.defaultValue !== 'undefined' ? options.defaultValue : key 
+    }
   };
 }
 
@@ -81,7 +83,7 @@ class ICU {
       return fc.format(options);
     } 
     catch (err) {
-      return this.options.parseErrorHandler(err, options);
+      return this.options.parseErrorHandler(err, key, options);
     }
   }
 
