@@ -1,4 +1,8 @@
 
+### 1.4.0
+
+- Add error handling for failed parsing. Allow custom error handler [24](https://github.com/i18next/i18next-icu/pull/24)
+
 ### 1.3.1
 
 - typescript: IDE autocomplete: annoying short locale data names [23](https://github.com/i18next/i18next-icu/pull/23)

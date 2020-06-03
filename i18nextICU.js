@@ -2138,7 +2138,7 @@ var ICU = /*#__PURE__*/function () {
   }, {
     key: "addUserDefinedFormats",
     value: function addUserDefinedFormats(formats) {
-      this.formats = this.formats ? _objectSpread2(_objectSpread2({}, this.formats), formats) : formats;
+      this.formats = this.formats ? _objectSpread2({}, this.formats, {}, formats) : formats;
     }
   }, {
     key: "parse",
