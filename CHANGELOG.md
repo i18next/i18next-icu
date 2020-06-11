@@ -1,3 +1,6 @@
+### 1.4.1
+
+- index.d.ts: add `parseErrorHandler` and tune types [25](https://github.com/i18next/i18next-icu/pull/25)
 
 ### 1.4.0
 
