@@ -75,14 +75,15 @@ class ICU {
     if (this.options.memoize) {
       fc = utils.getPath(this.mem, memKey);
     }
-    if (!fc) {
-      fc = new IntlMessageFormat(res, lng, this.formats);
-      if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
-    }
+
     try {
+      if (!fc) {
+        fc = new IntlMessageFormat(res, lng, this.formats);
+        if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
+      }
+
       return fc.format(options);
-    } 
-    catch (err) {
+    } catch (err) {
       return this.options.parseErrorHandler(err, key,res, options);
     }
   }
