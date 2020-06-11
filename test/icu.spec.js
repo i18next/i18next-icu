@@ -86,6 +86,9 @@ describe('icu format', () => {
         '=1 {one photo.}' +
         'other {# photos.}}';
 
+      const strBadMissing = 'missing {variable} should not fail the world.';
+      const strBadUnescape = 'this {- unescapedVariable} is valid for i18next, but not valid for ICU format parser.';
+
       i18next
         .use(ICU)
         .init({
@@ -93,7 +96,9 @@ describe('icu format', () => {
           resources: {
             en: {
               translation: {
-                'key': str
+                'key': str,
+                'bad_key_missing': strBadMissing,
+                'bad_key_unescape': strBadUnescape,
               }
             }
           }
@@ -103,6 +108,11 @@ describe('icu format', () => {
     it('should parse', () => {
       expect(i18next.t('key', { numPhotos: 1000 })).toEqual('You have 1,000 photos.');
       expect(i18next.t('key', { numPhotos: 2000 })).toEqual('You have 2,000 photos.');
+    });
+
+    it('should return fallback value for incompatible key values', () => {
+      expect(i18next.t('bad_key_missing' )).toEqual('missing {variable} should not fail the world.');
+      expect(i18next.t('bad_key_unescape', { unescapedVariable: '<img />' })).toEqual('this {- unescapedVariable} is valid for i18next, but not valid for ICU format parser.');
     });
 
     it('should clear the cache on bound events', () => {
@@ -158,5 +168,4 @@ describe('icu format', () => {
       expect(errorHandler).toHaveBeenCalledTimes(0)
     })
   })
-
 });
