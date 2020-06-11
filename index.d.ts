@@ -29,10 +29,11 @@ declare module "i18next-icu" {
     formats?: IcuFormats;
     bindI18n?: string;
     bindI18nStore?: string;
+    parseErrorHandler: (err: Error, key: string, res: string, options: Object) => string;
   }
 
-  export interface IcuInstance extends ThirdPartyModule {
-    init(i18next: i18n, options?: IcuConfig): void;
+  export interface IcuInstance<TOptions = IcuConfig> extends ThirdPartyModule {
+    init(i18next: i18n, options?: TOptions): void;
     addLocaleData(localeData: LocaleData | LocaleData[]): void;
     addUserDefinedFormats(formats: IcuFormats): void;
     clearCache(): void;
