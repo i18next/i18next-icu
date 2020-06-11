@@ -29,7 +29,7 @@ declare module "i18next-icu" {
     formats?: IcuFormats;
     bindI18n?: string;
     bindI18nStore?: string;
-    parseErrorHandler: (err: Error, key: string, res: string, options: Object) => string;
+    parseErrorHandler?: (err: Error, key: string, res: string, options: Object) => string;
   }
 
   export interface IcuInstance<TOptions = IcuConfig> extends ThirdPartyModule {
