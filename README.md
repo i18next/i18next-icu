@@ -84,7 +84,7 @@ i18next
   // which events on resourceSource should clear the cache, can be set to false or string of events separated by " "
   bindI18nStore: '',
 
-  // Will be run when parser throws an error. Return a string to use in place of the translation.
+  // Will be run when parser throws an error. Can return any string, which can be used as a fallback, in case of broken translation.
   // If omitted, the default swallows the error and returns the unsubstituted string (res)
   parseErrorHandler: (err, key, res, options) => {}
 }
