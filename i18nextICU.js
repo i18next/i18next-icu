@@ -75,21 +75,9 @@
     return target;
   }
 
-  // @ts-check
-
-  /**
-   * 
-   * @param {*} object 
-   * @param {*} path 
-   * @param {*} Empty 
-   */
   function getLastOfPath(object, path, Empty) {
-    /**
-     * 
-     * @param {string | undefined} key 
-     */
     function cleanKey(key) {
-      return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : "";
+      return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
     }
 
     function canNotTraverseDeeper() {
@@ -111,29 +99,14 @@
       k: cleanKey(stack.shift())
     };
   }
-  /**
-   * 
-   * @param {*} object 
-   * @param {*} path 
-   * @param {*} newValue 
-   */
-
 
   function setPath(object, path, newValue) {
     var _getLastOfPath = getLastOfPath(object, path, Object),
         obj = _getLastOfPath.obj,
         k = _getLastOfPath.k;
 
-    if (obj && k !== undefined) {
-      obj[k] = newValue;
-    }
+    obj[k] = newValue;
   }
-  /**
-   * 
-   * @param {*} object 
-   * @param {*} path 
-   */
-
   function getPath(object, path) {
     var _getLastOfPath3 = getLastOfPath(object, path),
         obj = _getLastOfPath3.obj,
@@ -142,19 +115,9 @@
     if (!obj) return undefined;
     return obj[k];
   }
-  /**
-   * @type {any[]}
-   */
-
   var arr = [];
   var each = arr.forEach;
   var slice = arr.slice;
-  /**
-   * given a list of objects in priority order, merge in
-   * any missing keys from objects later in the arguments list
-   * @param {Record<string, any>} obj 
-   */
-
   function defaults(obj) {
     each.call(slice.call(arguments, 1), function (source) {
       if (source) {
@@ -4399,14 +4362,7 @@
       memoizeFallback: false,
       bindI18n: '',
       bindI18nStore: '',
-
-      /**
-       * 
-       * @param {any} _err 
-       * @param {any} _key 
-       * @param {any} res 
-       */
-      parseErrorHandler: function parseErrorHandler(_err, _key, res) {
+      parseErrorHandler: function parseErrorHandler(err, key, res, options) {
         return res;
       }
     };
