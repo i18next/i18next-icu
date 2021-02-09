@@ -4,7 +4,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import { argv } from 'yargs';
 
 const format = argv.format || argv.f || 'iife';
-const compress = argv.uglify;
+const compress = argv.compact;
 
 const babelOptions = {
   exclude: 'node_modules/**',
