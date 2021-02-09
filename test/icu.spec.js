@@ -1,16 +1,18 @@
+import artIntlLocalesSupported from "intl-locales-supported";
+if (global.Intl) {
+  if (!artIntlLocalesSupported(['en', 'ar-AR'])) {
+    const polyFill = require("intl");
+    Intl.NumberFormat = polyFill.NumberFormat;
+    Intl.DateTimeFormat = polyFill.DateTimeFormat;
+  }
+} else {
+  global.Intl = require("intl");
+}
+
 import ICU from "../src/";
 import i18next from "i18next";
 
 describe("icu format", () => {
-  it("Node should be built with full-icu", () => {
-    if (!global.Intl) {
-      console.error(
-        're-build node with full-icu. If you\'re using nvm (https://nvm.sh) then run "nvm install -s <node-version> --with-full-icu --download-all". You may need to uninstall the version first'
-      );
-    }
-    expect(global.Intl).not.toBeUndefined();
-  });
-
   describe("basic parse", () => {
     let icu;
 
