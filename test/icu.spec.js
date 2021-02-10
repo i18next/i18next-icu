@@ -1,6 +1,6 @@
-import artIntlLocalesSupported from "intl-locales-supported";
+import areIntlLocalesSupported from "intl-locales-supported";
 if (global.Intl) {
-  if (!artIntlLocalesSupported(['en', 'ar-AR'])) {
+  if (!areIntlLocalesSupported(['en', 'ar-AR'])) {
     const polyFill = require("intl");
     Intl.NumberFormat = polyFill.NumberFormat;
     Intl.DateTimeFormat = polyFill.DateTimeFormat;

@@ -1,3 +1,7 @@
+### 2.0.0
+
+- update all dependencies, and update rollup build [31](https://github.com/i18next/i18next-icu/pull/31) solves intl-messageformat is egregiously out of date [30](https://github.com/i18next/i18next-icu/issues/30)
+
 ### 1.4.2
 
 - Fix/make error handling work [27](https://github.com/i18next/i18next-icu/pull/27)
