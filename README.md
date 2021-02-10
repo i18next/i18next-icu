@@ -14,6 +14,8 @@ Source can be loaded via [npm](https://www.npmjs.com/package/i18next-icu) or [do
 ```
 # npm package
 $ npm install i18next-icu
+# peer dependencies
+$ npm install intl-messageformat
 ```
 
 Wiring up:
@@ -27,43 +29,6 @@ i18next.use(ICU).init(i18nextOptions);
 
 - As with all modules you can either pass the constructor function (class) to the i18next.use or a concrete instance.
 - If you don't use a module loader it will be added to `window.i18nextICU`
-
-## Plural Support
-
-- While on node.js all plurals will work out of the box in browser you will need to load additional locale data files like:
-
-```js
-import i18next from 'i18next';
-import ICU from 'i18next-icu';
-
-import fr from 'i18next-icu/locale-data/fr';
-
-i18next
-  .use(ICU)
-  .init({
-    i18nFormat: {
-      localeData: fr // you also can pass in array of localeData
-      formats: {
-        // https://github.com/yahoo/intl-messageformat#user-defined-formats
-      }
-    }
-  });
-
-// or for react-i18next when using SSR
-import i18next from 'i18next';
-import ICU from 'i18next-icu';
-import fr from 'i18next-icu/locale-data/fr';
-
-const icu = new ICU();
-icu.addLocaleData(fr);
-icu.addUserDefinedFormats({ /* https://github.com/yahoo/intl-messageformat#user-defined-formats */ })
-
-i18next
-  .use(icu)
-  .init({
-    i18nFormat: {}
-  });
-```
 
 ## Backend Options
 

@@ -1,10 +1,10 @@
-import babel from 'rollup-plugin-babel';
-import uglify from 'rollup-plugin-uglify';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import { terser } from 'rollup-plugin-terser';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import { argv } from 'yargs';
 
 const format = argv.format || argv.f || 'iife';
-const compress = argv.uglify;
+const compress = argv.compact;
 
 const babelOptions = {
   exclude: 'node_modules/**',
@@ -12,20 +12,25 @@ const babelOptions = {
   babelrc: false
 };
 
-const dest = {
-  amd: `dist/amd/i18nextICU${compress ? '.min' : ''}.js`,
-  umd: `dist/umd/i18nextICU${compress ? '.min' : ''}.js`,
-  iife: `dist/iife/i18nextICU${compress ? '.min' : ''}.js`
-}[format];
+const output = [{
+  file: `dist/umd/i18nextICU${compress ? '.min' : ''}.js`,
+  format: 'umd',
+  name: "i18nextICU",
+}, {
+  file: `dist/amd/i18nextICU${compress ? '.min' : ''}.js`,
+  format: 'amd',
+  name: "i18nextICU",
+}, {
+  file: `dist/iife/i18nextICU${compress ? '.min' : ''}.js`,
+  format: 'iife',
+  name: "i18nextICU",
+}];
 
 export default {
-  entry: 'src/index.js',
-  format,
+  input: 'src/index.js',
   plugins: [
     babel(babelOptions),
-    nodeResolve({ jsnext: true })
-  ].concat(compress ? uglify() : []),
-  moduleName: 'i18nextICU',
-  //moduleId: 'i18nextXHRBackend',
-  dest
+    nodeResolve({ mainField: ['jsnext:main'] })
+  ].concat(compress ? terser() : []),
+  output
 };

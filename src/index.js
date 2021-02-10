@@ -42,25 +42,6 @@ class ICU {
         }
       }
     }
-
-    if (this.options.localeData) {
-      if (Object.prototype.toString.apply(this.options.localeData) === '[object Array]') {
-        this.options.localeData.forEach(ld => this.addLocaleData(ld));
-      } else {
-        this.addLocaleData(this.options.localeData);
-      }
-    }
-  }
-
-  addLocaleData(data) {
-    let locales = Object.prototype.toString.apply(data) === '[object Array]' ? data : [data];
-
-    locales.forEach(localeData => {
-      if (localeData && localeData.locale) {
-        IntlMessageFormat.__addLocaleData(localeData);
-        // IntlRelativeFormat.__addLocaleData(localeData);
-      }
-    });
   }
 
   addUserDefinedFormats(formats) {
@@ -88,7 +69,7 @@ class ICU {
     }
   }
 
-  addLookupKeys(finalKeys, key, code, ns, options) {
+  addLookupKeys(finalKeys, _key, _code, _ns, _options) {
     // no additional keys needed for select or plural
     // so there is no need to add keys to that finalKeys array
     return finalKeys;

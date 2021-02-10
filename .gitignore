@@ -7,7 +7,6 @@
 npm-debug.log
 npm-debug.log.*
 *.dat
-package-lock.json
 
 # Ignore various temporary files
 *~
