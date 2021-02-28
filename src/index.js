@@ -59,7 +59,11 @@ class ICU {
 
     try {
       if (!fc) {
-        fc = new IntlMessageFormat(res, lng, this.formats);
+        // without ignoreTag, react-i18next <Trans> translations with <0></0> placeholders
+        // will fail to parse, as IntlMessageFormat expects them to be defined in the
+        // options passed to fc.format() as { 0: (children) => string }
+        // but the replacement of placeholders is done in react-i18next
+        fc = new IntlMessageFormat(res, lng, this.formats, { ignoreTag: true });
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
       }
 
