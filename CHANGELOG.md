@@ -1,4 +1,4 @@
-### 2.0.1
+### 2.0.2
 
 - i18next-icu incompatible with react-i18next [34](https://github.com/i18next/i18next-icu/pull/34)
 
