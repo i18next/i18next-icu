@@ -40,9 +40,6 @@ i18next.use(ICU).init(i18nextOptions);
   // memoize if not having a lookup and just using the key fallback as value
   memoizeFallback: false,
 
-  // array or single object of loaded 'i18next-icu/locale-data
-  localeData: null,
-
   // which events should clear the cache, can be set to false or string of events separated by " "
   bindI18n: '',
 

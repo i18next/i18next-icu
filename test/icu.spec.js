@@ -46,6 +46,14 @@ describe("icu format", () => {
         "Got ١ one"
       );
     });
+
+    it("should ignore <0></0> placeholder tags", () => {
+      const str = "This has a <0>placeholder</0> tag in it, and an { argument }";
+
+      expect(icu.parse(str, { argument: "argument" }, "en", "ns", "key")).toBe(
+        "This has a <0>placeholder</0> tag in it, and an argument"
+      )
+    });
   });
 
   describe("with formatter", () => {
