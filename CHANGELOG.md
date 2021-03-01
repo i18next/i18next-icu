@@ -1,3 +1,7 @@
+### 2.0.1
+
+- i18next-icu incompatible with react-i18next [34](https://github.com/i18next/i18next-icu/pull/34)
+
 ### 2.0.0
 
 - update all dependencies, and update rollup build [31](https://github.com/i18next/i18next-icu/pull/31) solves intl-messageformat is egregiously out of date [30](https://github.com/i18next/i18next-icu/issues/30)
