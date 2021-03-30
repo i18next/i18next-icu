@@ -1,3 +1,7 @@
+### 2.0.3
+
+- Added ES build to general build task [37](https://github.com/i18next/i18next-icu/pull/37)
+
 ### 2.0.2
 
 - i18next-icu incompatible with react-i18next [34](https://github.com/i18next/i18next-icu/pull/34)
