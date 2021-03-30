@@ -3,7 +3,7 @@
   "version": "2.0.2",
   "description": "i18nFormat plugin to use ICU format with i18next",
   "main": "./index.js",
-  "jsnext:main": "dist/es/index.js",
+  "module": "dist/es/index.js",
   "keywords": [
     "i18next",
     "i18next-format"
