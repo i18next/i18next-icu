@@ -3,7 +3,7 @@
   "version": "2.0.2",
   "description": "i18nFormat plugin to use ICU format with i18next",
   "main": "./index.js",
-  "jsnext:main": "dist/es/index.js",
+  "module": "dist/es/index.js",
   "keywords": [
     "i18next",
     "i18next-format"
@@ -55,7 +55,7 @@
     "build:es-win": "SET BABEL_ENV=jsnext babel src --out-dir dist/es",
     "build:cjs": "babel src --out-dir dist/commonjs",
     "build:rollup": "rollup -c rollup.config.js && rollup -c rollup.config.js --compact",
-    "build": "npm run clean && npm run build:cjs && npm run build:rollup && npm run copy",
+    "build": "npm run clean && npm run build:cjs && npm run build:es && npm run build:rollup && npm run copy",
     "build-win": "npm run clean && npm run build:cjs && npm run build:es-win && npm run build:rollup && npm run copy-win",
     "preversion": "npm run test && npm run build && git push",
     "postversion": "git push && git push --tags"
