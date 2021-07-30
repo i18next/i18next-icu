@@ -87,6 +87,12 @@ i18next.use(ICU).init({
 i18next.t("key", { numPhotos: 1000 }); // -> You have 1,000 photos.
 ```
 
+## Migration guide
+
+### 1.x.x -> 2.0.0
+
+- updated `intl-messageformat` dependency. Adding locales-data is no longer needed.
+
 ---
 
 <h3 align="center">Gold Sponsors</h3>
