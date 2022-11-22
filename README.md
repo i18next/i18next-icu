@@ -7,6 +7,11 @@
 
 This changes i18n format from i18next json to ICU using [yahoo/intl-messageformat](https://github.com/yahoo/intl-messageformat)
 
+## Advice
+
+When using this module, only the ICU message format is respected, this means the i18next format interpolation will not work.
+So for example instead of `Hy {{name}}!` it is `Hy {name}!`
+
 # Getting started
 
 Source can be loaded via [npm](https://www.npmjs.com/package/i18next-icu) or [downloaded](https://github.com/i18next/i18next-icu/blob/master/i18nextICU.min.js) from this repo.
