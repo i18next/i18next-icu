@@ -3,7 +3,6 @@
 [![Travis](https://img.shields.io/travis/i18next/i18next-icu/master.svg?style=flat-square)](https://travis-ci.org/i18next/i18next-icu)
 [![Coveralls](https://img.shields.io/coveralls/i18next/i18next-icu/master.svg?style=flat-square)](https://coveralls.io/github/i18next/i18next-icu)
 [![npm version](https://img.shields.io/npm/v/i18next-icu.svg?style=flat-square)](https://www.npmjs.com/package/i18next-icu)
-[![David](https://img.shields.io/david/i18next/i18next-icu.svg?style=flat-square)](https://david-dm.org/i18next/i18next-icu)
 
 This changes i18n format from i18next json to ICU using [yahoo/intl-messageformat](https://github.com/yahoo/intl-messageformat)
 
