@@ -1,3 +1,7 @@
+### 2.1.0
+
+- update intl-messageformat dependency to address [57](https://github.com/i18next/i18next-icu/issues/57)
+
 ### 2.0.3
 
 - Added ES build to general build task [37](https://github.com/i18next/i18next-icu/pull/37)
