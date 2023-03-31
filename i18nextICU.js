@@ -171,6 +171,18 @@
       return __assign.apply(this, arguments);
   };
 
+  function __rest(s, e) {
+      var t = {};
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+          t[p] = s[p];
+      if (s != null && typeof Object.getOwnPropertySymbols === "function")
+          for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+              if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                  t[p[i]] = s[p[i]];
+          }
+      return t;
+  }
+
   function __spreadArray(to, from, pack) {
       if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
           if (ar || !(i in from)) {
@@ -3909,11 +3921,9 @@
               if (!IntlMessageFormat.__parse) {
                   throw new TypeError('IntlMessageFormat.__parse must be set to process `message` of type `string`');
               }
+              var _a = opts || {}; _a.formatters; var parseOpts = __rest(_a, ["formatters"]);
               // Parse string messages into an AST.
-              this.ast = IntlMessageFormat.__parse(message, {
-                  ignoreTag: opts === null || opts === void 0 ? void 0 : opts.ignoreTag,
-                  locale: this.resolvedLocale,
-              });
+              this.ast = IntlMessageFormat.__parse(message, __assign(__assign({}, parseOpts), { locale: this.resolvedLocale }));
           }
           else {
               this.ast = message;
