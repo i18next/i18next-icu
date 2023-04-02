@@ -8,7 +8,7 @@ function getDefaults() {
     bindI18n: '',
     bindI18nStore: '',
     parseErrorHandler: (err, key, res, options) => {
-      return res
+      return res;
     },
     parseLngForICU: (lng) => {
       return lng;
