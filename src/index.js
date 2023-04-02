@@ -7,9 +7,12 @@ function getDefaults() {
     memoizeFallback: false,
     bindI18n: '',
     bindI18nStore: '',
-    parseErrorHandler: (err, key, res, options) => { 
-      return res 
-    }
+    parseErrorHandler: (err, key, res, options) => {
+      return res
+    },
+    parseLngForICU: (lng) => {
+      return lng;
+    },
   };
 }
 
@@ -27,7 +30,7 @@ class ICU {
     this.formats = this.options.formats;
 
     if (i18next) {
-      const { bindI18n, bindI18nStore, memoize } = this.options; 
+      const { bindI18n, bindI18nStore, memoize } = this.options;
 
       i18next.IntlMessageFormat = IntlMessageFormat;
       i18next.ICU = this;
@@ -36,7 +39,7 @@ class ICU {
         if (bindI18n) {
           i18next.on(bindI18n, () => this.clearCache())
         }
-  
+
         if (bindI18nStore) {
           i18next.store.on(bindI18nStore, () => this.clearCache())
         }
@@ -59,17 +62,18 @@ class ICU {
 
     try {
       if (!fc) {
+        const transformedLng = this.options.parseLngForICU(lng);
         // without ignoreTag, react-i18next <Trans> translations with <0></0> placeholders
         // will fail to parse, as IntlMessageFormat expects them to be defined in the
         // options passed to fc.format() as { 0: (children) => string }
         // but the replacement of placeholders is done in react-i18next
-        fc = new IntlMessageFormat(res, lng, this.formats, { ignoreTag: true });
+        fc = new IntlMessageFormat(res, transformedLng, this.formats, { ignoreTag: true });
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
       }
 
       return fc.format(options);
     } catch (err) {
-      return this.options.parseErrorHandler(err, key,res, options);
+      return this.options.parseErrorHandler(err, key, res, options);
     }
   }
 

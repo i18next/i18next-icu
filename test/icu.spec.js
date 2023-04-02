@@ -166,6 +166,24 @@ describe("icu format", () => {
       i18next.addResourceBundle("en", "translation", { key: "value" });
       expect(spy).toHaveBeenCalledTimes(2);
     });
+
+    it("should transform the language code", () => {
+      i18next.use(ICU).init({
+        lng: "invalid-icu-language",
+        resources: {
+          "invalid-icu-language": {
+            translation: {
+              key: "Hello {who}",
+            }
+          }
+        },
+        i18nFormat: {
+          parseLngForICU: (lng) => "en-US",
+        },
+      });
+
+      expect(i18next.t("key", { who: 'world' })).toEqual("Hello world");
+    });
   });
 
   describe("with missing keys", () => {
