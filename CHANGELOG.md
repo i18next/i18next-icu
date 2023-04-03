@@ -1,3 +1,7 @@
+### 2.3.0
+
+- Adding function to parse language for ICU [63](https://github.com/i18next/i18next-icu/pull/63)
+
 ### 2.2.0
 
 - update intl-messageformat dependency to address [62](https://github.com/i18next/i18next-icu/issues/62)
