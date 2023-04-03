@@ -52,7 +52,11 @@ i18next.use(ICU).init(i18nextOptions);
 
   // Will be run when parser throws an error. Can return any string, which can be used as a fallback, in case of broken translation.
   // If omitted, the default swallows the error and returns the unsubstituted string (res)
-  parseErrorHandler: (err, key, res, options) => {}
+  parseErrorHandler: (err, key, res, options) => {},
+
+  // Transform the language code prior to ICU locale parsing, useful for supporting psuedo-locales like en-ZZ
+  // If omitted, the default leaves the language code as is
+  parseLngForICU: (lng) => lng,
 }
 ```
 

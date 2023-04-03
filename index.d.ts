@@ -25,6 +25,7 @@ declare module "i18next-icu" {
     bindI18n?: string;
     bindI18nStore?: string;
     parseErrorHandler?: (err: Error, key: string, res: string, options: Object) => string;
+    parseLngForICU?: (lng: string) => string;
   }
 
   export interface IcuInstance<TOptions = IcuConfig> extends ThirdPartyModule {
@@ -34,7 +35,7 @@ declare module "i18next-icu" {
   }
 
   interface IcuConstructor {
-    new (config?: IcuConfig): IcuInstance;
+    new(config?: IcuConfig): IcuInstance;
     type: "i18nFormat";
   }
 
