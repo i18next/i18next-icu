@@ -95,6 +95,12 @@ i18next.use(ICU).init({
 i18next.t("key", { numPhotos: 1000 }); // -> You have 1,000 photos.
 ```
 
+## hints
+
+Using i18next-icu - non of the i18next specific stuff will be available. You will have to rely on what intl-messageformat provides by calling the `t` function with needed options.
+
+All extra features build around i18next plurals, interpolation, context do not get applied to messageformat based keys.
+
 ## Migration guide
 
 ### 1.x.x -> 2.0.0
