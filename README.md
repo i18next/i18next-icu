@@ -57,6 +57,11 @@ i18next.use(ICU).init(i18nextOptions);
   // Transform the language code prior to ICU locale parsing, useful for supporting psuedo-locales like en-ZZ
   // If omitted, the default leaves the language code as is
   parseLngForICU: (lng) => lng,
+
+  // Automatically escape HTML special characters in variable values to prevent ICU parsing issues
+  // When true (default), characters like <, >, &, ", ' in variables are escaped to their HTML entities
+  // This prevents strings like "user:<" from being truncated or causing parsing errors
+  escapeVariables: true,
 }
 ```
 

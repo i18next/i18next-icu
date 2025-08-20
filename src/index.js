@@ -13,6 +13,7 @@ function getDefaults() {
     parseLngForICU: (lng) => {
       return lng;
     },
+    escapeVariables: true,
   };
 }
 
@@ -71,7 +72,7 @@ class ICU {
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
       }
 
-      return fc.format(options);
+      return fc.format(this.escapeVariableValues(options));
     } catch (err) {
       return this.options.parseErrorHandler(err, key, res, options);
     }
@@ -85,6 +86,28 @@ class ICU {
 
   clearCache() {
     this.mem = {};
+  }
+
+  escapeVariableValues(options) {
+    if (!this.options.escapeVariables || !options || typeof options !== 'object') {
+      return options;
+    }
+
+    const escaped = {};
+    for (const [key, value] of Object.entries(options)) {
+      if (typeof value === 'string') {
+        // Escape HTML special characters that could interfere with ICU parsing
+        escaped[key] = value
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      } else {
+        escaped[key] = value;
+      }
+    }
+    return escaped;
   }
 }
 
