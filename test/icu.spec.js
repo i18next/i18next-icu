@@ -223,8 +223,10 @@ describe("icu format", () => {
   });
 
   describe("HTML escape handling", () => {
-    it("should handle variables with HTML special characters by default", () => {
-      let icu = new ICU();
+    it("should handle variables with HTML special characters when enabled", () => {
+      let icu = new ICU({
+        escapeVariables: true
+      });
 
       const result = icu.parse(
         "以茲證明 {name} 已於 {date} 完成由 {teacher} 授課的課程。",
@@ -260,7 +262,9 @@ describe("icu format", () => {
     });
 
     it("should escape multiple HTML special characters", () => {
-      let icu = new ICU();
+      let icu = new ICU({
+        escapeVariables: true
+      });
 
       const result = icu.parse(
         "Message: {content}",
@@ -274,7 +278,9 @@ describe("icu format", () => {
     });
 
     it("should not escape non-string values", () => {
-      let icu = new ICU();
+      let icu = new ICU({
+        escapeVariables: true
+      });
 
       const result = icu.parse(
         "Count: {count}, Price: {price}",
@@ -288,7 +294,9 @@ describe("icu format", () => {
     });
 
     it("should work with react-i18next Trans component patterns", () => {
-      let icu = new ICU();
+      let icu = new ICU({
+        escapeVariables: true
+      });
 
       const result = icu.parse(
         "以茲證明 {name} 已於 {date} 完成由 {teacher} 授課的 <0><0>{course}</0></0> 課程。",

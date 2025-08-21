@@ -13,7 +13,7 @@ function getDefaults() {
     parseLngForICU: (lng) => {
       return lng;
     },
-    escapeVariables: true,
+    escapeVariables: false,
   };
 }
 

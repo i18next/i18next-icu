@@ -59,9 +59,10 @@ i18next.use(ICU).init(i18nextOptions);
   parseLngForICU: (lng) => lng,
 
   // Automatically escape HTML special characters in variable values to prevent ICU parsing issues
-  // When true (default), characters like <, >, &, ", ' in variables are escaped to their HTML entities
+  // When true, characters like <, >, &, ", ' in variables are escaped to their HTML entities
   // This prevents strings like "user:<" from being truncated or causing parsing errors
-  escapeVariables: true,
+  // Default: false (to maintain backward compatibility)
+  escapeVariables: false,
 }
 ```
 
