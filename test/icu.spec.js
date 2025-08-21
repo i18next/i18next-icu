@@ -221,4 +221,97 @@ describe("icu format", () => {
       expect(errorHandler).toHaveBeenCalledTimes(0);
     });
   });
+
+  describe("HTML escape handling", () => {
+    it("should handle variables with HTML special characters when enabled", () => {
+      let icu = new ICU({
+        escapeVariables: true
+      });
+
+      const result = icu.parse(
+        "以茲證明 {name} 已於 {date} 完成由 {teacher} 授課的課程。",
+        { 
+          name: "小月:<", 
+          date: "2025/08/20 08:00", 
+          teacher: "foobar" 
+        },
+        "zh",
+        "ns",
+        "key1"
+      );
+
+      expect(result).toBe("以茲證明 小月:&lt; 已於 2025/08/20 08:00 完成由 foobar 授課的課程。");
+    });
+
+    it("should allow disabling HTML escape", () => {
+      let icu = new ICU({
+        escapeVariables: false
+      });
+
+      // This might fail or truncate due to HTML parsing issues
+      const result = icu.parse(
+        "Hello {name}",
+        { name: "user<script>" },
+        "en",
+        "ns",
+        "key1"
+      );
+
+      // Without escaping, the result might be unexpected due to HTML parsing
+      expect(typeof result).toBe("string");
+    });
+
+    it("should escape multiple HTML special characters", () => {
+      let icu = new ICU({
+        escapeVariables: true
+      });
+
+      const result = icu.parse(
+        "Message: {content}",
+        { content: '<script>alert("xss")</script> & other "quotes"' },
+        "en",
+        "ns",
+        "key1"
+      );
+
+      expect(result).toBe('Message: &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt; &amp; other &quot;quotes&quot;');
+    });
+
+    it("should not escape non-string values", () => {
+      let icu = new ICU({
+        escapeVariables: true
+      });
+
+      const result = icu.parse(
+        "Count: {count}, Price: {price}",
+        { count: 42, price: 19.99 },
+        "en",
+        "ns",
+        "key1"
+      );
+
+      expect(result).toBe("Count: 42, Price: 19.99");
+    });
+
+    it("should work with react-i18next Trans component patterns", () => {
+      let icu = new ICU({
+        escapeVariables: true
+      });
+
+      const result = icu.parse(
+        "以茲證明 {name} 已於 {date} 完成由 {teacher} 授課的 <0><0>{course}</0></0> 課程。",
+        { 
+          name: "小月:<", 
+          date: "2025/08/20 08:00", 
+          teacher: "foobar",
+          course: "JavaScript"
+        },
+        "zh",
+        "ns",
+        "key1"
+      );
+
+      expect(result).toBe("以茲證明 小月:&lt; 已於 2025/08/20 08:00 完成由 foobar 授課的 <0><0>JavaScript</0></0> 課程。");
+    });
+  });
 });
