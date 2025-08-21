@@ -4,12 +4,25 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.i18nextICU = factory());
 }(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+    return _typeof(obj);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,13 +32,11 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -37,13 +48,10 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
-
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(object);
       if (enumerableOnly) symbols = symbols.filter(function (sym) {
@@ -51,14 +59,11 @@
       });
       keys.push.apply(keys, symbols);
     }
-
     return keys;
   }
-
   function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
-
       if (i % 2) {
         ownKeys(Object(source), true).forEach(function (key) {
           _defineProperty(target, key, source[key]);
@@ -71,47 +76,84 @@
         });
       }
     }
-
     return target;
+  }
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+  function _iterableToArrayLimit(arr, i) {
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   function getLastOfPath(object, path, Empty) {
     function cleanKey(key) {
       return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
     }
-
     function canNotTraverseDeeper() {
       return !object || typeof object === 'string';
     }
-
     var stack = typeof path !== 'string' ? [].concat(path) : path.split('.');
-
     while (stack.length > 1) {
       if (canNotTraverseDeeper()) return {};
       var key = cleanKey(stack.shift());
       if (!object[key] && Empty) object[key] = new Empty();
       object = object[key];
     }
-
     if (canNotTraverseDeeper()) return {};
     return {
       obj: object,
       k: cleanKey(stack.shift())
     };
   }
-
   function setPath(object, path, newValue) {
     var _getLastOfPath = getLastOfPath(object, path, Object),
-        obj = _getLastOfPath.obj,
-        k = _getLastOfPath.k;
-
+      obj = _getLastOfPath.obj,
+      k = _getLastOfPath.k;
     obj[k] = newValue;
   }
   function getPath(object, path) {
     var _getLastOfPath3 = getLastOfPath(object, path),
-        obj = _getLastOfPath3.obj,
-        k = _getLastOfPath3.k;
-
+      obj = _getLastOfPath3.obj,
+      k = _getLastOfPath3.k;
     if (!obj) return undefined;
     return obj[k];
   }
@@ -143,55 +185,141 @@
   OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
   PERFORMANCE OF THIS SOFTWARE.
   ***************************************************************************** */
-  /* global Reflect, Promise */
+  /* global Reflect, Promise, SuppressedError, Symbol, Iterator */
 
   var extendStatics = function(d, b) {
-      extendStatics = Object.setPrototypeOf ||
-          ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-          function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-      return extendStatics(d, b);
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return extendStatics(d, b);
   };
 
   function __extends(d, b) {
-      if (typeof b !== "function" && b !== null)
-          throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-      extendStatics(d, b);
-      function __() { this.constructor = d; }
-      d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   }
 
   var __assign = function() {
-      __assign = Object.assign || function __assign(t) {
-          for (var s, i = 1, n = arguments.length; i < n; i++) {
-              s = arguments[i];
-              for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-          }
-          return t;
-      };
-      return __assign.apply(this, arguments);
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
   };
 
   function __rest(s, e) {
-      var t = {};
-      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-          t[p] = s[p];
-      if (s != null && typeof Object.getOwnPropertySymbols === "function")
-          for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-              if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                  t[p[i]] = s[p[i]];
-          }
-      return t;
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
   }
 
   function __spreadArray(to, from, pack) {
-      if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-          if (ar || !(i in from)) {
-              if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-              ar[i] = from[i];
-          }
-      }
-      return to.concat(ar || Array.prototype.slice.call(from));
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
   }
+
+  typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+  };
+
+  //
+  // Main
+  //
+  function memoize(fn, options) {
+      var cache = options && options.cache ? options.cache : cacheDefault;
+      var serializer = options && options.serializer ? options.serializer : serializerDefault;
+      var strategy = options && options.strategy ? options.strategy : strategyDefault;
+      return strategy(fn, {
+          cache: cache,
+          serializer: serializer,
+      });
+  }
+  //
+  // Strategy
+  //
+  function isPrimitive(value) {
+      return (value == null || typeof value === 'number' || typeof value === 'boolean'); // || typeof value === "string" 'unsafe' primitive for our needs
+  }
+  function monadic(fn, cache, serializer, arg) {
+      var cacheKey = isPrimitive(arg) ? arg : serializer(arg);
+      var computedValue = cache.get(cacheKey);
+      if (typeof computedValue === 'undefined') {
+          computedValue = fn.call(this, arg);
+          cache.set(cacheKey, computedValue);
+      }
+      return computedValue;
+  }
+  function variadic(fn, cache, serializer) {
+      var args = Array.prototype.slice.call(arguments, 3);
+      var cacheKey = serializer(args);
+      var computedValue = cache.get(cacheKey);
+      if (typeof computedValue === 'undefined') {
+          computedValue = fn.apply(this, args);
+          cache.set(cacheKey, computedValue);
+      }
+      return computedValue;
+  }
+  function assemble(fn, context, strategy, cache, serialize) {
+      return strategy.bind(context, fn, cache, serialize);
+  }
+  function strategyDefault(fn, options) {
+      var strategy = fn.length === 1 ? monadic : variadic;
+      return assemble(fn, this, strategy, options.cache.create(), options.serializer);
+  }
+  function strategyVariadic(fn, options) {
+      return assemble(fn, this, variadic, options.cache.create(), options.serializer);
+  }
+  function strategyMonadic(fn, options) {
+      return assemble(fn, this, monadic, options.cache.create(), options.serializer);
+  }
+  //
+  // Serializer
+  //
+  var serializerDefault = function () {
+      return JSON.stringify(arguments);
+  };
+  //
+  // Cache
+  //
+  var ObjectWithoutPrototypeCache = /** @class */ (function () {
+      function ObjectWithoutPrototypeCache() {
+          this.cache = Object.create(null);
+      }
+      ObjectWithoutPrototypeCache.prototype.get = function (key) {
+          return this.cache[key];
+      };
+      ObjectWithoutPrototypeCache.prototype.set = function (key, value) {
+          this.cache[key] = value;
+      };
+      return ObjectWithoutPrototypeCache;
+  }());
+  var cacheDefault = {
+      create: function create() {
+          return new ObjectWithoutPrototypeCache();
+      },
+  };
+  var strategies = {
+      variadic: strategyVariadic,
+      monadic: strategyMonadic,
+  };
 
   var ErrorKind;
   (function (ErrorKind) {
@@ -394,7 +522,7 @@
                   throw new RangeError('`D/F/g` (day) patterns are not supported, use `d` instead');
               // Weekday
               case 'E':
-                  result.weekday = len === 4 ? 'short' : len === 5 ? 'narrow' : 'short';
+                  result.weekday = len === 4 ? 'long' : len === 5 ? 'narrow' : 'short';
                   break;
               case 'e':
                   if (len < 4) {
@@ -452,7 +580,7 @@
                   result.timeZoneName = len < 4 ? 'short' : 'long';
                   break;
               case 'Z': // 1..3, 4, 5: The ISO8601 varios formats
-              case 'O': // 1, 4: miliseconds in day short, long
+              case 'O': // 1, 4: milliseconds in day short, long
               case 'v': // 1, 4: generic non-location format
               case 'V': // 1, 2, 3, 4: time zone ID or city
               case 'X': // 1, 2, 3, 4: The ISO8601 varios formats
@@ -683,6 +811,27 @@
               case 'scale':
                   result.scale = parseFloat(token.options[0]);
                   continue;
+              case 'rounding-mode-floor':
+                  result.roundingMode = 'floor';
+                  continue;
+              case 'rounding-mode-ceiling':
+                  result.roundingMode = 'ceil';
+                  continue;
+              case 'rounding-mode-down':
+                  result.roundingMode = 'trunc';
+                  continue;
+              case 'rounding-mode-up':
+                  result.roundingMode = 'expand';
+                  continue;
+              case 'rounding-mode-half-even':
+                  result.roundingMode = 'halfEven';
+                  continue;
+              case 'rounding-mode-half-down':
+                  result.roundingMode = 'halfTrunc';
+                  continue;
+              case 'rounding-mode-half-up':
+                  result.roundingMode = 'halfExpand';
+                  continue;
               // https://unicode-org.github.io/icu/userguide/format_parse/numbers/skeletons.html#integer-width
               case 'integer-width':
                   if (token.options.length > 1) {
@@ -764,187 +913,283 @@
   // @generated from time-data-gen.ts
   // prettier-ignore  
   var timeData = {
-      "AX": [
-          "H"
-      ],
-      "BQ": [
-          "H"
-      ],
-      "CP": [
-          "H"
-      ],
-      "CZ": [
-          "H"
-      ],
-      "DK": [
-          "H"
-      ],
-      "FI": [
-          "H"
-      ],
-      "ID": [
-          "H"
-      ],
-      "IS": [
-          "H"
-      ],
-      "ML": [
-          "H"
-      ],
-      "NE": [
-          "H"
-      ],
-      "RU": [
-          "H"
-      ],
-      "SE": [
-          "H"
-      ],
-      "SJ": [
-          "H"
-      ],
-      "SK": [
-          "H"
-      ],
-      "AS": [
-          "h",
-          "H"
-      ],
-      "BT": [
-          "h",
-          "H"
-      ],
-      "DJ": [
-          "h",
-          "H"
-      ],
-      "ER": [
-          "h",
-          "H"
-      ],
-      "GH": [
-          "h",
-          "H"
-      ],
-      "IN": [
-          "h",
-          "H"
-      ],
-      "LS": [
-          "h",
-          "H"
-      ],
-      "PG": [
-          "h",
-          "H"
-      ],
-      "PW": [
-          "h",
-          "H"
-      ],
-      "SO": [
-          "h",
-          "H"
-      ],
-      "TO": [
-          "h",
-          "H"
-      ],
-      "VU": [
-          "h",
-          "H"
-      ],
-      "WS": [
-          "h",
-          "H"
-      ],
       "001": [
           "H",
           "h"
+      ],
+      "419": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "AC": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "AD": [
+          "H",
+          "hB"
+      ],
+      "AE": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "AF": [
+          "H",
+          "hb",
+          "hB",
+          "h"
+      ],
+      "AG": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "AI": [
+          "H",
+          "h",
+          "hb",
+          "hB"
       ],
       "AL": [
           "h",
           "H",
           "hB"
       ],
-      "TD": [
-          "h",
+      "AM": [
           "H",
           "hB"
       ],
-      "ca-ES": [
+      "AO": [
+          "H",
+          "hB"
+      ],
+      "AR": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "AS": [
+          "h",
+          "H"
+      ],
+      "AT": [
+          "H",
+          "hB"
+      ],
+      "AU": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "AW": [
+          "H",
+          "hB"
+      ],
+      "AX": [
+          "H"
+      ],
+      "AZ": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "BA": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "BB": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "BD": [
+          "h",
+          "hB",
+          "H"
+      ],
+      "BE": [
+          "H",
+          "hB"
+      ],
+      "BF": [
+          "H",
+          "hB"
+      ],
+      "BG": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "BH": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "BI": [
+          "H",
+          "h"
+      ],
+      "BJ": [
+          "H",
+          "hB"
+      ],
+      "BL": [
+          "H",
+          "hB"
+      ],
+      "BM": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "BN": [
+          "hb",
+          "hB",
+          "h",
+          "H"
+      ],
+      "BO": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "BQ": [
+          "H"
+      ],
+      "BR": [
+          "H",
+          "hB"
+      ],
+      "BS": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "BT": [
+          "h",
+          "H"
+      ],
+      "BW": [
           "H",
           "h",
+          "hb",
           "hB"
+      ],
+      "BY": [
+          "H",
+          "h"
+      ],
+      "BZ": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "CA": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "CC": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "CD": [
+          "hB",
+          "H"
       ],
       "CF": [
           "H",
           "h",
           "hB"
       ],
+      "CG": [
+          "H",
+          "hB"
+      ],
+      "CH": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "CI": [
+          "H",
+          "hB"
+      ],
+      "CK": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "CL": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
       "CM": [
           "H",
           "h",
           "hB"
       ],
-      "fr-CA": [
+      "CN": [
           "H",
+          "hB",
+          "hb",
+          "h"
+      ],
+      "CO": [
           "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "CP": [
+          "H"
+      ],
+      "CR": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "CU": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "CV": [
+          "H",
           "hB"
       ],
-      "gl-ES": [
+      "CW": [
           "H",
-          "h",
           "hB"
       ],
-      "it-CH": [
+      "CX": [
           "H",
           "h",
-          "hB"
-      ],
-      "it-IT": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "LU": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "NP": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "PF": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "SC": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "SM": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "SN": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "TF": [
-          "H",
-          "h",
-          "hB"
-      ],
-      "VA": [
-          "H",
-          "h",
+          "hb",
           "hB"
       ],
       "CY": [
@@ -953,23 +1198,340 @@
           "hb",
           "hB"
       ],
-      "GR": [
-          "h",
+      "CZ": [
+          "H"
+      ],
+      "DE": [
           "H",
+          "hB"
+      ],
+      "DG": [
+          "H",
+          "h",
           "hb",
           "hB"
       ],
-      "CO": [
+      "DJ": [
           "h",
+          "H"
+      ],
+      "DK": [
+          "H"
+      ],
+      "DM": [
+          "h",
+          "hb",
           "H",
-          "hB",
-          "hb"
+          "hB"
       ],
       "DO": [
           "h",
           "H",
           "hB",
           "hb"
+      ],
+      "DZ": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "EA": [
+          "H",
+          "h",
+          "hB",
+          "hb"
+      ],
+      "EC": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "EE": [
+          "H",
+          "hB"
+      ],
+      "EG": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "EH": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "ER": [
+          "h",
+          "H"
+      ],
+      "ES": [
+          "H",
+          "hB",
+          "h",
+          "hb"
+      ],
+      "ET": [
+          "hB",
+          "hb",
+          "h",
+          "H"
+      ],
+      "FI": [
+          "H"
+      ],
+      "FJ": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "FK": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "FM": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "FO": [
+          "H",
+          "h"
+      ],
+      "FR": [
+          "H",
+          "hB"
+      ],
+      "GA": [
+          "H",
+          "hB"
+      ],
+      "GB": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "GD": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "GE": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "GF": [
+          "H",
+          "hB"
+      ],
+      "GG": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "GH": [
+          "h",
+          "H"
+      ],
+      "GI": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "GL": [
+          "H",
+          "h"
+      ],
+      "GM": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "GN": [
+          "H",
+          "hB"
+      ],
+      "GP": [
+          "H",
+          "hB"
+      ],
+      "GQ": [
+          "H",
+          "hB",
+          "h",
+          "hb"
+      ],
+      "GR": [
+          "h",
+          "H",
+          "hb",
+          "hB"
+      ],
+      "GT": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "GU": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "GW": [
+          "H",
+          "hB"
+      ],
+      "GY": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "HK": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "HN": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "HR": [
+          "H",
+          "hB"
+      ],
+      "HU": [
+          "H",
+          "h"
+      ],
+      "IC": [
+          "H",
+          "h",
+          "hB",
+          "hb"
+      ],
+      "ID": [
+          "H"
+      ],
+      "IE": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "IL": [
+          "H",
+          "hB"
+      ],
+      "IM": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "IN": [
+          "h",
+          "H"
+      ],
+      "IO": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "IQ": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "IR": [
+          "hB",
+          "H"
+      ],
+      "IS": [
+          "H"
+      ],
+      "IT": [
+          "H",
+          "hB"
+      ],
+      "JE": [
+          "H",
+          "h",
+          "hb",
+          "hB"
+      ],
+      "JM": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "JO": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "JP": [
+          "H",
+          "K",
+          "h"
+      ],
+      "KE": [
+          "hB",
+          "hb",
+          "H",
+          "h"
+      ],
+      "KG": [
+          "H",
+          "h",
+          "hB",
+          "hb"
+      ],
+      "KH": [
+          "hB",
+          "h",
+          "H",
+          "hb"
+      ],
+      "KI": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "KM": [
+          "H",
+          "h",
+          "hB",
+          "hb"
+      ],
+      "KN": [
+          "h",
+          "hb",
+          "H",
+          "hB"
       ],
       "KP": [
           "h",
@@ -983,130 +1545,115 @@
           "hB",
           "hb"
       ],
-      "NA": [
+      "KW": [
           "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "KY": [
+          "h",
+          "hb",
           "H",
+          "hB"
+      ],
+      "KZ": [
+          "H",
+          "hB"
+      ],
+      "LA": [
+          "H",
+          "hb",
+          "hB",
+          "h"
+      ],
+      "LB": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "LC": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "LI": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "LK": [
+          "H",
+          "h",
           "hB",
           "hb"
       ],
-      "PA": [
-          "h",
-          "H",
-          "hB",
-          "hb"
-      ],
-      "PR": [
-          "h",
-          "H",
-          "hB",
-          "hb"
-      ],
-      "VE": [
-          "h",
-          "H",
-          "hB",
-          "hb"
-      ],
-      "AC": [
-          "H",
+      "LR": [
           "h",
           "hb",
+          "H",
           "hB"
       ],
-      "AI": [
-          "H",
+      "LS": [
           "h",
-          "hb",
-          "hB"
-      ],
-      "BW": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "BZ": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "CC": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "CK": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "CX": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "DG": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "FK": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "GB": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "GG": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "GI": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "IE": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "IM": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "IO": [
-          "H",
-          "h",
-          "hb",
-          "hB"
-      ],
-      "JE": [
-          "H",
-          "h",
-          "hb",
-          "hB"
+          "H"
       ],
       "LT": [
           "H",
           "h",
           "hb",
+          "hB"
+      ],
+      "LU": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "LV": [
+          "H",
+          "hB",
+          "hb",
+          "h"
+      ],
+      "LY": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "MA": [
+          "H",
+          "h",
+          "hB",
+          "hb"
+      ],
+      "MC": [
+          "H",
+          "hB"
+      ],
+      "MD": [
+          "H",
+          "hB"
+      ],
+      "ME": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "MF": [
+          "H",
+          "hB"
+      ],
+      "MG": [
+          "H",
+          "h"
+      ],
+      "MH": [
+          "h",
+          "hb",
+          "H",
           "hB"
       ],
       "MK": [
@@ -1115,17 +1662,95 @@
           "hb",
           "hB"
       ],
+      "ML": [
+          "H"
+      ],
+      "MM": [
+          "hB",
+          "hb",
+          "H",
+          "h"
+      ],
       "MN": [
           "H",
           "h",
           "hb",
           "hB"
       ],
+      "MO": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "MP": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "MQ": [
+          "H",
+          "hB"
+      ],
+      "MR": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
       "MS": [
           "H",
           "h",
           "hb",
           "hB"
+      ],
+      "MT": [
+          "H",
+          "h"
+      ],
+      "MU": [
+          "H",
+          "h"
+      ],
+      "MV": [
+          "H",
+          "h"
+      ],
+      "MW": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "MX": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "MY": [
+          "hb",
+          "hB",
+          "h",
+          "H"
+      ],
+      "MZ": [
+          "H",
+          "hB"
+      ],
+      "NA": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "NC": [
+          "H",
+          "hB"
+      ],
+      "NE": [
+          "H"
       ],
       "NF": [
           "H",
@@ -1137,6 +1762,25 @@
           "H",
           "h",
           "hb",
+          "hB"
+      ],
+      "NI": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "NL": [
+          "H",
+          "hB"
+      ],
+      "NO": [
+          "H",
+          "h"
+      ],
+      "NP": [
+          "H",
+          "h",
           "hB"
       ],
       "NR": [
@@ -1151,10 +1795,146 @@
           "hb",
           "hB"
       ],
+      "NZ": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "OM": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "PA": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "PE": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "PF": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "PG": [
+          "h",
+          "H"
+      ],
+      "PH": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "PK": [
+          "h",
+          "hB",
+          "H"
+      ],
+      "PL": [
+          "H",
+          "h"
+      ],
+      "PM": [
+          "H",
+          "hB"
+      ],
       "PN": [
           "H",
           "h",
           "hb",
+          "hB"
+      ],
+      "PR": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "PS": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "PT": [
+          "H",
+          "hB"
+      ],
+      "PW": [
+          "h",
+          "H"
+      ],
+      "PY": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "QA": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "RE": [
+          "H",
+          "hB"
+      ],
+      "RO": [
+          "H",
+          "hB"
+      ],
+      "RS": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "RU": [
+          "H"
+      ],
+      "RW": [
+          "H",
+          "h"
+      ],
+      "SA": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "SB": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "SC": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "SD": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "SE": [
+          "H"
+      ],
+      "SG": [
+          "h",
+          "hb",
+          "H",
           "hB"
       ],
       "SH": [
@@ -1163,10 +1943,72 @@
           "hb",
           "hB"
       ],
+      "SI": [
+          "H",
+          "hB"
+      ],
+      "SJ": [
+          "H"
+      ],
+      "SK": [
+          "H"
+      ],
+      "SL": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "SM": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "SN": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "SO": [
+          "h",
+          "H"
+      ],
+      "SR": [
+          "H",
+          "hB"
+      ],
+      "SS": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "ST": [
+          "H",
+          "hB"
+      ],
+      "SV": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
       "SX": [
           "H",
           "h",
           "hb",
+          "hB"
+      ],
+      "SY": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "SZ": [
+          "h",
+          "hb",
+          "H",
           "hB"
       ],
       "TA": [
@@ -1175,11 +2017,185 @@
           "hb",
           "hB"
       ],
+      "TC": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "TD": [
+          "h",
+          "H",
+          "hB"
+      ],
+      "TF": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "TG": [
+          "H",
+          "hB"
+      ],
+      "TH": [
+          "H",
+          "h"
+      ],
+      "TJ": [
+          "H",
+          "h"
+      ],
+      "TL": [
+          "H",
+          "hB",
+          "hb",
+          "h"
+      ],
+      "TM": [
+          "H",
+          "h"
+      ],
+      "TN": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "TO": [
+          "h",
+          "H"
+      ],
+      "TR": [
+          "H",
+          "hB"
+      ],
+      "TT": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "TW": [
+          "hB",
+          "hb",
+          "h",
+          "H"
+      ],
+      "TZ": [
+          "hB",
+          "hb",
+          "H",
+          "h"
+      ],
+      "UA": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "UG": [
+          "hB",
+          "hb",
+          "H",
+          "h"
+      ],
+      "UM": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "US": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "UY": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "UZ": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "VA": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "VC": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "VE": [
+          "h",
+          "H",
+          "hB",
+          "hb"
+      ],
+      "VG": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "VI": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "VN": [
+          "H",
+          "h"
+      ],
+      "VU": [
+          "h",
+          "H"
+      ],
+      "WF": [
+          "H",
+          "hB"
+      ],
+      "WS": [
+          "h",
+          "H"
+      ],
+      "XK": [
+          "H",
+          "hB",
+          "h"
+      ],
+      "YE": [
+          "h",
+          "hB",
+          "hb",
+          "H"
+      ],
+      "YT": [
+          "H",
+          "hB"
+      ],
       "ZA": [
           "H",
           "h",
           "hb",
           "hB"
+      ],
+      "ZM": [
+          "h",
+          "hb",
+          "H",
+          "hB"
+      ],
+      "ZW": [
+          "H",
+          "h"
       ],
       "af-ZA": [
           "H",
@@ -1187,49 +2203,42 @@
           "hB",
           "hb"
       ],
-      "AR": [
-          "H",
+      "ar-001": [
           "h",
           "hB",
-          "hb"
+          "hb",
+          "H"
       ],
-      "CL": [
+      "ca-ES": [
           "H",
           "h",
-          "hB",
-          "hb"
+          "hB"
       ],
-      "CR": [
-          "H",
+      "en-001": [
           "h",
-          "hB",
-          "hb"
+          "hb",
+          "H",
+          "hB"
       ],
-      "CU": [
-          "H",
+      "en-HK": [
           "h",
-          "hB",
-          "hb"
+          "hb",
+          "H",
+          "hB"
       ],
-      "EA": [
+      "en-IL": [
           "H",
           "h",
-          "hB",
-          "hb"
+          "hb",
+          "hB"
       ],
-      "es-BO": [
-          "H",
+      "en-MY": [
           "h",
-          "hB",
-          "hb"
+          "hb",
+          "H",
+          "hB"
       ],
       "es-BR": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "es-EC": [
           "H",
           "h",
           "hB",
@@ -1247,764 +2256,36 @@
           "hB",
           "hb"
       ],
-      "es-PE": [
+      "fr-CA": [
           "H",
           "h",
-          "hB",
-          "hb"
+          "hB"
       ],
-      "GT": [
+      "gl-ES": [
           "H",
           "h",
-          "hB",
-          "hb"
-      ],
-      "HN": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "IC": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "KG": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "KM": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "LK": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "MA": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "MX": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "NI": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "PY": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "SV": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "UY": [
-          "H",
-          "h",
-          "hB",
-          "hb"
-      ],
-      "JP": [
-          "H",
-          "h",
-          "K"
-      ],
-      "AD": [
-          "H",
-          "hB"
-      ],
-      "AM": [
-          "H",
-          "hB"
-      ],
-      "AO": [
-          "H",
-          "hB"
-      ],
-      "AT": [
-          "H",
-          "hB"
-      ],
-      "AW": [
-          "H",
-          "hB"
-      ],
-      "BE": [
-          "H",
-          "hB"
-      ],
-      "BF": [
-          "H",
-          "hB"
-      ],
-      "BJ": [
-          "H",
-          "hB"
-      ],
-      "BL": [
-          "H",
-          "hB"
-      ],
-      "BR": [
-          "H",
-          "hB"
-      ],
-      "CG": [
-          "H",
-          "hB"
-      ],
-      "CI": [
-          "H",
-          "hB"
-      ],
-      "CV": [
-          "H",
-          "hB"
-      ],
-      "DE": [
-          "H",
-          "hB"
-      ],
-      "EE": [
-          "H",
-          "hB"
-      ],
-      "FR": [
-          "H",
-          "hB"
-      ],
-      "GA": [
-          "H",
-          "hB"
-      ],
-      "GF": [
-          "H",
-          "hB"
-      ],
-      "GN": [
-          "H",
-          "hB"
-      ],
-      "GP": [
-          "H",
-          "hB"
-      ],
-      "GW": [
-          "H",
-          "hB"
-      ],
-      "HR": [
-          "H",
-          "hB"
-      ],
-      "IL": [
-          "H",
-          "hB"
-      ],
-      "IT": [
-          "H",
-          "hB"
-      ],
-      "KZ": [
-          "H",
-          "hB"
-      ],
-      "MC": [
-          "H",
-          "hB"
-      ],
-      "MD": [
-          "H",
-          "hB"
-      ],
-      "MF": [
-          "H",
-          "hB"
-      ],
-      "MQ": [
-          "H",
-          "hB"
-      ],
-      "MZ": [
-          "H",
-          "hB"
-      ],
-      "NC": [
-          "H",
-          "hB"
-      ],
-      "NL": [
-          "H",
-          "hB"
-      ],
-      "PM": [
-          "H",
-          "hB"
-      ],
-      "PT": [
-          "H",
-          "hB"
-      ],
-      "RE": [
-          "H",
-          "hB"
-      ],
-      "RO": [
-          "H",
-          "hB"
-      ],
-      "SI": [
-          "H",
-          "hB"
-      ],
-      "SR": [
-          "H",
-          "hB"
-      ],
-      "ST": [
-          "H",
-          "hB"
-      ],
-      "TG": [
-          "H",
-          "hB"
-      ],
-      "TR": [
-          "H",
-          "hB"
-      ],
-      "WF": [
-          "H",
-          "hB"
-      ],
-      "YT": [
-          "H",
-          "hB"
-      ],
-      "BD": [
-          "h",
-          "hB",
-          "H"
-      ],
-      "PK": [
-          "h",
-          "hB",
-          "H"
-      ],
-      "AZ": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "BA": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "BG": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "CH": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "GE": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "LI": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "ME": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "RS": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "UA": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "UZ": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "XK": [
-          "H",
-          "hB",
-          "h"
-      ],
-      "AG": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "AU": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "BB": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "BM": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "BS": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "CA": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "DM": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "en-001": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "FJ": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "FM": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "GD": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "GM": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "GU": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "GY": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "JM": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "KI": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "KN": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "KY": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "LC": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "LR": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "MH": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "MP": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "MW": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "NZ": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "SB": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "SG": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "SL": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "SS": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "SZ": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "TC": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "TT": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "UM": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "US": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "VC": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "VG": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "VI": [
-          "h",
-          "hb",
-          "H",
-          "hB"
-      ],
-      "ZM": [
-          "h",
-          "hb",
-          "H",
           "hB"
-      ],
-      "BO": [
-          "H",
-          "hB",
-          "h",
-          "hb"
-      ],
-      "EC": [
-          "H",
-          "hB",
-          "h",
-          "hb"
-      ],
-      "ES": [
-          "H",
-          "hB",
-          "h",
-          "hb"
-      ],
-      "GQ": [
-          "H",
-          "hB",
-          "h",
-          "hb"
-      ],
-      "PE": [
-          "H",
-          "hB",
-          "h",
-          "hb"
       ],
-      "AE": [
-          "h",
+      "gu-IN": [
           "hB",
           "hb",
-          "H"
-      ],
-      "ar-001": [
           "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "BH": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "DZ": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "EG": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "EH": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "HK": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "IQ": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "JO": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "KW": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "LB": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "LY": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "MO": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "MR": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "OM": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "PH": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "PS": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "QA": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "SA": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "SD": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "SY": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "TN": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "YE": [
-          "h",
-          "hB",
-          "hb",
-          "H"
-      ],
-      "AF": [
-          "H",
-          "hb",
-          "hB",
-          "h"
-      ],
-      "LA": [
-          "H",
-          "hb",
-          "hB",
-          "h"
-      ],
-      "CN": [
-          "H",
-          "hB",
-          "hb",
-          "h"
-      ],
-      "LV": [
-          "H",
-          "hB",
-          "hb",
-          "h"
-      ],
-      "TL": [
-          "H",
-          "hB",
-          "hb",
-          "h"
-      ],
-      "zu-ZA": [
-          "H",
-          "hB",
-          "hb",
-          "h"
-      ],
-      "CD": [
-          "hB",
-          "H"
-      ],
-      "IR": [
-          "hB",
           "H"
       ],
       "hi-IN": [
           "hB",
           "h",
           "H"
+      ],
+      "it-CH": [
+          "H",
+          "h",
+          "hB"
+      ],
+      "it-IT": [
+          "H",
+          "h",
+          "hB"
       ],
       "kn-IN": [
           "hB",
@@ -2013,47 +2294,6 @@
       ],
       "ml-IN": [
           "hB",
-          "h",
-          "H"
-      ],
-      "te-IN": [
-          "hB",
-          "h",
-          "H"
-      ],
-      "KH": [
-          "hB",
-          "h",
-          "H",
-          "hb"
-      ],
-      "ta-IN": [
-          "hB",
-          "h",
-          "hb",
-          "H"
-      ],
-      "BN": [
-          "hb",
-          "hB",
-          "h",
-          "H"
-      ],
-      "MY": [
-          "hb",
-          "hB",
-          "h",
-          "H"
-      ],
-      "ET": [
-          "hB",
-          "hb",
-          "h",
-          "H"
-      ],
-      "gu-IN": [
-          "hB",
-          "hb",
           "h",
           "H"
       ],
@@ -2069,34 +2309,21 @@
           "h",
           "H"
       ],
-      "TW": [
+      "ta-IN": [
           "hB",
+          "h",
           "hb",
+          "H"
+      ],
+      "te-IN": [
+          "hB",
           "h",
           "H"
       ],
-      "KE": [
+      "zu-ZA": [
+          "H",
           "hB",
           "hb",
-          "H",
-          "h"
-      ],
-      "MM": [
-          "hB",
-          "hb",
-          "H",
-          "h"
-      ],
-      "TZ": [
-          "hB",
-          "hb",
-          "H",
-          "h"
-      ],
-      "UG": [
-          "hB",
-          "hb",
-          "H",
           "h"
       ]
   };
@@ -2192,7 +2419,7 @@
   }
   // #region Ponyfills
   // Consolidate these variables up top for easier toggling during debugging
-  var hasNativeStartsWith = !!String.prototype.startsWith;
+  var hasNativeStartsWith = !!String.prototype.startsWith && '_a'.startsWith('a', 1);
   var hasNativeFromCodePoint = !!String.fromCodePoint;
   var hasNativeFromEntries = !!Object.fromEntries;
   var hasNativeCodePointAt = !!String.prototype.codePointAt;
@@ -3492,85 +3719,6 @@
       return result.val;
   }
 
-  //
-  // Main
-  //
-  function memoize(fn, options) {
-      var cache = options && options.cache ? options.cache : cacheDefault;
-      var serializer = options && options.serializer ? options.serializer : serializerDefault;
-      var strategy = options && options.strategy ? options.strategy : strategyDefault;
-      return strategy(fn, {
-          cache: cache,
-          serializer: serializer,
-      });
-  }
-  //
-  // Strategy
-  //
-  function isPrimitive(value) {
-      return (value == null || typeof value === 'number' || typeof value === 'boolean'); // || typeof value === "string" 'unsafe' primitive for our needs
-  }
-  function monadic(fn, cache, serializer, arg) {
-      var cacheKey = isPrimitive(arg) ? arg : serializer(arg);
-      var computedValue = cache.get(cacheKey);
-      if (typeof computedValue === 'undefined') {
-          computedValue = fn.call(this, arg);
-          cache.set(cacheKey, computedValue);
-      }
-      return computedValue;
-  }
-  function variadic(fn, cache, serializer) {
-      var args = Array.prototype.slice.call(arguments, 3);
-      var cacheKey = serializer(args);
-      var computedValue = cache.get(cacheKey);
-      if (typeof computedValue === 'undefined') {
-          computedValue = fn.apply(this, args);
-          cache.set(cacheKey, computedValue);
-      }
-      return computedValue;
-  }
-  function assemble(fn, context, strategy, cache, serialize) {
-      return strategy.bind(context, fn, cache, serialize);
-  }
-  function strategyDefault(fn, options) {
-      var strategy = fn.length === 1 ? monadic : variadic;
-      return assemble(fn, this, strategy, options.cache.create(), options.serializer);
-  }
-  function strategyVariadic(fn, options) {
-      return assemble(fn, this, variadic, options.cache.create(), options.serializer);
-  }
-  function strategyMonadic(fn, options) {
-      return assemble(fn, this, monadic, options.cache.create(), options.serializer);
-  }
-  //
-  // Serializer
-  //
-  var serializerDefault = function () {
-      return JSON.stringify(arguments);
-  };
-  //
-  // Cache
-  //
-  function ObjectWithoutPrototypeCache() {
-      this.cache = Object.create(null);
-  }
-  ObjectWithoutPrototypeCache.prototype.get = function (key) {
-      return this.cache[key];
-  };
-  ObjectWithoutPrototypeCache.prototype.set = function (key, value) {
-      this.cache[key] = value;
-  };
-  var cacheDefault = {
-      create: function create() {
-          // @ts-ignore
-          return new ObjectWithoutPrototypeCache();
-      },
-  };
-  var strategies = {
-      variadic: strategyVariadic,
-      monadic: strategyMonadic,
-  };
-
   var ErrorCode;
   (function (ErrorCode) {
       // When we have a placeholder but no value to format
@@ -4036,43 +4184,37 @@
       },
       parseLngForICU: function parseLngForICU(lng) {
         return lng;
-      }
+      },
+      escapeVariables: false
     };
   }
-
   var ICU = /*#__PURE__*/function () {
     function ICU(options) {
       _classCallCheck(this, ICU);
-
       this.type = 'i18nFormat';
       this.mem = {};
       this.init(null, options);
     }
-
     _createClass(ICU, [{
       key: "init",
       value: function init(i18next, options) {
         var _this = this;
-
         var i18nextOptions = i18next && i18next.options && i18next.options.i18nFormat || {};
         this.options = defaults(i18nextOptions, options, this.options || {}, getDefaults());
         this.formats = this.options.formats;
-
         if (i18next) {
           var _this$options = this.options,
-              bindI18n = _this$options.bindI18n,
-              bindI18nStore = _this$options.bindI18nStore,
-              memoize = _this$options.memoize;
+            bindI18n = _this$options.bindI18n,
+            bindI18nStore = _this$options.bindI18nStore,
+            memoize = _this$options.memoize;
           i18next.IntlMessageFormat = IntlMessageFormat;
           i18next.ICU = this;
-
           if (memoize) {
             if (bindI18n) {
               i18next.on(bindI18n, function () {
                 return _this.clearCache();
               });
             }
-
             if (bindI18nStore) {
               i18next.store.on(bindI18nStore, function () {
                 return _this.clearCache();
@@ -4092,25 +4234,22 @@
         var hadSuccessfulLookup = info && info.resolved && info.resolved.res;
         var memKey = this.options.memoize && "".concat(lng, ".").concat(ns, ".").concat(key.replace(/\./g, '###'));
         var fc;
-
         if (this.options.memoize) {
           fc = getPath(this.mem, memKey);
         }
-
         try {
           if (!fc) {
-            var transformedLng = this.options.parseLngForICU(lng); // without ignoreTag, react-i18next <Trans> translations with <0></0> placeholders
+            var transformedLng = this.options.parseLngForICU(lng);
+            // without ignoreTag, react-i18next <Trans> translations with <0></0> placeholders
             // will fail to parse, as IntlMessageFormat expects them to be defined in the
             // options passed to fc.format() as { 0: (children) => string }
             // but the replacement of placeholders is done in react-i18next
-
             fc = new IntlMessageFormat(res, transformedLng, this.formats, {
               ignoreTag: true
             });
             if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, memKey, fc);
           }
-
-          return fc.format(options);
+          return fc.format(this.escapeVariableValues(options));
         } catch (err) {
           return this.options.parseErrorHandler(err, key, res, options);
         }
@@ -4127,11 +4266,29 @@
       value: function clearCache() {
         this.mem = {};
       }
+    }, {
+      key: "escapeVariableValues",
+      value: function escapeVariableValues(options) {
+        if (!this.options.escapeVariables || !options || _typeof(options) !== 'object') {
+          return options;
+        }
+        var escaped = {};
+        for (var _i = 0, _Object$entries = Object.entries(options); _i < _Object$entries.length; _i++) {
+          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
+          if (typeof value === 'string') {
+            // Escape HTML special characters that could interfere with ICU parsing
+            escaped[key] = value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+          } else {
+            escaped[key] = value;
+          }
+        }
+        return escaped;
+      }
     }]);
-
     return ICU;
   }();
-
   ICU.type = 'i18nFormat';
 
   return ICU;

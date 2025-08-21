@@ -1,3 +1,7 @@
+### 2.4.0
+
+- Fix HTML special characters truncation in variable values [73](https://github.com/i18next/i18next-icu/pull/73) by introducing `escapeVariables` option
+
 ### 2.3.0
 
 - Adding function to parse language for ICU [63](https://github.com/i18next/i18next-icu/pull/63)

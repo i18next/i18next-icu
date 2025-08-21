@@ -1,6 +1,9 @@
 import areIntlLocalesSupported from "intl-locales-supported";
+
+const isARSupported = areIntlLocalesSupported(['en', 'ar-AR']) && Intl.NumberFormat('ar-AR').format(1000) === '١٬٠٠٠';
+
 if (global.Intl) {
-  if (!areIntlLocalesSupported(['en', 'ar-AR'])) {
+  if (!isARSupported) {
     const polyFill = require("intl");
     Intl.NumberFormat = polyFill.NumberFormat;
     Intl.DateTimeFormat = polyFill.DateTimeFormat;
