@@ -1,3 +1,7 @@
+### 2.4.1
+
+- types for `escapeVariables` option [74](https://github.com/i18next/i18next-icu/issues/74)
+
 ### 2.4.0
 
 - Fix HTML special characters truncation in variable values [73](https://github.com/i18next/i18next-icu/pull/73) by introducing `escapeVariables` option
