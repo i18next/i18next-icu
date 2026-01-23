@@ -1,3 +1,7 @@
+### 2.4.2
+
+- try to address: Can't resolve latest version of intl-messageformat [77](https://github.com/i18next/i18next-icu/issues/77)
+
 ### 2.4.1
 
 - types for `escapeVariables` option [74](https://github.com/i18next/i18next-icu/issues/74)
