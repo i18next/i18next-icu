@@ -113,5 +113,4 @@ class ICU {
 
 ICU.type = 'i18nFormat';
 
-
 export default ICU;

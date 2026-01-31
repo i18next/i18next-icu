@@ -1,1 +1,2 @@
-module.exports = require('./dist/commonjs/index.js').default;
+import mod from './dist/es/index.js'
+export default mod

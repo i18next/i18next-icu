@@ -2,8 +2,30 @@
   "name": "i18next-icu",
   "version": "2.4.2",
   "description": "i18nFormat plugin to use ICU format with i18next",
-  "main": "./index.js",
-  "module": "dist/es/index.js",
+  "type": "module",
+  "main": "./dist/commonjs/index.js",
+  "module": "./dist/es/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": {
+        "require": "./index.d.ts",
+        "import": "./index.d.ts"
+      },
+      "module": "./dist/es/index.js",
+      "import": "./dist/es/index.js",
+      "require": "./dist/commonjs/index.js",
+      "default": "./dist/es/index.js"
+    },
+    "./cjs": {
+      "types": "./dist/commonjs/index.d.ts",
+      "default": "./dist/commonjs/index.js"
+    },
+    "./esm": {
+      "types": "./dist/es/index.d.ts",
+      "default": "./dist/es/index.js"
+    }
+  },
   "keywords": [
     "i18next",
     "i18next-format"
@@ -51,9 +73,9 @@
     "clean": "rimraf dist && mkdirp dist && rimraf locale-data",
     "copy": "cp ./dist/umd/i18nextICU.min.js ./i18nextICU.min.js && cp ./dist/umd/i18nextICU.js ./i18nextICU.js",
     "copy-win": "xcopy .\\dist\\umd\\i18nextICU.min.js .\\i18nextICU.min.js /y && xcopy .\\dist\\umd\\i18nextICU.js .\\i18nextICU.js /y",
-    "build:es": "BABEL_ENV=jsnext babel src --out-dir dist/es",
-    "build:es-win": "SET BABEL_ENV=jsnext babel src --out-dir dist/es",
-    "build:cjs": "babel src --out-dir dist/commonjs",
+    "build:es": "BABEL_ENV=jsnext babel src --out-dir dist/es && cp index.d.ts dist/es/index.d.ts",
+    "build:es-win": "SET BABEL_ENV=jsnext babel src --out-dir dist/es && cp index.d.ts dist/es/index.d.ts",
+    "build:cjs": "babel src --out-dir dist/commonjs && cp index.d.ts dist/commonjs/index.d.ts && echo '{\"type\":\"commonjs\"}' > dist/commonjs/package.json",
     "build:rollup": "rollup -c rollup.config.js && rollup -c rollup.config.js --compact",
     "build": "npm run clean && npm run build:cjs && npm run build:es && npm run build:rollup && npm run copy",
     "build-win": "npm run clean && npm run build:cjs && npm run build:es-win && npm run build:rollup && npm run copy-win",

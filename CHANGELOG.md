@@ -1,3 +1,7 @@
+### 3.0.0
+
+- ESM by default, trying to address [78](https://github.com/i18next/i18next-icu/issues/78)
+
 ### 2.4.2
 
 - try to address: Can't resolve latest version of intl-messageformat [77](https://github.com/i18next/i18next-icu/issues/77)
