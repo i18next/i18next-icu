@@ -1,4 +1,4 @@
-### 3.0.0
+### 2.4.3
 
 - ESM by default, trying to address [78](https://github.com/i18next/i18next-icu/issues/78)
 
