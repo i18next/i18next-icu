@@ -106,6 +106,31 @@ Using i18next-icu - non of the i18next specific stuff will be available. You wil
 
 All extra features build around i18next plurals, interpolation, context do not get applied to messageformat based keys.
 
+## TypeScript
+
+i18next's type-level interpolation extractor looks for the default `{{variable}}` syntax in your translation strings. ICU MessageFormat uses single braces — and nested-brace plurals like `{count, plural, one {{count} row} other {{count} rows}}` confuse the extractor: the first `{{` and the trailing `}}` are matched as a single interpolation, producing a phantom variable name on every `t()` call ([#85](https://github.com/i18next/i18next-icu/issues/85)).
+
+To opt out of the i18next extractor (since `i18next` v26.2.0), set `parseInterpolation: false` in your `CustomTypeOptions`:
+
+```ts
+// i18next.d.ts
+import 'i18next';
+
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    parseInterpolation: false;
+    defaultNS: 'translation';
+    resources: {
+      translation: {
+        key: 'You have {numPhotos, plural, =0 {no photos.} =1 {one photo.} other {# photos.}}';
+      };
+    };
+  }
+}
+```
+
+The flag is type-only; runtime interpolation is handled by `intl-messageformat` via the i18next-icu plugin and is not affected.
+
 ## Migration guide
 
 ### 1.x.x -> 2.0.0
