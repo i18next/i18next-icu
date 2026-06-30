@@ -124,6 +124,11 @@
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
+  // Keys that must never be traversed when walking a string/array path into an
+  // object, otherwise a crafted path such as `__proto__.polluted` walks straight
+  // into Object.prototype. Mirrors the guard shipped to the same setPath/pushPath
+  // walker in i18next-fs-backend 2.6.6 and i18next-http-middleware 3.9.7.
+  var UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
   function getLastOfPath(object, path, Empty) {
     function cleanKey(key) {
       return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
@@ -135,19 +140,24 @@
     while (stack.length > 1) {
       if (canNotTraverseDeeper()) return {};
       var key = cleanKey(stack.shift());
+      if (UNSAFE_KEYS.indexOf(key) > -1) return {};
       if (!object[key] && Empty) object[key] = new Empty();
       object = object[key];
     }
     if (canNotTraverseDeeper()) return {};
+    var k = cleanKey(stack.shift());
+    if (UNSAFE_KEYS.indexOf(k) > -1) return {};
     return {
       obj: object,
-      k: cleanKey(stack.shift())
+      k: k
     };
   }
   function setPath(object, path, newValue) {
     var _getLastOfPath = getLastOfPath(object, path, Object),
       obj = _getLastOfPath.obj,
       k = _getLastOfPath.k;
+    if (obj === undefined) return; // unsafe path, drop silently
+
     obj[k] = newValue;
   }
   function getPath(object, path) {
@@ -163,7 +173,11 @@
   function defaults(obj) {
     each.call(slice.call(arguments, 1), function (source) {
       if (source) {
-        for (var prop in source) {
+        // iterate own keys only (skip inherited/polluted props) and refuse to
+        // copy prototype keys, so a polluted source can't seed Object.prototype.
+        for (var _i = 0, _Object$keys = Object.keys(source); _i < _Object$keys.length; _i++) {
+          var prop = _Object$keys[_i];
+          if (UNSAFE_KEYS.indexOf(prop) > -1) continue;
           if (obj[prop] === undefined) obj[prop] = source[prop];
         }
       }

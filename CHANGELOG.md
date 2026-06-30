@@ -1,3 +1,8 @@
+### 2.4.4
+
+- security: guard the shared `getLastOfPath` / `setPath` / `pushPath` walker against prototype pollution. The `memoize` cache key is `${lng}.${ns}.${key}` and only the trailing `key` is dot-escaped, so an unescaped `ns` segment named `__proto__` / `constructor` / `prototype` walked straight into `Object.prototype` (with the default `memoize: true`, `parse(..., 'en', '__proto__', 'greeting')` cached the formatter on `Object.prototype.greeting`). The walker now refuses unsafe segments and drops the write; legitimate dotted/nested keys and normal memoization are unaffected. Same walker / same fix as `i18next-fs-backend@2.6.6` ([GHSA-2933-q333-qg83](https://github.com/i18next/i18next-fs-backend/security/advisories/GHSA-2933-q333-qg83)) and `i18next-http-middleware@3.9.7` ([GHSA-f49m-vf83-692w](https://github.com/i18next/i18next-http-middleware/security/advisories/GHSA-f49m-vf83-692w)). Thanks [@greymoth-jp](https://github.com/greymoth-jp) ([#87](https://github.com/i18next/i18next-icu/pull/87))
+- security (defence-in-depth): `defaults()` / `extend()` now iterate own keys via `Object.keys()` and skip `__proto__` / `constructor` / `prototype`, so a polluted or crafted options source can't seed `Object.prototype` during option merging
+
 ### 2.4.3
 
 - ESM by default, trying to address [78](https://github.com/i18next/i18next-icu/issues/78)

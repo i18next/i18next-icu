@@ -61,7 +61,10 @@ let slice = arr.slice;
 export function defaults(obj) {
   each.call(slice.call(arguments, 1), function(source) {
     if (source) {
-      for (var prop in source) {
+      // iterate own keys only (skip inherited/polluted props) and refuse to
+      // copy prototype keys, so a polluted source can't seed Object.prototype.
+      for (const prop of Object.keys(source)) {
+        if (UNSAFE_KEYS.indexOf(prop) > -1) continue;
         if (obj[prop] === undefined) obj[prop] = source[prop];
       }
     }
@@ -72,7 +75,8 @@ export function defaults(obj) {
 export function extend(obj) {
   each.call(slice.call(arguments, 1), function(source) {
     if (source) {
-      for (var prop in source) {
+      for (const prop of Object.keys(source)) {
+        if (UNSAFE_KEYS.indexOf(prop) > -1) continue;
         obj[prop] = source[prop];
       }
     }
