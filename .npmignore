@@ -9,3 +9,13 @@ coverage/
 bower.json
 gulpfile.js
 karma.conf.js
+.coveralls.yml
+rollup.config.js
+tsconfig.json
+# npm ignores .gitignore once .npmignore exists, so local/secret files are mirrored here
+.claude
+.vscode
+.idea
+.env*
+*.pem
+*.key
