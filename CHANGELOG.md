@@ -1,3 +1,7 @@
+### 2.4.5
+
+- support intl-messageformat 12: widen the peer range to `>=10.3.3 <13.0.0`
+
 ### 2.4.4
 
 - security: guard the shared `getLastOfPath` / `setPath` / `pushPath` walker against prototype pollution. The `memoize` cache key is `${lng}.${ns}.${key}` and only the trailing `key` is dot-escaped, so an unescaped `ns` segment named `__proto__` / `constructor` / `prototype` walked straight into `Object.prototype` (with the default `memoize: true`, `parse(..., 'en', '__proto__', 'greeting')` cached the formatter on `Object.prototype.greeting`). The walker now refuses unsafe segments and drops the write; legitimate dotted/nested keys and normal memoization are unaffected. Same walker / same fix as `i18next-fs-backend@2.6.6` ([GHSA-2933-q333-qg83](https://github.com/i18next/i18next-fs-backend/security/advisories/GHSA-2933-q333-qg83)) and `i18next-http-middleware@3.9.7` ([GHSA-f49m-vf83-692w](https://github.com/i18next/i18next-http-middleware/security/advisories/GHSA-f49m-vf83-692w)). Thanks [@greymoth-jp](https://github.com/greymoth-jp) ([#87](https://github.com/i18next/i18next-icu/pull/87))
