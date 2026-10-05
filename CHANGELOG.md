@@ -1,6 +1,6 @@
 ### 2.4.5
 
-- support intl-messageformat 12: widen the peer range to `>=10.3.3 <13.0.0`
+- support intl-messageformat 12: widen the peer range to `>=10.3.3 <13.0.0`. Thanks [@outof-place](https://github.com/outof-place) ([#94](https://github.com/i18next/i18next-icu/pull/94))
 
 ### 2.4.4
 
