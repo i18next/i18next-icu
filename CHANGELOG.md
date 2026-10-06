@@ -1,3 +1,8 @@
+### 2.5.0
+
+- the UMD/AMD/IIFE bundles (`dist/umd`, `dist/amd`, `dist/iife`, `i18nextICU.js`, `i18nextICU.min.js`) now include intl-messageformat 12, which ships ES2022 (class static blocks, `?.`, `??`). They need Chrome 94, Firefox 93 or Safari 16.4 or newer, and they get smaller (`i18nextICU.min.js` 13.8 kB -> 11.8 kB gzipped). The CommonJS and ES module builds are unchanged.
+- dev toolchain: jest 30, TypeScript 6, `@rollup/plugin-terser`. Thanks [@outof-place](https://github.com/outof-place) ([#96](https://github.com/i18next/i18next-icu/pull/96))
+
 ### 2.4.5
 
 - support intl-messageformat 12: widen the peer range to `>=10.3.3 <13.0.0`. Thanks [@outof-place](https://github.com/outof-place) ([#94](https://github.com/i18next/i18next-icu/pull/94))
