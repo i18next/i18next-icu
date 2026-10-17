@@ -1,6 +1,6 @@
 {
   "name": "i18next-icu",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "i18nFormat plugin to use ICU format with i18next",
   "type": "module",
   "main": "./dist/commonjs/index.js",
