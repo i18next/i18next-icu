@@ -123,9 +123,7 @@ Without `debug` these checks do not run.
 
 ## TypeScript
 
-i18next's type-level interpolation extractor looks for the default `{{variable}}` syntax in your translation strings. ICU MessageFormat uses single braces — and nested-brace plurals like `{count, plural, one {{count} row} other {{count} rows}}` confuse the extractor: the first `{{` and the trailing `}}` are matched as a single interpolation, producing a phantom variable name on every `t()` call ([#85](https://github.com/i18next/i18next-icu/issues/85)).
-
-To opt out of the i18next extractor (since `i18next` v26.2.0), set `parseInterpolation: false` in your `CustomTypeOptions`:
+Since `i18next` v26.5.0, set `parseInterpolation: 'icu'` in your `CustomTypeOptions` and the options of `t()` (and the `values` of react-i18next's `Trans` and `IcuTrans`) are type-checked against the ICU arguments of each message:
 
 ```ts
 // i18next.d.ts
@@ -133,7 +131,7 @@ import 'i18next';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
-    parseInterpolation: false;
+    parseInterpolation: 'icu';
     defaultNS: 'translation';
     resources: {
       translation: {
@@ -144,7 +142,17 @@ declare module 'i18next' {
 }
 ```
 
-The flag is type-only; runtime interpolation is handled by `intl-messageformat` via the i18next-icu plugin and is not affected.
+```ts
+t('key', { numPhotos: 3 }); // ok
+t('key', { numPhotos: 'three' }); // type error: numPhotos takes a number
+t('key'); // type error: 'pass these arguments as t() options': { numPhotos: number }
+```
+
+`{name}` takes a string or number, `{n, number}`, `plural` and `selectordinal` a number, `{d, date}` and `{t, time}` a `Date`, `select` one of its cases or any string (for `other`), and arguments nested in cases are required too. `interpolationFormatTypeMap` changes a type by format name, for example `date: Date | number`. The messages need literal types, as the resources file from [i18next-cli](https://github.com/i18next/i18next-cli)'s `types` command has them; with `typeof` a JSON import every message is a `string` and the arguments are not checked.
+
+With `i18next` v26.2.0 to v26.4.x, set `parseInterpolation: false` instead. i18next's own extractor looks for `{{variable}}`, and nested-brace plurals like `{count, plural, one {{count} row} other {{count} rows}}` would make it ask for a variable that does not exist ([#85](https://github.com/i18next/i18next-icu/issues/85)). With `false`, keys are checked but the options are not.
+
+Both settings are type-only; runtime interpolation is handled by `intl-messageformat` via the i18next-icu plugin and is not affected.
 
 ## Migration guide
 
