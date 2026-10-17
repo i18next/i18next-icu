@@ -34,5 +34,6 @@ jobs:
       - name: Override intl-messageformat with ${{ matrix.intl-messageformat }}
         run: |
           npm install --no-save "intl-messageformat@${{ matrix.intl-messageformat }}"
-          npm ls intl-messageformat
+          # not npm ls: it exits 1 for a version outside the ^12 devDependency range
+          node -p "'intl-messageformat ' + require('./node_modules/intl-messageformat/package.json').version"
       - run: npm test
