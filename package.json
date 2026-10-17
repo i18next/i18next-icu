@@ -40,7 +40,7 @@
     "intl-messageformat": ">=10.3.3 <13.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
+    "@babel/cli": "^7.29.7",
     "@babel/core": "^7.12.13",
     "@babel/eslint-parser": "7.12.13",
     "@babel/preset-env": "^7.12.13",
@@ -109,5 +109,8 @@
     "Gregory Beaver <gregory.beaver@braze.com>"
   ],
   "license": "MIT",
-  "lock": false
+  "lock": false,
+  "overrides": {
+    "argparse": "^2.0.1"
+  }
 }
