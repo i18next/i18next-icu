@@ -106,6 +106,21 @@ Using i18next-icu - non of the i18next specific stuff will be available. You wil
 
 All extra features build around i18next plurals, interpolation, context do not get applied to messageformat based keys.
 
+What keeps working and what does not is listed in [Using ICU or MF2](https://www.i18next.com/how-to/using-icu-or-mf2) in the i18next docs.
+
+### debug warnings
+
+With i18next `debug: true`, i18next-icu logs a warning through the i18next logger, once per key, when:
+
+- a message can not be parsed or formatted (the default `parseErrorHandler` silently returns the unformatted message), with a hint if it contains i18next interpolation like `{{name}}`
+- `t` is called with `count` and plural suffix keys (`key_one`, `key_other`, `key_ordinal_one`, ...) exist for that key
+- `t` is called with `context` and a context key (`key_male`) exists
+- a message contains `$t(` nesting
+- a key resolves to an object or array (`returnObjects`, `joinArrays`)
+- `interpolation.escapeValue` is on, which the plugin does not apply (logged once, not logged with `escapeVariables: true`)
+
+Without `debug` these checks do not run.
+
 ## TypeScript
 
 i18next's type-level interpolation extractor looks for the default `{{variable}}` syntax in your translation strings. ICU MessageFormat uses single braces — and nested-brace plurals like `{count, plural, one {{count} row} other {{count} rows}}` confuse the extractor: the first `{{` and the trailing `}}` are matched as a single interpolation, producing a phantom variable name on every `t()` call ([#85](https://github.com/i18next/i18next-icu/issues/85)).

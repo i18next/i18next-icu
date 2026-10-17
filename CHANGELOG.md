@@ -1,3 +1,7 @@
+### 2.6.0
+
+- warn in debug mode: with i18next `debug: true`, log a warning through the i18next logger (once per key) when a message can not be parsed or formatted (the default `parseErrorHandler` swallowed this silently, now with a hint for i18next `{{name}}` syntax), when `t` is called with `count` or `context` and suffix keys like `key_one` or `key_male` exist (i18next-icu does not look them up), when a message contains `$t(` nesting, when a key resolves to an object or array (`returnObjects`), and once per instance when `interpolation.escapeValue` is on, which the plugin does not apply (not logged with `escapeVariables: true`). Each warning links to [Using ICU or MF2](https://www.i18next.com/how-to/using-icu-or-mf2). Without `debug` nothing changes.
+
 ### 2.5.0
 
 - the UMD/AMD/IIFE bundles (`dist/umd`, `dist/amd`, `dist/iife`, `i18nextICU.js`, `i18nextICU.min.js`) now include intl-messageformat 12, which ships ES2022 (class static blocks, `?.`, `??`). They need Chrome 94, Firefox 93 or Safari 16.4 or newer, and they get smaller (`i18nextICU.min.js` 13.8 kB -> 11.8 kB gzipped). The CommonJS and ES module builds are unchanged.

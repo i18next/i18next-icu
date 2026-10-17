@@ -2996,6 +2996,8 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
   //#region packages/intl-messageformat/index.ts
   var intl_messageformat_default = IntlMessageFormat;
 
+  var DOCS_URL = 'https://www.i18next.com/how-to/using-icu-or-mf2';
+  var PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other'];
   function getDefaults() {
     return {
       memoize: true,
@@ -3011,11 +3013,22 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
       escapeVariables: false
     };
   }
+  function errorWarning(err, res, isParseError, where) {
+    if (isParseError && res && _typeof(res) === 'object') {
+      return "".concat(where, " resolved to an object or array, but i18next-icu does not support returnObjects or joinArrays and returns the raw value unformatted.");
+    }
+    // {{ is valid ICU inside plural or select cases ({count, plural, other {{count} rows}}), so only hint at it when parsing failed
+    if (isParseError && typeof res === 'string' && res.indexOf('{{') > -1) {
+      return "".concat(where, " could not be parsed (").concat(err.message, "). It contains \"{{\": i18next interpolation like {{name}} does not work with ICU, use {name}.");
+    }
+    return "".concat(where, " could not be ").concat(isParseError ? 'parsed' : 'formatted', ": ").concat(err.message);
+  }
   var ICU = /*#__PURE__*/function () {
     function ICU(options) {
       _classCallCheck(this, ICU);
       this.type = 'i18nFormat';
       this.mem = {};
+      this.warned = new Set();
       this.init(null, options);
     }
     _createClass(ICU, [{
@@ -3032,6 +3045,12 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
             memoize = _this$options.memoize;
           i18next.IntlMessageFormat = intl_messageformat_default;
           i18next.ICU = this;
+          this.i18next = i18next;
+          // the warnings below only run with i18next `debug: true`, like i18next's own warnings
+          this.debug = !!(i18next.options && i18next.options.debug);
+          if (this.debug && i18next.options.interpolation && i18next.options.interpolation.escapeValue !== false && !this.options.escapeVariables) {
+            this.warn('interpolation.escapeValue is not applied, values are inserted without HTML escaping. Set the i18next-icu option escapeVariables: true to escape them, or interpolation.escapeValue: false if your output is escaped elsewhere (e.g. by React).');
+          }
           if (memoize) {
             if (bindI18n) {
               i18next.on(bindI18n, function () {
@@ -3062,6 +3081,9 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
         }
         try {
           if (!fc) {
+            if (this.debug && typeof res === 'string' && res.indexOf('$t(') > -1 && this.firstTime("nesting ".concat(lng, " ").concat(ns, " ").concat(key))) {
+              this.warn("key \"".concat(key, "\" (").concat(lng, "/").concat(ns, ") contains \"$t(\", but i18next-icu does not support nesting, the text is output as is."));
+            }
             var transformedLng = this.options.parseLngForICU(lng);
             // without ignoreTag, react-i18next <Trans> translations with <0></0> placeholders
             // will fail to parse, as IntlMessageFormat expects them to be defined in the
@@ -3074,15 +3096,64 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
           }
           return fc.format(this.escapeVariableValues(options));
         } catch (err) {
+          if (this.debug && this.firstTime("error ".concat(lng, " ").concat(ns, " ").concat(key))) {
+            this.warn(errorWarning(err, res, !fc, "key \"".concat(key, "\" (").concat(lng, "/").concat(ns, ")")));
+          }
           return this.options.parseErrorHandler(err, key, res, options);
         }
       }
     }, {
       key: "addLookupKeys",
-      value: function addLookupKeys(finalKeys, _key, _code, _ns, _options) {
+      value: function addLookupKeys(finalKeys, key, code, ns, options) {
         // no additional keys needed for select or plural
         // so there is no need to add keys to that finalKeys array
+        if (this.debug && options) this.checkSuffixKeys(key, code, ns, options);
         return finalKeys;
+      }
+
+      // i18next would look up key_one, key_male, ... at this point; ICU does not, so tell if such keys exist
+    }, {
+      key: "checkSuffixKeys",
+      value: function checkSuffixKeys(key, code, ns, _ref) {
+        var count = _ref.count,
+          context = _ref.context;
+        var _this$i18next$options = this.i18next.options,
+          _this$i18next$options2 = _this$i18next$options.pluralSeparator,
+          pluralSeparator = _this$i18next$options2 === void 0 ? '_' : _this$i18next$options2,
+          _this$i18next$options3 = _this$i18next$options.contextSeparator,
+          contextSeparator = _this$i18next$options3 === void 0 ? '_' : _this$i18next$options3;
+        var store = this.i18next.services.resourceStore;
+        var where = "key \"".concat(key, "\" (").concat(code, "/").concat(ns, ")");
+        if (count !== undefined && this.firstTime("plural ".concat(code, " ").concat(ns, " ").concat(key))) {
+          var found = PLURAL_SUFFIXES.concat(PLURAL_SUFFIXES.map(function (s) {
+            return "ordinal".concat(pluralSeparator).concat(s);
+          })).map(function (s) {
+            return "".concat(key).concat(pluralSeparator).concat(s);
+          }).filter(function (k) {
+            return store.getResource(code, ns, k) !== undefined;
+          });
+          if (found.length) {
+            this.warn("".concat(where, " was called with count, but i18next-icu does not look up plural suffix keys (").concat(found.join(', '), "). Put the plural into the message: {count, plural, one {# item} other {# items}}."));
+          }
+        }
+        var contextKey = "".concat(key).concat(contextSeparator).concat(context);
+        if (context !== undefined && context !== '' && this.firstTime("context ".concat(code, " ").concat(ns, " ").concat(contextKey)) && store.getResource(code, ns, contextKey) !== undefined) {
+          this.warn("".concat(where, " was called with context \"").concat(context, "\", but i18next-icu does not look up context keys (").concat(contextKey, "). Use a select in the message: {context, select, ").concat(context, " {...} other {...}}."));
+        }
+      }
+
+      // true the first time an id is seen, so each warning is logged once
+    }, {
+      key: "firstTime",
+      value: function firstTime(id) {
+        if (this.warned.has(id)) return false;
+        this.warned.add(id);
+        return true;
+      }
+    }, {
+      key: "warn",
+      value: function warn(message) {
+        this.i18next.services.logger.warn("i18next-icu: ".concat(message, " See ").concat(DOCS_URL));
       }
     }, {
       key: "clearCache",

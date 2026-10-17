@@ -318,3 +318,104 @@ describe("icu format", () => {
     });
   });
 });
+
+describe("debug warnings", () => {
+  const resources = {
+    en: {
+      translation: {
+        photos_one: "one photo",
+        photos_other: "{count} photos",
+        rank_ordinal_one: "{count}st",
+        friend: "a friend",
+        friend_male: "a boyfriend",
+        oldSyntax: "Hello {{name}}",
+        rows: "{count, plural, one {{count} row} other {{count} rows}}",
+        nested: "see $t(friend)",
+        list: { a: "x", b: "y" },
+      },
+    },
+  };
+
+  function setup(options = {}) {
+    const warn = jest.fn();
+    const instance = i18next.createInstance();
+    instance
+      .use({ type: "logger", log() {}, warn: (args) => warn(args.join(" ")), error() {} })
+      .use(ICU)
+      .init({ lng: "en", debug: true, resources, interpolation: { escapeValue: false }, ...options });
+    const warnings = () => warn.mock.calls.map((c) => c[0]).filter((m) => m.includes("i18next-icu:"));
+    return { t: instance.t.bind(instance), warnings, icu: instance.ICU };
+  }
+
+  it("warns once when escapeValue is not applied", () => {
+    const { warnings } = setup({ interpolation: { escapeValue: true } });
+    expect(warnings()).toHaveLength(1);
+    expect(warnings()[0]).toMatch(/escapeValue is not applied.*escapeVariables/);
+  });
+
+  it("does not warn about escapeValue with escapeVariables or escapeValue: false", () => {
+    expect(setup().warnings()).toHaveLength(0);
+    expect(setup({ interpolation: { escapeValue: true }, i18nFormat: { escapeVariables: true } }).warnings()).toHaveLength(0);
+  });
+
+  it("warns once per key about plural suffix keys", () => {
+    const { t, warnings } = setup();
+    expect(t("photos", { count: 2 })).toEqual("photos");
+    t("photos", { count: 3 });
+    t("rank", { count: 1 });
+    expect(warnings()).toHaveLength(2);
+    expect(warnings()[0]).toMatch(/key "photos" \(en\/translation\) .*photos_one, photos_other.*https:\/\/www\.i18next\.com\/how-to\/using-icu-or-mf2/);
+    expect(warnings()[1]).toMatch(/rank_ordinal_one/);
+  });
+
+  it("warns about context keys next to a base key", () => {
+    const { t, warnings } = setup();
+    expect(t("friend", { context: "male" })).toEqual("a friend");
+    t("friend", { context: "male" });
+    t("friend", { context: "female" }); // no friend_female key
+    expect(warnings()).toHaveLength(1);
+    expect(warnings()[0]).toMatch(/context "male".*friend_male/);
+  });
+
+  it("warns about i18next interpolation syntax, but not about valid ICU with {{", () => {
+    const { t, warnings } = setup();
+    expect(t("oldSyntax", { name: "Bob" })).toEqual("Hello {{name}}");
+    t("oldSyntax", { name: "Bob" });
+    expect(t("rows", { count: 2 })).toEqual("2 rows");
+    expect(warnings()).toHaveLength(1);
+    expect(warnings()[0]).toMatch(/key "oldSyntax" .*could not be parsed.*i18next interpolation like \{\{name\}\}/);
+  });
+
+  it("warns about $t() nesting", () => {
+    const { t, warnings } = setup();
+    expect(t("nested")).toEqual("see $t(friend)");
+    expect(warnings()).toHaveLength(1);
+    expect(warnings()[0]).toMatch(/key "nested" .*does not support nesting/);
+  });
+
+  it("warns when a key resolves to an object", () => {
+    const { t, warnings } = setup();
+    expect(t("list", { returnObjects: true })).toEqual({ a: "x", b: "y" });
+    expect(warnings()).toHaveLength(1);
+    expect(warnings()[0]).toMatch(/key "list" .*object or array.*returnObjects/);
+  });
+
+  it("warns about parse and format errors that parseErrorHandler swallows", () => {
+    const { t, warnings } = setup({ resources: { en: { translation: { broken: "Hi {name", greet: "Hi {name}" } } } });
+    expect(t("broken")).toEqual("Hi {name");
+    expect(t("greet")).toEqual("Hi {name}");
+    expect(warnings()).toHaveLength(2);
+    expect(warnings()[0]).toMatch(/key "broken" .*could not be parsed: /);
+    expect(warnings()[1]).toMatch(/key "greet" .*could not be formatted: /);
+  });
+
+  it("stays silent without debug", () => {
+    const { t, warnings, icu } = setup({ debug: false, interpolation: { escapeValue: true } });
+    t("photos", { count: 2 });
+    t("friend", { context: "male" });
+    t("oldSyntax");
+    t("nested");
+    expect(warnings()).toHaveLength(0);
+    expect(icu.warned.size).toBe(0); // the checks did not even run
+  });
+});
