@@ -61,7 +61,6 @@
     "jest": "^30.5.2",
     "mkdirp": "1.0.4",
     "react": "17.0.1",
-    "request": "^2.88.2",
     "rimraf": "3.0.2",
     "rollup": "2.80.0",
     "typescript": "^6.0.3",
