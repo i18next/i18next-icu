@@ -1,0 +1,38 @@
+name: node
+
+# Runs the tests against every intl-messageformat major the peer range allows
+# (>=10.3.3 <13.0.0, with 10.3.3 as the lower bound) and against latest, so a
+# new major shows up here (weekly) before users report it.
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test with intl-messageformat ${{ matrix.intl-messageformat }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        intl-messageformat: ['10.3.3', '10', '11', '12', 'latest']
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - run: npm install
+      - name: Override intl-messageformat with ${{ matrix.intl-messageformat }}
+        run: |
+          npm install --no-save "intl-messageformat@${{ matrix.intl-messageformat }}"
+          npm ls intl-messageformat
+      - run: npm test

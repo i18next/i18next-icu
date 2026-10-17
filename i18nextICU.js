@@ -119,67 +119,6 @@
     }
   }
 
-  // Keys that must never be traversed when walking a string/array path into an
-  // object, otherwise a crafted path such as `__proto__.polluted` walks straight
-  // into Object.prototype. Mirrors the guard shipped to the same setPath/pushPath
-  // walker in i18next-fs-backend 2.6.6 and i18next-http-middleware 3.9.7.
-  var UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
-  function getLastOfPath(object, path, Empty) {
-    function cleanKey(key) {
-      return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
-    }
-    function canNotTraverseDeeper() {
-      return !object || typeof object === 'string';
-    }
-    var stack = typeof path !== 'string' ? [].concat(path) : path.split('.');
-    while (stack.length > 1) {
-      if (canNotTraverseDeeper()) return {};
-      var key = cleanKey(stack.shift());
-      if (UNSAFE_KEYS.indexOf(key) > -1) return {};
-      if (!object[key] && Empty) object[key] = new Empty();
-      object = object[key];
-    }
-    if (canNotTraverseDeeper()) return {};
-    var k = cleanKey(stack.shift());
-    if (UNSAFE_KEYS.indexOf(k) > -1) return {};
-    return {
-      obj: object,
-      k: k
-    };
-  }
-  function setPath(object, path, newValue) {
-    var _getLastOfPath = getLastOfPath(object, path, Object),
-      obj = _getLastOfPath.obj,
-      k = _getLastOfPath.k;
-    if (obj === undefined) return; // unsafe path, drop silently
-
-    obj[k] = newValue;
-  }
-  function getPath(object, path) {
-    var _getLastOfPath3 = getLastOfPath(object, path),
-      obj = _getLastOfPath3.obj,
-      k = _getLastOfPath3.k;
-    if (!obj) return undefined;
-    return obj[k];
-  }
-  var arr = [];
-  var each = arr.forEach;
-  var slice = arr.slice;
-  function defaults(obj) {
-    each.call(slice.call(arguments, 1), function (source) {
-      if (source) {
-        // iterate own keys only (skip inherited/polluted props) and refuse to
-        // copy prototype keys, so a polluted source can't seed Object.prototype.
-        for (var _i = 0, _Object$keys = Object.keys(source); _i < _Object$keys.length; _i++) {
-          var prop = _Object$keys[_i];
-          if (UNSAFE_KEYS.indexOf(prop) > -1) continue;
-          if (obj[prop] === undefined) obj[prop] = source[prop];
-        }
-      }
-    });
-    return obj;
-  }
-
   //#region packages/fast-memoize/index.ts
   function memoize(fn, options) {
   	const cache = options && options.cache ? options.cache : cacheDefault;
@@ -2996,6 +2935,67 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
   //#region packages/intl-messageformat/index.ts
   var intl_messageformat_default = IntlMessageFormat;
 
+  // Keys that must never be traversed when walking a string/array path into an
+  // object, otherwise a crafted path such as `__proto__.polluted` walks straight
+  // into Object.prototype. Mirrors the guard shipped to the same setPath/pushPath
+  // walker in i18next-fs-backend 2.6.6 and i18next-http-middleware 3.9.7.
+  var UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
+  function getLastOfPath(object, path, Empty) {
+    function cleanKey(key) {
+      return key && key.indexOf('###') > -1 ? key.replace(/###/g, '.') : key;
+    }
+    function canNotTraverseDeeper() {
+      return !object || typeof object === 'string';
+    }
+    var stack = typeof path !== 'string' ? [].concat(path) : path.split('.');
+    while (stack.length > 1) {
+      if (canNotTraverseDeeper()) return {};
+      var key = cleanKey(stack.shift());
+      if (UNSAFE_KEYS.indexOf(key) > -1) return {};
+      if (!object[key] && Empty) object[key] = new Empty();
+      object = object[key];
+    }
+    if (canNotTraverseDeeper()) return {};
+    var k = cleanKey(stack.shift());
+    if (UNSAFE_KEYS.indexOf(k) > -1) return {};
+    return {
+      obj: object,
+      k: k
+    };
+  }
+  function setPath(object, path, newValue) {
+    var _getLastOfPath = getLastOfPath(object, path, Object),
+      obj = _getLastOfPath.obj,
+      k = _getLastOfPath.k;
+    if (obj === undefined) return; // unsafe path, drop silently
+
+    obj[k] = newValue;
+  }
+  function getPath(object, path) {
+    var _getLastOfPath3 = getLastOfPath(object, path),
+      obj = _getLastOfPath3.obj,
+      k = _getLastOfPath3.k;
+    if (!obj) return undefined;
+    return obj[k];
+  }
+  function defaults(obj) {
+    for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      sources[_key - 1] = arguments[_key];
+    }
+    sources.forEach(function (source) {
+      if (source) {
+        // iterate own keys only (skip inherited/polluted props) and refuse to
+        // copy prototype keys, so a polluted source can't seed Object.prototype.
+        for (var _i = 0, _Object$keys = Object.keys(source); _i < _Object$keys.length; _i++) {
+          var prop = _Object$keys[_i];
+          if (UNSAFE_KEYS.indexOf(prop) > -1) continue;
+          if (obj[prop] === undefined) obj[prop] = source[prop];
+        }
+      }
+    });
+    return obj;
+  }
+
   var DOCS_URL = 'https://www.i18next.com/how-to/using-icu-or-mf2';
   var PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other'];
   function getDefaults() {
@@ -3069,15 +3069,21 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
       key: "addUserDefinedFormats",
       value: function addUserDefinedFormats(formats) {
         this.formats = this.formats ? _objectSpread2(_objectSpread2({}, this.formats), formats) : formats;
+        // cached formatters were compiled with the old formats
+        this.clearCache();
       }
     }, {
       key: "parse",
       value: function parse(res, options, lng, ns, key, info) {
         var hadSuccessfulLookup = info && info.resolved && info.resolved.res;
-        var memKey = this.options.memoize && "".concat(lng, ".").concat(ns, ".").concat(key.replace(/\./g, '###'));
+        // an array path, so dots in ns or key do not nest the memo deeper
+        var memKey = this.options.memoize && [lng, ns, key];
         var fc;
         if (this.options.memoize) {
-          fc = getPath(this.mem, memKey);
+          // the memo key does not contain the message, so compare it: a message changed by
+          // addResource, reloadResources or HMR is compiled again instead of served stale
+          var memo = getPath(this.mem, memKey);
+          if (memo && memo.res === res) fc = memo.fc;
         }
         try {
           if (!fc) {
@@ -3092,9 +3098,15 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
             fc = new intl_messageformat_default(res, transformedLng, this.formats, {
               ignoreTag: true
             });
-            if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, memKey, fc);
+            if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, memKey, {
+              res: res,
+              fc: fc
+            });
           }
-          return fc.format(this.escapeVariableValues(options));
+
+          // like i18next, values can also be passed in a replace object
+          var values = options && options.replace && _typeof(options.replace) === 'object' ? _objectSpread2(_objectSpread2({}, options), options.replace) : options;
+          return fc.format(this.escapeVariableValues(values));
         } catch (err) {
           if (this.debug && this.firstTime("error ".concat(lng, " ").concat(ns, " ").concat(key))) {
             this.warn(errorWarning(err, res, !fc, "key \"".concat(key, "\" (").concat(lng, "/").concat(ns, ")")));

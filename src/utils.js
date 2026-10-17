@@ -52,14 +52,8 @@ export function getPath(object, path) {
   return obj[k];
 }
 
-
-
-let arr = [];
-let each = arr.forEach;
-let slice = arr.slice;
-
-export function defaults(obj) {
-  each.call(slice.call(arguments, 1), function(source) {
+export function defaults(obj, ...sources) {
+  sources.forEach((source) => {
     if (source) {
       // iterate own keys only (skip inherited/polluted props) and refuse to
       // copy prototype keys, so a polluted source can't seed Object.prototype.
@@ -72,8 +66,8 @@ export function defaults(obj) {
   return obj;
 }
 
-export function extend(obj) {
-  each.call(slice.call(arguments, 1), function(source) {
+export function extend(obj, ...sources) {
+  sources.forEach((source) => {
     if (source) {
       for (const prop of Object.keys(source)) {
         if (UNSAFE_KEYS.indexOf(prop) > -1) continue;

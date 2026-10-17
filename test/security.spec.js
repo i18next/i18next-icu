@@ -73,8 +73,8 @@ describe("prototype pollution guards", () => {
   });
 
   describe("parse() memoize cache", () => {
-    // The memoize cache key is `${lng}.${ns}.${key}` (only the trailing key is
-    // ###-escaped; lng and ns are not), and it is written into an in-memory
+    // The memoize cache key is the path [lng, ns, key] (before 2.6.1 the string
+    // `${lng}.${ns}.${key}`, with only the key ###-escaped), written into an in-memory
     // object via the same setPath walker. A prototype-name namespace segment
     // therefore reaches the walker. Same reachable segment as the namespace
     // case in the i18next-fs-backend / i18next-http-middleware advisories.

@@ -1,4 +1,6 @@
-parser: babel-eslint
+parser: "@babel/eslint-parser"
+parserOptions:
+  requireConfigFile: false
 extends: airbnb
 
 rules:
@@ -8,6 +10,12 @@ rules:
   comma-dangle: [2, "never"]
   padded-blocks: [0, "never"]
   no-unused-vars: [2, {vars: all, args: none}]
+  # same as i18next-mf2: the path walker and the option merging write to their arguments on purpose
+  no-param-reassign: 0
+  no-continue: 0
+  import/extensions: 0
+  # airbnb also forbids for...of, which this code uses
+  no-restricted-syntax: [2, ForInStatement, LabeledStatement, WithStatement]
   react/prop-types:
     - 0
     - ignore: #coming from hoc

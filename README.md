@@ -1,6 +1,5 @@
 # Introduction
 
-[![Coveralls](https://img.shields.io/coveralls/i18next/i18next-icu/master.svg?style=flat-square)](https://coveralls.io/github/i18next/i18next-icu)
 [![npm version](https://img.shields.io/npm/v/i18next-icu.svg?style=flat-square)](https://www.npmjs.com/package/i18next-icu)
 
 This changes i18n format from i18next json to ICU using [formatjs/intl-messageformat](https://github.com/formatjs/formatjs/tree/main/packages/intl-messageformat)
@@ -38,6 +37,7 @@ i18next.use(ICU).init(i18nextOptions);
 ```js
 {
   // per default icu functions are parsed once and cached for subsequent calls
+  // (a message changed by addResource, reloadResources or HMR is parsed again)
   memoize: true,
 
   // memoize if not having a lookup and just using the key fallback as value
@@ -120,6 +120,21 @@ With i18next `debug: true`, i18next-icu logs a warning through the i18next logge
 - `interpolation.escapeValue` is on, which the plugin does not apply (logged once, not logged with `escapeVariables: true`)
 
 Without `debug` these checks do not run.
+
+### React Native, Hermes and other runtimes without Intl
+
+intl-messageformat formats with the runtime's `Intl` APIs: `Intl.PluralRules` picks the `one`, `few`, `other`, ... case of `plural` and `selectordinal`, `Intl.NumberFormat` formats `#` and `{n, number}`, `Intl.DateTimeFormat` formats `{d, date}` and `{t, time}`. When an API is missing, formatting throws and the default `parseErrorHandler` returns the unformatted message (with `debug: true` the error is logged).
+
+- **Hermes** (the default React Native engine) implements `Intl.NumberFormat` and `Intl.DateTimeFormat` on Android and iOS, but not `Intl.PluralRules` or `Intl.Locale` (see [Hermes Intl APIs](https://github.com/facebook/hermes/blob/main/doc/IntlAPIs.md)). Exact matches like `=0` and `=1` work, every other plural case returns the raw message. Polyfill both in your entry file, before i18next is initialized, with locale data for each language you ship:
+
+  ```js
+  import '@formatjs/intl-locale/polyfill.js';
+  import '@formatjs/intl-pluralrules/polyfill-force.js';
+  import '@formatjs/intl-pluralrules/locale-data/en.js';
+  import '@formatjs/intl-pluralrules/locale-data/de.js';
+  ```
+
+- **Runtimes without `Intl`**: Hermes on React Native for Windows ([microsoft/hermes-windows#222](https://github.com/microsoft/hermes-windows/issues/222)), and on Android older Hermes builds and JavaScriptCore without the Intl variant. Without `Intl` no message can be created, so even `Hello {name}` comes back unformatted ([#66](https://github.com/i18next/i18next-icu/issues/66)); with only an `Intl.PluralRules` polyfill, plurals pick the right case but a message with `#` comes back unformatted ([#47](https://github.com/i18next/i18next-icu/issues/47)). Polyfill, in this order, `@formatjs/intl-getcanonicallocales`, `@formatjs/intl-locale`, `@formatjs/intl-pluralrules`, `@formatjs/intl-numberformat` and, for dates, `@formatjs/intl-datetimeformat`, the last three with locale data for your languages. See [FormatJS runtime requirements](https://formatjs.github.io/docs/guides/runtime-requirements/).
 
 ## TypeScript
 

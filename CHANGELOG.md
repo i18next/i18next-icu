@@ -1,3 +1,12 @@
+### 2.6.1
+
+- fix: the `memoize` cache now compares the message, so a message that changed after its first use (`addResource`, `reloadResources`, a backend `reloadInterval`, HMR, next-i18next `reloadOnPrerender`) is compiled again instead of returning the old text. Before, this needed `bindI18nStore: 'added'` or `bindI18n: 'loaded'`, which still work.
+- fix: values passed in a `replace` object (`t('key', { replace: { name } })`) are used, like i18next does for its own interpolation ([#69](https://github.com/i18next/i18next-icu/issues/69))
+- fix: `addUserDefinedFormats()` clears the `memoize` cache, so messages compiled before use the new formats
+- README: which `Intl` APIs intl-messageformat needs and how to polyfill them on React Native with Hermes and in runtimes without `Intl` ([#47](https://github.com/i18next/i18next-icu/issues/47), [#66](https://github.com/i18next/i18next-icu/issues/66))
+- CI: run the tests against intl-messageformat 10.3.3, 10, 11, 12 and latest
+- dev: `npm run lint` works again (`@babel/eslint-parser`), minimatch 3.1.5 (dev dependency only), removed the stale Coveralls config and badge
+
 ### 2.6.0
 
 - warn in debug mode: with i18next `debug: true`, log a warning through the i18next logger (once per key) when a message can not be parsed or formatted (the default `parseErrorHandler` swallowed this silently, now with a hint for i18next `{{name}}` syntax), when `t` is called with `count` or `context` and suffix keys like `key_one` or `key_male` exist (i18next-icu does not look them up), when a message contains `$t(` nesting, when a key resolves to an object or array (`returnObjects`), and once per instance when `interpolation.escapeValue` is on, which the plugin does not apply (not logged with `escapeVariables: true`). Each warning links to [Using ICU or MF2](https://www.i18next.com/how-to/using-icu-or-mf2). Without `debug` nothing changes.

@@ -189,6 +189,52 @@ describe("icu format", () => {
     });
   });
 
+  describe("memoize", () => {
+    it("compiles a message again when it changed (addResource, reloadResources)", async () => {
+      let hello = "Hello {name}";
+      const instance = i18next.createInstance();
+      await instance
+        .use({ type: "backend", init() {}, read: (lng, ns, cb) => cb(null, { hello }) })
+        .use(ICU)
+        .init({ lng: "en", fallbackLng: false });
+
+      expect(instance.t("hello", { name: "Bob" })).toEqual("Hello Bob");
+      const { fc } = instance.ICU.mem.en.translation.hello;
+      expect(instance.t("hello", { name: "Ann" })).toEqual("Hello Ann");
+      expect(instance.ICU.mem.en.translation.hello.fc).toBe(fc);
+
+      instance.addResource("en", "translation", "hello", "Howdy {name}");
+      expect(instance.t("hello", { name: "Bob" })).toEqual("Howdy Bob");
+
+      hello = "Hi {name}";
+      await instance.reloadResources();
+      expect(instance.t("hello", { name: "Bob" })).toEqual("Hi Bob");
+    });
+
+    it("keeps namespaces with dots apart", () => {
+      const icu = new ICU();
+      expect(icu.parse("A {x}", { x: 1 }, "en", "a", "b")).toEqual("A 1");
+      expect(icu.parse("B {x}", { x: 2 }, "en", "a.b", "fc")).toEqual("B 2");
+      expect(icu.parse("A {x}", { x: 3 }, "en", "a", "b")).toEqual("A 3");
+    });
+
+    it("applies formats added after a message was cached", () => {
+      const icu = new ICU();
+      expect(icu.parse("{v, number, short}", { v: 0.444 }, "en", "ns", "key")).toEqual("0.444");
+      icu.addUserDefinedFormats({ number: { short: { maximumFractionDigits: 1 } } });
+      expect(icu.parse("{v, number, short}", { v: 0.444 }, "en", "ns", "key")).toEqual("0.4");
+    });
+  });
+
+  describe("values in replace", () => {
+    it("reads the values from a replace object like i18next", () => {
+      const icu = new ICU({ escapeVariables: true });
+      expect(
+        icu.parse("{count, plural, one {# item} other {# items}} for {name}", { count: 2, replace: { name: "<b>Bob</b>" } }, "en", "ns", "key")
+      ).toEqual("2 items for &lt;b&gt;Bob&lt;/b&gt;");
+    });
+  });
+
   describe("with missing keys", () => {
     it("should call the error handler", () => {
       let errorHandler = jest.fn();

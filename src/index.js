@@ -1,5 +1,5 @@
-import * as utils from './utils.js';
 import IntlMessageFormat from 'intl-messageformat';
+import * as utils from './utils.js';
 
 const DOCS_URL = 'https://www.i18next.com/how-to/using-icu-or-mf2';
 const PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other'];
@@ -10,13 +10,9 @@ function getDefaults() {
     memoizeFallback: false,
     bindI18n: '',
     bindI18nStore: '',
-    parseErrorHandler: (err, key, res, options) => {
-      return res;
-    },
-    parseLngForICU: (lng) => {
-      return lng;
-    },
-    escapeVariables: false,
+    parseErrorHandler: (err, key, res, options) => res,
+    parseLngForICU: (lng) => lng,
+    escapeVariables: false
   };
 }
 
@@ -60,11 +56,11 @@ class ICU {
 
       if (memoize) {
         if (bindI18n) {
-          i18next.on(bindI18n, () => this.clearCache())
+          i18next.on(bindI18n, () => this.clearCache());
         }
 
         if (bindI18nStore) {
-          i18next.store.on(bindI18nStore, () => this.clearCache())
+          i18next.store.on(bindI18nStore, () => this.clearCache());
         }
       }
     }
@@ -72,15 +68,21 @@ class ICU {
 
   addUserDefinedFormats(formats) {
     this.formats = this.formats ? { ...this.formats, ...formats } : formats;
+    // cached formatters were compiled with the old formats
+    this.clearCache();
   }
 
   parse(res, options, lng, ns, key, info) {
     const hadSuccessfulLookup = info && info.resolved && info.resolved.res;
-    const memKey = this.options.memoize && `${lng}.${ns}.${key.replace(/\./g, '###')}`;
+    // an array path, so dots in ns or key do not nest the memo deeper
+    const memKey = this.options.memoize && [lng, ns, key];
 
     let fc;
     if (this.options.memoize) {
-      fc = utils.getPath(this.mem, memKey);
+      // the memo key does not contain the message, so compare it: a message changed by
+      // addResource, reloadResources or HMR is compiled again instead of served stale
+      const memo = utils.getPath(this.mem, memKey);
+      if (memo && memo.res === res) fc = memo.fc;
     }
 
     try {
@@ -94,10 +96,12 @@ class ICU {
         // options passed to fc.format() as { 0: (children) => string }
         // but the replacement of placeholders is done in react-i18next
         fc = new IntlMessageFormat(res, transformedLng, this.formats, { ignoreTag: true });
-        if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, fc);
+        if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, { res, fc });
       }
 
-      return fc.format(this.escapeVariableValues(options));
+      // like i18next, values can also be passed in a replace object
+      const values = options && options.replace && typeof options.replace === 'object' ? { ...options, ...options.replace } : options;
+      return fc.format(this.escapeVariableValues(values));
     } catch (err) {
       if (this.debug && this.firstTime(`error ${lng} ${ns} ${key}`)) {
         this.warn(errorWarning(err, res, !fc, `key "${key}" (${lng}/${ns})`));

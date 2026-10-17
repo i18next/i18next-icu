@@ -68,6 +68,7 @@
     "yargs": "16.2.0"
   },
   "scripts": {
+    "lint": "eslint src",
     "test": "tsc --noEmit && jest --coverage --runInBand --ci",
     "tdd": "jest --watch",
     "clean": "rimraf dist && mkdirp dist && rimraf locale-data",
