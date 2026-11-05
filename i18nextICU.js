@@ -88,15 +88,15 @@
   function _slicedToArray(r, e) {
     return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
   }
-  function _toPrimitive(t, r) {
+  function _toPrimitive(t, e) {
     if ("object" != typeof t || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-      var i = e.call(t, r || "default");
+    var r;
+    if ("undefined" != typeof Symbol && void 0 !== (r = t[Symbol.toPrimitive])) {
+      var i = r.call(t, e || "default");
       if ("object" != typeof i) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return ("string" === r ? String : Number)(t);
+    return ("string" === e ? String : Number)(t);
   }
   function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
@@ -3010,7 +3010,8 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
       parseLngForICU: function parseLngForICU(lng) {
         return lng;
       },
-      escapeVariables: false
+      escapeVariables: false,
+      requiresOtherClause: true
     };
   }
   function errorWarning(err, res, isParseError, where) {
@@ -3031,7 +3032,7 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
       this.warned = new Set();
       this.init(null, options);
     }
-    _createClass(ICU, [{
+    return _createClass(ICU, [{
       key: "init",
       value: function init(i18next, options) {
         var _this = this;
@@ -3096,7 +3097,8 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
             // options passed to fc.format() as { 0: (children) => string }
             // but the replacement of placeholders is done in react-i18next
             fc = new intl_messageformat_default(res, transformedLng, this.formats, {
-              ignoreTag: true
+              ignoreTag: true,
+              requiresOtherClause: this.options.requiresOtherClause
             });
             if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) setPath(this.mem, memKey, {
               res: res,
@@ -3193,7 +3195,6 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
         return escaped;
       }
     }]);
-    return ICU;
   }();
   ICU.type = 'i18nFormat';
 
