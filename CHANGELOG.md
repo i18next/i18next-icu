@@ -1,3 +1,7 @@
+### 2.7.0
+
+- feat: `requiresOtherClause` option, passed to the intl-messageformat parser. Set it to `false` to accept `plural`, `select` and `selectordinal` arguments without an `other` case, e.g. `{count, plural, one {# item}}`. A value no case matches then fails when formatting and goes to `parseErrorHandler`. Default `true`, so nothing changes unless it is set ([#99](https://github.com/i18next/i18next-icu/issues/99), [#100](https://github.com/i18next/i18next-icu/pull/100))
+
 ### 2.6.1
 
 - fix: the `memoize` cache now compares the message, so a message that changed after its first use (`addResource`, `reloadResources`, a backend `reloadInterval`, HMR, next-i18next `reloadOnPrerender`) is compiled again instead of returning the old text. Before, this needed `bindI18nStore: 'added'` or `bindI18n: 'loaded'`, which still work.

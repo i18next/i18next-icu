@@ -66,6 +66,7 @@ i18next.use(ICU).init(i18nextOptions);
   // Require an `other` case in every plural, select and selectordinal argument (passed to the intl-messageformat parser)
   // Set to false to accept messages that only list explicit cases, e.g. {count, plural, one {# item}}
   // Default: true (a message without `other` fails to parse and goes to parseErrorHandler)
+  // With false, a value no case matches (count: 5 for the example above) fails when formatting and also goes to parseErrorHandler
   requiresOtherClause: true,
 }
 ```
