@@ -235,6 +235,40 @@ describe("icu format", () => {
     });
   });
 
+  describe("requiresOtherClause", () => {
+    const plural = "{count, plural, one {# item}}";
+    const select = "{gender, select, female {She} male {He}} replied";
+
+    it("rejects a plural or select without other by default", () => {
+      const errorHandler = jest.fn((err, key, res) => res);
+      const icu = new ICU({ parseErrorHandler: errorHandler });
+
+      expect(icu.parse(plural, { count: 1 }, "en", "ns", "plural")).toEqual(plural);
+      expect(icu.parse(select, { gender: "female" }, "en", "ns", "select")).toEqual(select);
+      expect(errorHandler).toHaveBeenCalledTimes(2);
+    });
+
+    it("formats a plural or select without other when set to false", () => {
+      const errorHandler = jest.fn();
+      const icu = new ICU({ parseErrorHandler: errorHandler, requiresOtherClause: false });
+
+      expect(icu.parse(plural, { count: 1 }, "en", "ns", "plural")).toEqual("1 item");
+      expect(icu.parse(select, { gender: "female" }, "en", "ns", "select")).toEqual("She replied");
+      expect(errorHandler).not.toHaveBeenCalled();
+    });
+
+    it("can be set through i18nFormat in i18next.init", () => {
+      const instance = i18next.createInstance();
+      instance.use(ICU).init({
+        lng: "en",
+        resources: { en: { translation: { key: plural } } },
+        i18nFormat: { requiresOtherClause: false }
+      });
+
+      expect(instance.t("key", { count: 1 })).toEqual("1 item");
+    });
+  });
+
   describe("with missing keys", () => {
     it("should call the error handler", () => {
       let errorHandler = jest.fn();
