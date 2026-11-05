@@ -62,6 +62,11 @@ i18next.use(ICU).init(i18nextOptions);
   // This prevents strings like "user:<" from being truncated or causing parsing errors
   // Default: false (to maintain backward compatibility)
   escapeVariables: false,
+
+  // Require an `other` case in every plural, select and selectordinal argument (passed to the intl-messageformat parser)
+  // Set to false to accept messages that only list explicit cases, e.g. {count, plural, one {# item}}
+  // Default: true (a message without `other` fails to parse and goes to parseErrorHandler)
+  requiresOtherClause: true,
 }
 ```
 

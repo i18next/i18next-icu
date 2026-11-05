@@ -12,7 +12,8 @@ function getDefaults() {
     bindI18nStore: '',
     parseErrorHandler: (err, key, res, options) => res,
     parseLngForICU: (lng) => lng,
-    escapeVariables: false
+    escapeVariables: false,
+    requiresOtherClause: true
   };
 }
 
@@ -95,7 +96,10 @@ class ICU {
         // will fail to parse, as IntlMessageFormat expects them to be defined in the
         // options passed to fc.format() as { 0: (children) => string }
         // but the replacement of placeholders is done in react-i18next
-        fc = new IntlMessageFormat(res, transformedLng, this.formats, { ignoreTag: true });
+        fc = new IntlMessageFormat(res, transformedLng, this.formats, {
+          ignoreTag: true,
+          requiresOtherClause: this.options.requiresOtherClause
+        });
         if (this.options.memoize && (this.options.memoizeFallback || !info || hadSuccessfulLookup)) utils.setPath(this.mem, memKey, { res, fc });
       }
 

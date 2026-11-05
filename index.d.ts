@@ -27,6 +27,7 @@ declare module "i18next-icu" {
     parseErrorHandler?: (err: Error, key: string, res: string, options: Object) => string;
     parseLngForICU?: (lng: string) => string;
     escapeVariables?: boolean;
+    requiresOtherClause?: boolean;
   }
 
   export interface IcuInstance<TOptions = IcuConfig> extends ThirdPartyModule {
