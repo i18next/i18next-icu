@@ -68,6 +68,9 @@ i18next.use(ICU).init(i18nextOptions);
   // Default: true (a message without `other` fails to parse and goes to parseErrorHandler)
   // With false, a value no case matches (count: 5 for the example above) fails when formatting and also goes to parseErrorHandler
   requiresOtherClause: true,
+
+  // named styles for {n, number, style}, {d, date, style} and {t, time, style}, see "Custom formats" below
+  formats: undefined,
 }
 ```
 
@@ -104,6 +107,43 @@ i18next.use(ICU).init({
 });
 
 i18next.t("key", { numPhotos: 1000 }); // -> You have 1,000 photos.
+```
+
+### Custom formats
+
+`formats` defines named styles for `number`, `date` and `time` arguments, as [intl-messageformat](https://formatjs.github.io/docs/intl-messageformat) expects them (`Intl.NumberFormat` and `Intl.DateTimeFormat` options), for example one date format with a time zone used by all messages:
+
+```js
+import i18next from "i18next";
+import ICU from "i18next-icu";
+
+const icu = new ICU({
+  formats: {
+    date: { userDate: { dateStyle: "medium", timeZone: "UTC" } }
+  }
+});
+
+i18next.use(icu).init({
+  lng: "en",
+  resources: {
+    en: { translation: { due: "Due {d, date, userDate}" } }
+  }
+});
+
+const d = new Date(Date.UTC(2026, 10, 19, 23, 30));
+i18next.t("due", { d }); // -> Due Nov 19, 2026
+```
+
+Use your own style names: a style named like a built-in one (`short`, `medium`, `long` or `full` for dates and times, `integer`, `currency` or `percent` for numbers) is merged with the built-in options, and `dateStyle` together with those fails.
+
+To change them later, for example when the user picks another time zone, call `addUserDefinedFormats` on the instance (`i18next.services.i18nFormat` if you passed the class to `use`). It adds styles to each group or replaces those with the same name, keeps the others, and clears the cache, so the next `t()` uses the new style:
+
+```js
+icu.addUserDefinedFormats({
+  date: { userDate: { dateStyle: "full", timeZone: "Asia/Tokyo" } }
+});
+
+i18next.t("due", { d }); // -> Due Friday, November 20, 2026 (already the next day in Tokyo)
 ```
 
 ## hints
