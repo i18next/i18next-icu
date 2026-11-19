@@ -218,6 +218,46 @@ describe("icu format", () => {
       expect(icu.parse("A {x}", { x: 3 }, "en", "a", "b")).toEqual("A 3");
     });
 
+    it("keeps the styles of a group when another one is added", () => {
+      const icu = new ICU({ formats: { number: { one: { maximumFractionDigits: 1 } } } });
+      icu.addUserDefinedFormats({ number: { two: { maximumFractionDigits: 2 } } });
+      expect(icu.parse("{v, number, one} {v, number, two}", { v: 0.4444 }, "en", "ns", "key")).toEqual("0.4 0.44");
+    });
+
+    it("merges repeated calls into a group and replaces a style with the same name", () => {
+      const icu = new ICU();
+      icu.addUserDefinedFormats({ number: { a: { maximumFractionDigits: 1 } } });
+      icu.addUserDefinedFormats({ number: { b: { maximumFractionDigits: 2 }, a: { maximumFractionDigits: 3 } } });
+      expect(icu.parse("{v, number, a} {v, number, b}", { v: 0.44444 }, "en", "ns", "key")).toEqual("0.444 0.44");
+    });
+
+    it("combines i18nFormat.formats from init with formats added before", async () => {
+      const icu = new ICU();
+      icu.addUserDefinedFormats({ number: { b: { maximumFractionDigits: 2 } } });
+      const instance = i18next.createInstance();
+      await instance.use(icu).init({
+        lng: "en",
+        i18nFormat: { formats: { number: { a: { maximumFractionDigits: 1 } } } },
+        resources: { en: { translation: { v: "{v, number, a} {v, number, b}" } } }
+      });
+      expect(instance.t("v", { v: 0.4444 })).toEqual("0.4 0.44");
+    });
+
+    it("applies the formats of a new init to messages already cached", () => {
+      const icu = new ICU({ formats: { number: { a: { maximumFractionDigits: 1 } } } });
+      expect(icu.parse("{v, number, a}", { v: 0.4444 }, "en", "ns", "key")).toEqual("0.4");
+      icu.init(null, { formats: { number: { a: { maximumFractionDigits: 3 } } } });
+      expect(icu.parse("{v, number, a}", { v: 0.4444 }, "en", "ns", "key")).toEqual("0.444");
+    });
+
+    it("uses formats added before i18next.init()", async () => {
+      const icu = new ICU();
+      icu.addUserDefinedFormats({ number: { short: { maximumFractionDigits: 1 } } });
+      const instance = i18next.createInstance();
+      await instance.use(icu).init({ lng: "en", resources: { en: { translation: { v: "V {v, number, short}" } } } });
+      expect(instance.t("v", { v: 0.444 })).toEqual("V 0.4");
+    });
+
     it("applies formats added after a message was cached", () => {
       const icu = new ICU();
       expect(icu.parse("{v, number, short}", { v: 0.444 }, "en", "ns", "key")).toEqual("0.444");

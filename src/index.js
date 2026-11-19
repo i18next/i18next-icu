@@ -28,6 +28,16 @@ function errorWarning(err, res, isParseError, where) {
   return `${where} could not be ${isParseError ? 'parsed' : 'formatted'}: ${err.message}`;
 }
 
+// merged per group (number, date, time), so a new style keeps the ones already there
+function mergeFormats(base, added) {
+  if (!base || !added) return base || added;
+  const merged = { ...base };
+  Object.keys(added).forEach((group) => {
+    merged[group] = { ...base[group], ...added[group] };
+  });
+  return merged;
+}
+
 class ICU {
   constructor(options) {
     this.type = 'i18nFormat';
@@ -40,7 +50,9 @@ class ICU {
   init(i18next, options) {
     const i18nextOptions = (i18next && i18next.options && i18next.options.i18nFormat) || {};
     this.options = utils.defaults(i18nextOptions, options, this.options || {}, getDefaults());
-    this.formats = this.options.formats;
+    this.formats = mergeFormats(this.options.formats, this.userDefinedFormats);
+    // a new init can bring other formats; cached formatters were compiled with the old ones
+    this.clearCache();
 
     if (i18next) {
       const { bindI18n, bindI18nStore, memoize } = this.options;
@@ -68,7 +80,9 @@ class ICU {
   }
 
   addUserDefinedFormats(formats) {
-    this.formats = this.formats ? { ...this.formats, ...formats } : formats;
+    // kept apart from the options, so they also survive the init() that i18next.use(icu).init() runs later
+    this.userDefinedFormats = mergeFormats(this.userDefinedFormats, formats);
+    this.formats = mergeFormats(this.options.formats, this.userDefinedFormats);
     // cached formatters were compiled with the old formats
     this.clearCache();
   }
