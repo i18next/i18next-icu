@@ -3024,6 +3024,16 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
     }
     return "".concat(where, " could not be ").concat(isParseError ? 'parsed' : 'formatted', ": ").concat(err.message);
   }
+
+  // merged per group (number, date, time), so a new style keeps the ones already there
+  function mergeFormats(base, added) {
+    if (!base || !added) return base || added;
+    var merged = _objectSpread2({}, base);
+    Object.keys(added).forEach(function (group) {
+      merged[group] = _objectSpread2(_objectSpread2({}, base[group]), added[group]);
+    });
+    return merged;
+  }
   var ICU = /*#__PURE__*/function () {
     function ICU(options) {
       _classCallCheck(this, ICU);
@@ -3038,7 +3048,9 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
         var _this = this;
         var i18nextOptions = i18next && i18next.options && i18next.options.i18nFormat || {};
         this.options = defaults(i18nextOptions, options, this.options || {}, getDefaults());
-        this.formats = this.options.formats;
+        this.formats = mergeFormats(this.options.formats, this.userDefinedFormats);
+        // a new init can bring other formats; cached formatters were compiled with the old ones
+        this.clearCache();
         if (i18next) {
           var _this$options = this.options,
             bindI18n = _this$options.bindI18n,
@@ -3069,7 +3081,9 @@ Try polyfilling it using "@formatjs/intl-pluralrules"
     }, {
       key: "addUserDefinedFormats",
       value: function addUserDefinedFormats(formats) {
-        this.formats = this.formats ? _objectSpread2(_objectSpread2({}, this.formats), formats) : formats;
+        // kept apart from the options, so they also survive the init() that i18next.use(icu).init() runs later
+        this.userDefinedFormats = mergeFormats(this.userDefinedFormats, formats);
+        this.formats = mergeFormats(this.options.formats, this.userDefinedFormats);
         // cached formatters were compiled with the old formats
         this.clearCache();
       }
