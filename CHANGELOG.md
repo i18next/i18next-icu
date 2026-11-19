@@ -1,3 +1,10 @@
+### 2.7.1
+
+- fix: `addUserDefinedFormats` adds to each group of formats (`number`, `date`, `time`) instead of replacing the whole group, so adding one `date` style keeps the other `date` styles, also those from the `formats` option
+- fix: formats added with `addUserDefinedFormats` before `i18next.use(icu).init()` are used; that `init()` reset them to the `formats` option
+- fix: a new `init()` with other `formats` (for example `i18nFormat.formats` when i18next is initialized again) applies them to messages that were already formatted; the cache kept the formatters compiled with the old formats
+- docs: the README documents the `formats` option and `addUserDefinedFormats` (new section "Custom formats") ([i18next#1888](https://github.com/i18next/i18next/discussions/1888))
+
 ### 2.7.0
 
 - feat: `requiresOtherClause` option, passed to the intl-messageformat parser. Set it to `false` to accept `plural`, `select` and `selectordinal` arguments without an `other` case, e.g. `{count, plural, one {# item}}`. A value no case matches then fails when formatting and goes to `parseErrorHandler`. Default `true`, so nothing changes unless it is set ([#99](https://github.com/i18next/i18next-icu/issues/99), [#100](https://github.com/i18next/i18next-icu/pull/100))
